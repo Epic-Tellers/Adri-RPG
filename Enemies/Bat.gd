@@ -41,7 +41,7 @@ func _physics_process(delta):
 			else:
 				state = IDLE
 	velocity = move_and_slide(velocity)
-
+	
 func seek_player():
 	if playerDetectionZone.can_see_player():
 		state = CHASE

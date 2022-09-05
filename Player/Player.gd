@@ -14,6 +14,8 @@ export var MAX_SPEED = 100 #adjust manually
 export var ACCELERATION = 500 #adjust manually
 export var FRICTION = 500 #adjust manually
 export var ROLL_SPEED = 120 #adjust manually
+export var HITSTOP_POWER = 0.3 #adjust manually. closer to 0, the greatests the hitstop
+export var HITSTOP_DURATION = 0.5 #adjust manually. this is in seconds.
 var stats = PlayerStats #since it is a singleton, you could skip this. However, this looks cleaner
 
 onready var animationPlayer = $AnimationPlayer #this is called to play animations
@@ -77,6 +79,11 @@ func roll_state(delta):
 	velocity = roll_vector * ROLL_SPEED 
 	animationState.travel("Roll")
 	move()
+	
+func frame_freeze(timeScale, duration):
+	Engine.time_scale = timeScale
+	yield(get_tree().create_timer(duration * timeScale), "timeout")
+	Engine.time_scale = 1.0
 
 func move():
 	velocity = move_and_slide(velocity) #move and slide -> not * delta. Move and collide? Yes * delta
@@ -89,6 +96,7 @@ func roll_animation_fisnished():
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= 1
+	stats.health -= 1 #TODO: dont hardcode this lolololol
+	frame_freeze(HITSTOP_POWER, HITSTOP_DURATION)
 	hurtbox.start_invincibility(0.5)
 	hurtbox.create_hit_effect()

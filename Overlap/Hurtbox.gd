@@ -8,6 +8,7 @@ onready var timer = $Timer
 
 signal invincibility_started
 signal invincibility_ended
+signal hitstop_start
 
 func set_invincible(value):
 	invincible = value
