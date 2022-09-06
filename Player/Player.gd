@@ -16,9 +16,15 @@ export var FRICTION = 500 #adjust manually
 export var ROLL_SPEED = 120 #adjust manually
 export var HITSTOP_POWER = 0.3 #adjust manually. closer to 0, the greatests the hitstop
 export var HITSTOP_DURATION = 0.5 #adjust manually. this is in seconds.
+export var INVINCIBILITY_DURATION = 0.6
+
 var stats = PlayerStats #since it is a singleton, you could skip this. However, this looks cleaner
+var hitstop = Hitstop
+
+const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 
 onready var animationPlayer = $AnimationPlayer #this is called to play animations
+onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var animationTree = $AnimationTree #this is the tree with all the animations
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
@@ -26,6 +32,7 @@ onready var animationState = animationTree.get("parameters/playback") #this is u
 																	#for example, animationState.travel("Attack") goes to the Attack node
 
 func _ready():
+	randomize()
 	stats.connect("no_health",self,"queue_free")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
@@ -79,11 +86,6 @@ func roll_state(delta):
 	velocity = roll_vector * ROLL_SPEED 
 	animationState.travel("Roll")
 	move()
-	
-func frame_freeze(timeScale, duration):
-	Engine.time_scale = timeScale
-	yield(get_tree().create_timer(duration * timeScale), "timeout")
-	Engine.time_scale = 1.0
 
 func move():
 	velocity = move_and_slide(velocity) #move and slide -> not * delta. Move and collide? Yes * delta
@@ -96,7 +98,17 @@ func roll_animation_fisnished():
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
-	stats.health -= 1 #TODO: dont hardcode this lolololol
-	frame_freeze(HITSTOP_POWER, HITSTOP_DURATION)
-	hurtbox.start_invincibility(0.5)
+	stats.health -= area.damage
+	hitstop.frame_freeze(HITSTOP_POWER, HITSTOP_DURATION)
+	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 	hurtbox.create_hit_effect()
+	var playerHurtSoundInstance = PlayerHurtSound.instance()
+	get_tree().current_scene.add_child(playerHurtSoundInstance)
+
+
+func _on_Hurtbox_invincibility_started():
+	blinkAnimationPlayer.play("Start")
+
+
+func _on_Hurtbox_invincibility_ended():
+	blinkAnimationPlayer.play("Stop")
