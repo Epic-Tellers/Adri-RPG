@@ -66,17 +66,16 @@ func _physics_process(delta):
 		velocity += softCollision.get_push_vector() * delta * SOFT_COLLISION_FORCE
 	velocity = move_and_slide(velocity)
 
-func try_to_attack(distance):
-	var attackRange = global_position.distance_to(distance)
+func try_to_attack(position):
+	var attackRange = global_position.distance_to(position)
 	if attackRange <= ATTACK_RANGE:
-		fireball_attack(distance - fireballSpawnPoint.global_position) #vector looking up from the bat's mouth to the player
+		fireball_attack(position) #vector looking up from the bat's mouth to the player
 
-func fireball_attack(direction):
+func fireball_attack(pos):
 	var fireball = FireballScene.instance()
-	get_parent().add_child(fireball)
-	fireball.global_position = fireballSpawnPoint.global_position
-	fireball.direction = direction.normalized()
-	fireball.look_at(direction)
+	get_tree().root.add_child(fireball)
+	fireball.set_origin_position(fireballSpawnPoint.global_position)
+	fireball.direction_set(pos)
 	canAttack = false;
 	attackCD.start(ATTACK_CD)
 	
