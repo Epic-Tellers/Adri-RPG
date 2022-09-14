@@ -6,21 +6,23 @@ const FireballScene = preload("res://Overlap/Fireball.tscn")
 enum {
 	IDLE,
 	WANDER,
-	CHASE
+	CHASE,
+	FLEE
 }
 var state = IDLE
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var canAttack = true
 
-export var KNOCKBACK_FORCE = 130
-export var FLY_DRAG = 200
-export var MAX_SPEED = 50
-export var SOFT_COLLISION_FORCE = 400
-export var INVINCIBILITY_DURATION = 0.3
-export var ATTACK_RANGE = 700
-export var ATTACK_CD = 1.5
-export var CR_VALUE = 3
+export var KNOCKBACK_FORCE = 130 #how hard is pushed back upon getting hit
+export var FLY_DRAG = 200 #fly acc
+export var MAX_SPEED = 50 #max speed of bat
+export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away from other bats
+export var INVINCIBILITY_DURATION = 0.3 #invul time after getting hit
+export var ATTACK_RANGE = 700 #range at which it can shoot fireballs
+export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
+export var CR_VALUE = 3 #Challenge Rating of the enemy
+export var FLEE_RANGE = 300 #Range at which it will flee player
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -60,9 +62,19 @@ func _physics_process(delta):
 				accelerate_towards_point(player.global_position, delta)
 				if canAttack:
 					try_to_attack(player.global_position)
+				else:
+					try_to_avoid(player.global_position)
 			else:
 				state = WANDER
-				
+		
+		FLEE:
+			var player = playerDetectionZone.player
+			if player != null:
+				var fleeVector = Vector2(global_position - player.global_position)
+				accelerate_towards_point(global_position + fleeVector, delta)
+			else:
+				state = WANDER
+			
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * SOFT_COLLISION_FORCE
 	velocity = move_and_slide(velocity)
@@ -71,6 +83,12 @@ func try_to_attack(position):
 	var attackRange = global_position.distance_to(position)
 	if attackRange <= ATTACK_RANGE:
 		fireball_attack(position) #vector looking up from the bat's mouth to the player
+
+func try_to_avoid(position):
+	if global_position.distance_to(position) <= FLEE_RANGE:
+		state = FLEE
+	else:
+		state = WANDER
 
 func fireball_attack(pos):
 	var fireball = FireballScene.instance()

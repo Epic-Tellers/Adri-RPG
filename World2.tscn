@@ -491,10 +491,12 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 script = ExtResource( 12 )
 
 [node name="BG" type="TextureRect" parent="."]
-margin_left = -24.0
-margin_top = -8.0
-margin_right = 272.0
-margin_bottom = 216.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -72.0
+margin_top = -24.0
+margin_right = 928.0
+margin_bottom = 976.0
 texture = ExtResource( 1 )
 stretch_mode = 2
 
@@ -510,7 +512,7 @@ tile_set = SubResource( 51 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 196609, 6, 0, 6, 7, 0, 2, 131071, 0, 0, 65536, 0, 131079, 65542, 0, 65540, 65543, 0, 131074, 196607, 0, 65540, 131072, 0, 131074, 131078, 0, 65539, 262143, 0, 65539, 196614, 0, 131076, 196615, 0, 2, 327679, 0, 131076, 262144, 0, 2, 262150, 0, 65536, 262151, 0, 65538, 393215, 0, 65536, 327680, 0, 131077, 327681, 0, 2, 327686, 0, 65540, 327687, 0, 131074, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 196613, 393218, 0, 196609, 393219, 0, 196609, 393220, 0, 196609, 393221, 0, 196609, 393222, 0, 196615 )
+tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 196609, 6, 0, 7, 131071, 0, 0, 65536, 0, 131079, 65542, 0, 196612, 65543, 0, 7, 196607, 0, 65540, 131072, 0, 131074, 131079, 0, 65539, 262143, 0, 65539, 196614, 0, 0, 196615, 0, 131079, 327679, 0, 131076, 262144, 0, 2, 262150, 0, 65536, 262151, 0, 65538, 393215, 0, 65536, 327680, 0, 131077, 327681, 0, 2, 327686, 0, 65540, 327687, 0, 131074, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 196613, 393218, 0, 196609, 393219, 0, 196609, 393220, 0, 196609, 393221, 0, 196609, 393222, 0, 196615 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 83, 56 )
@@ -519,7 +521,7 @@ position = Vector2( 83, 56 )
 position = Vector2( -1, 0 )
 
 [node name="BottomRight" parent="Camera2D/Limits" index="1"]
-position = Vector2( 272, 216 )
+position = Vector2( 248, 216 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -550,10 +552,10 @@ position = Vector2( 16, 120 )
 [node name="SpawnPoints" parent="YSort" instance=ExtResource( 11 )]
 
 [node name="SpawnPoint1" parent="YSort/SpawnPoints" index="0"]
-position = Vector2( 72, 185 )
+position = Vector2( 115, 186 )
 
 [node name="SpawnPoint2" parent="YSort/SpawnPoints" index="1"]
-position = Vector2( 176, 176 )
+position = Vector2( 184, 184 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -564,7 +566,7 @@ margin_right = 83.0
 margin_bottom = 16.0
 
 [node name="NextLevelColider" parent="." instance=ExtResource( 10 )]
-position = Vector2( 128, 96 )
+position = Vector2( 83, 176 )
 
 [editable path="Camera2D"]
 [editable path="YSort/SpawnPoints"]

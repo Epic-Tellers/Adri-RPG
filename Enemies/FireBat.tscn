@@ -111,12 +111,14 @@ tracks/0/keys = {
 [node name="FireBat" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 4 )
+ATTACK_CD = 1.8
+FLEE_RANGE = 150
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( 0, -11 )
 
@@ -134,7 +136,7 @@ position = Vector2( 0, -14 )
 shape = SubResource( 8 )
 
 [node name="Stats" parent="." instance=ExtResource( 5 )]
-max_health = 2
+max_health = 3
 
 [node name="PlayerDetectionZone" parent="." instance=ExtResource( 6 )]
 
