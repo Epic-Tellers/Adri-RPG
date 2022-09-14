@@ -1,0 +1,9 @@
+[gd_scene format=2]
+
+[node name="SpawnPoints" type="YSort"]
+
+[node name="SpawnPoint1" type="Position2D" parent="."]
+position = Vector2( 96, 144 )
+
+[node name="SpawnPoint2" type="Position2D" parent="."]
+position = Vector2( 256, 94 )

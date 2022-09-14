@@ -18,23 +18,22 @@ func assign_upgrade():
 	#do something with that number?
 	return upgradeNumber
 
+func change_scene():
+	print("Player going to next level")
+	PlaceHolderWorldArray.shuffle()
+	get_tree().change_scene(PlaceHolderWorldArray.back())
+
 
 func _on_Button1_pressed():
 	#do something with this upgrade?
-	print("Player going to next level")
-	PlaceHolderWorldArray.shuffle()
-	get_tree().change_scene(PlaceHolderWorldArray[0])
+	change_scene()
 
 
 func _on_Button2_pressed():
 	#do something with this upgrade?
-	print("Player going to next level")
-	PlaceHolderWorldArray.shuffle()
-	get_tree().change_scene(PlaceHolderWorldArray[0])
+	change_scene()
 
 
 func _on_Button3_pressed():
 	#do something with this upgrade?
-	print("Player going to next level")
-	PlaceHolderWorldArray.shuffle()
-	get_tree().change_scene(PlaceHolderWorldArray[0])
+	change_scene()

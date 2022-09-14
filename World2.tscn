@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=2]
@@ -10,7 +10,8 @@
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
 [ext_resource path="res://NextLevelColider.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=11]
+[ext_resource path="res://SpawnPoints.tscn" type="PackedScene" id=11]
+[ext_resource path="res://World.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=50]
 0/name = "DirtTileset.png 0"
@@ -487,6 +488,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World2" type="Node2D"]
+script = ExtResource( 12 )
 
 [node name="BG" type="TextureRect" parent="."]
 margin_left = -24.0
@@ -545,8 +547,13 @@ position = Vector2( 144, 144 )
 [node name="Tree" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 16, 120 )
 
-[node name="Bat" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 72, 184 )
+[node name="SpawnPoints" parent="YSort" instance=ExtResource( 11 )]
+
+[node name="SpawnPoint1" parent="YSort/SpawnPoints" index="0"]
+position = Vector2( 72, 185 )
+
+[node name="SpawnPoint2" parent="YSort/SpawnPoints" index="1"]
+position = Vector2( 176, 176 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -560,3 +567,4 @@ margin_bottom = 16.0
 position = Vector2( 128, 96 )
 
 [editable path="Camera2D"]
+[editable path="YSort/SpawnPoints"]

@@ -16,6 +16,7 @@ export var FLY_DRAG = 200
 export var MAX_SPEED = 50
 export var SOFT_COLLISION_FORCE = 400
 export var INVINCIBILITY_DURATION = 0.3
+export var CR_VALUE = 1
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone

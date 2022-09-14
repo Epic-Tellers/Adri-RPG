@@ -116,6 +116,7 @@ script = ExtResource( 4 )
 material = SubResource( 12 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
+frame = 2
 playing = true
 offset = Vector2( 0, -11 )
 

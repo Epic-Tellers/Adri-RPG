@@ -6,12 +6,12 @@
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=4]
 [ext_resource path="res://World/CliffTileset.png" type="Texture" id=5]
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=6]
-[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=7]
+[ext_resource path="res://SpawnPoints.tscn" type="PackedScene" id=7]
 [ext_resource path="res://UI/HealthUI.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
 [ext_resource path="res://Camera2D.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Enemies/FireBat.tscn" type="PackedScene" id=11]
 [ext_resource path="res://NextLevelColider.tscn" type="PackedScene" id=12]
+[ext_resource path="res://World.gd" type="Script" id=13]
 
 [sub_resource type="TileSet" id=1]
 0/name = "DirtTileset.png 0"
@@ -488,6 +488,7 @@ points = PoolVector2Array( 0, 0, 32, 0, 32, 32, 0, 32 )
 0/z_index = 0
 
 [node name="World" type="Node2D"]
+script = ExtResource( 13 )
 
 [node name="BG" type="TextureRect" parent="."]
 margin_left = -431.0
@@ -709,12 +710,6 @@ position = Vector2( 288, 192 )
 [node name="Grass46" parent="YSort/Grass" instance=ExtResource( 6 )]
 position = Vector2( 256, 192 )
 
-[node name="Bat" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 112, 368 )
-
-[node name="Bat2" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 176, 368 )
-
 [node name="Trees" type="YSort" parent="YSort"]
 
 [node name="Tree" parent="YSort/Trees" instance=ExtResource( 9 )]
@@ -747,8 +742,7 @@ position = Vector2( 296, 84 )
 [node name="Tree2" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 196, 68 )
 
-[node name="FireBat2" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 232, 112 )
+[node name="SpawnPoints" parent="YSort" instance=ExtResource( 7 )]
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

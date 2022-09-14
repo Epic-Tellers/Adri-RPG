@@ -20,6 +20,7 @@ export var SOFT_COLLISION_FORCE = 400
 export var INVINCIBILITY_DURATION = 0.3
 export var ATTACK_RANGE = 700
 export var ATTACK_CD = 1.5
+export var CR_VALUE = 3
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
