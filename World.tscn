@@ -522,7 +522,6 @@ position = Vector2( 608, 416 )
 
 [node name="NextLevelColider" parent="." instance=ExtResource( 12 )]
 position = Vector2( 80, 53 )
-NextLevel = "res://World2.tscn"
 
 [node name="YSort" type="YSort" parent="."]
 
