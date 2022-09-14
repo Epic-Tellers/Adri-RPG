@@ -78,11 +78,11 @@ func move_state(delta):
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
 		
-func attack_state(delta):
+func attack_state(_delta):
 	velocity = velocity / 2
 	animationState.travel("Attack")
 
-func roll_state(delta):
+func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED 
 	animationState.travel("Roll")
 	move()

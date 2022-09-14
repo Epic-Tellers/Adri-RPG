@@ -9,7 +9,7 @@ onready var collisionShape = $CollisionShape2D
 
 signal invincibility_started
 signal invincibility_ended
-signal hitstop_start
+#signal hitstop_start
 
 func set_invincible(value):
 	invincible = value

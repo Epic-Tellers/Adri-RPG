@@ -11,7 +11,7 @@ func _process(delta):
 	var motion =  (direction - origin_position).normalized() * FIREBALL_SPEED
 	self.position += motion * delta
 	
-func _on_Hitbox_area_entered(area):
+func _on_Hitbox_area_entered(_area):
 	queue_free()
 
 func direction_set(value):
