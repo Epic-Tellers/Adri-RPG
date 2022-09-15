@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=2]
+[gd_scene load_steps=91 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -291,12 +291,12 @@ tracks/4/keys = {
 }
 
 [sub_resource type="Animation" id=59]
-resource_name = "Charge"
+resource_name = "ChargeDown"
 length = 0.2
 loop = true
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
+tracks/0/interp = 0
 tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -304,11 +304,11 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 60, 60 ]
+"values": [ 36, 36 ]
 }
 
-[sub_resource type="Animation" id=60]
-resource_name = "Hold"
+[sub_resource type="Animation" id=85]
+resource_name = "ChargeLeft"
 length = 0.2
 loop = true
 tracks/0/type = "value"
@@ -321,7 +321,41 @@ tracks/0/keys = {
 "times": PoolRealArray( 0, 0.1 ),
 "transitions": PoolRealArray( 1, 1 ),
 "update": 1,
-"values": [ 61, 61 ]
+"values": [ 32, 32 ]
+}
+
+[sub_resource type="Animation" id=84]
+resource_name = "ChargeRight"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 24, 24 ]
+}
+
+[sub_resource type="Animation" id=83]
+resource_name = "ChargeUp"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 28, 28 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -688,8 +722,9 @@ tracks/0/keys = {
 }
 
 [sub_resource type="Animation" id=61]
-resource_name = "Spin"
+resource_name = "SpinDown"
 length = 0.2
+step = 0.05
 tracks/0/type = "value"
 tracks/0/path = NodePath("Sprite:frame")
 tracks/0/interp = 1
@@ -697,10 +732,103 @@ tracks/0/loop_wrap = true
 tracks/0/imported = false
 tracks/0/enabled = true
 tracks/0/keys = {
-"times": PoolRealArray( 0, 0.1 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
 "update": 1,
-"values": [ 62, 62 ]
+"values": [ 38, 34, 30, 26 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spin_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=81]
+resource_name = "SpinLeft"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 34, 38, 26, 30 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spin_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=82]
+resource_name = "SpinRight"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 26, 38, 34, 30 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spin_animation_finished"
+} ]
+}
+
+[sub_resource type="Animation" id=80]
+resource_name = "SpinUp"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 1,
+"values": [ 30, 26, 38, 34 ]
 }
 tracks/1/type = "method"
 tracks/1/path = NodePath(".")
@@ -817,77 +945,80 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=62]
-animation = "Charge"
+[sub_resource type="AnimationNodeAnimation" id=100]
+animation = "ChargeLeft"
 
-[sub_resource type="AnimationNodeAnimation" id=63]
-animation = "Charge"
+[sub_resource type="AnimationNodeAnimation" id=101]
+animation = "ChargeDown"
 
-[sub_resource type="AnimationNodeAnimation" id=64]
-animation = "Charge"
+[sub_resource type="AnimationNodeAnimation" id=102]
+animation = "ChargeRight"
 
-[sub_resource type="AnimationNodeAnimation" id=65]
-animation = "Charge"
+[sub_resource type="AnimationNodeAnimation" id=103]
+animation = "ChargeUp"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=53]
-blend_point_0/node = SubResource( 62 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=104]
+blend_point_0/node = SubResource( 100 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 63 )
+blend_point_1/node = SubResource( 101 )
 blend_point_1/pos = Vector2( 0, 1.1 )
-blend_point_2/node = SubResource( 64 )
+blend_point_2/node = SubResource( 102 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 65 )
+blend_point_3/node = SubResource( 103 )
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=66]
-animation = "Hold"
+[sub_resource type="AnimationNodeAnimation" id=93]
+animation = "ChargeLeft"
 
-[sub_resource type="AnimationNodeAnimation" id=67]
-animation = "Hold"
+[sub_resource type="AnimationNodeAnimation" id=94]
+animation = "ChargeDown"
 
-[sub_resource type="AnimationNodeAnimation" id=68]
-animation = "Hold"
+[sub_resource type="AnimationNodeAnimation" id=95]
+animation = "ChargeRight"
 
-[sub_resource type="AnimationNodeAnimation" id=69]
-animation = "Hold"
+[sub_resource type="AnimationNodeAnimation" id=96]
+animation = "ChargeUp"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=70]
-blend_point_0/node = SubResource( 66 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=97]
+blend_point_0/node = SubResource( 93 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 67 )
+blend_point_1/node = SubResource( 94 )
 blend_point_1/pos = Vector2( 0, 1.1 )
-blend_point_2/node = SubResource( 68 )
+blend_point_2/node = SubResource( 95 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 69 )
+blend_point_3/node = SubResource( 96 )
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
-[sub_resource type="AnimationNodeAnimation" id=71]
-animation = "Spin"
+[sub_resource type="AnimationNodeAnimation" id=108]
+animation = "SpinLeft"
 
-[sub_resource type="AnimationNodeAnimation" id=72]
-animation = "Spin"
+[sub_resource type="AnimationNodeAnimation" id=109]
+animation = "SpinDown"
 
-[sub_resource type="AnimationNodeAnimation" id=73]
-animation = "Spin"
+[sub_resource type="AnimationNodeAnimation" id=110]
+animation = "SpinRight"
 
-[sub_resource type="AnimationNodeAnimation" id=74]
-animation = "Spin"
+[sub_resource type="AnimationNodeAnimation" id=111]
+animation = "SpinUp"
 
-[sub_resource type="AnimationNodeBlendSpace2D" id=75]
-blend_point_0/node = SubResource( 71 )
+[sub_resource type="AnimationNodeBlendSpace2D" id=112]
+blend_point_0/node = SubResource( 108 )
 blend_point_0/pos = Vector2( -1, 0 )
-blend_point_1/node = SubResource( 72 )
+blend_point_1/node = SubResource( 109 )
 blend_point_1/pos = Vector2( 0, 1.1 )
-blend_point_2/node = SubResource( 73 )
+blend_point_2/node = SubResource( 110 )
 blend_point_2/pos = Vector2( 1, 0 )
-blend_point_3/node = SubResource( 74 )
+blend_point_3/node = SubResource( 111 )
 blend_point_3/pos = Vector2( 0, -1.1 )
 min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
+blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
@@ -901,36 +1032,36 @@ max_space = Vector2( 1, 1.1 )
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+[sub_resource type="AnimationNodeStateMachineTransition" id=105]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+[sub_resource type="AnimationNodeStateMachineTransition" id=106]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+[sub_resource type="AnimationNodeStateMachineTransition" id=114]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+[sub_resource type="AnimationNodeStateMachineTransition" id=117]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=78]
+[sub_resource type="AnimationNodeStateMachineTransition" id=118]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id=79]
+[sub_resource type="AnimationNodeStateMachineTransition" id=119]
 
 [sub_resource type="AnimationNodeStateMachine" id=16]
 states/Attack/node = SubResource( 33 )
 states/Attack/position = Vector2( 530, 53 )
 states/Idle/node = SubResource( 15 )
-states/Idle/position = Vector2( 422, 157 )
+states/Idle/position = Vector2( 424, 157 )
 states/Roll/node = SubResource( 41 )
 states/Roll/position = Vector2( 530, 250 )
 states/Run/node = SubResource( 22 )
-states/Run/position = Vector2( 628, 157 )
-states/SpinCharge/node = SubResource( 53 )
-states/SpinCharge/position = Vector2( 231, 53 )
-states/SpinHold/node = SubResource( 70 )
-states/SpinHold/position = Vector2( 89, 157 )
-states/SpinRelease/node = SubResource( 75 )
-states/SpinRelease/position = Vector2( 231, 250 )
-transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ), "Idle", "SpinCharge", SubResource( 55 ), "SpinCharge", "Idle", SubResource( 56 ), "SpinCharge", "SpinHold", SubResource( 76 ), "SpinHold", "Idle", SubResource( 77 ), "SpinHold", "SpinRelease", SubResource( 78 ), "SpinRelease", "Idle", SubResource( 79 ) ]
+states/Run/position = Vector2( 621, 157 )
+states/SpinCharge/node = SubResource( 104 )
+states/SpinCharge/position = Vector2( 230, 42.2057 )
+states/SpinHold/node = SubResource( 97 )
+states/SpinHold/position = Vector2( 128, 157 )
+states/SpinRelease/node = SubResource( 112 )
+states/SpinRelease/position = Vector2( 230, 250 )
+transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ), "Idle", "SpinCharge", SubResource( 105 ), "SpinCharge", "Idle", SubResource( 106 ), "SpinRelease", "Idle", SubResource( 114 ), "SpinHold", "Idle", SubResource( 117 ), "SpinCharge", "SpinHold", SubResource( 118 ), "SpinHold", "SpinRelease", SubResource( 119 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -173, -66.7943 )
+graph_offset = Vector2( -173, -109.969 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
@@ -1013,8 +1144,10 @@ anims/AttackDown = SubResource( 25 )
 anims/AttackLeft = SubResource( 26 )
 anims/AttackRight = SubResource( 27 )
 anims/AttackUp = SubResource( 28 )
-anims/Charge = SubResource( 59 )
-anims/Hold = SubResource( 60 )
+anims/ChargeDown = SubResource( 59 )
+anims/ChargeLeft = SubResource( 85 )
+anims/ChargeRight = SubResource( 84 )
+anims/ChargeUp = SubResource( 83 )
 anims/IdleDown = SubResource( 9 )
 anims/IdleLeft = SubResource( 10 )
 anims/IdleRight = SubResource( 7 )
@@ -1028,19 +1161,23 @@ anims/RunDown = SubResource( 6 )
 anims/RunLeft = SubResource( 5 )
 anims/RunRight = SubResource( 3 )
 anims/RunUp = SubResource( 4 )
-anims/Spin = SubResource( 61 )
+anims/SpinDown = SubResource( 61 )
+anims/SpinLeft = SubResource( 81 )
+anims/SpinRight = SubResource( 82 )
+anims/SpinUp = SubResource( 80 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 16 )
 anim_player = NodePath("../AnimationPlayer")
+active = true
 parameters/playback = SubResource( 17 )
 parameters/Attack/blend_position = Vector2( 0, 1 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( 0, 1 )
 parameters/Run/blend_position = Vector2( 0, 1 )
-parameters/SpinCharge/blend_position = Vector2( 0, 0.00478256 )
-parameters/SpinHold/blend_position = Vector2( 0, 0 )
-parameters/SpinRelease/blend_position = Vector2( 0, 0 )
+parameters/SpinCharge/blend_position = Vector2( 0, 1 )
+parameters/SpinHold/blend_position = Vector2( 0, 1 )
+parameters/SpinRelease/blend_position = Vector2( 0, 1 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, 4 )

@@ -166,6 +166,7 @@ func _on_Hurtbox_invincibility_ended():
 func _on_ChargeTimer_timeout():
 	if state == SPIN_CHARGE:
 		state = SPIN_HOLD
+	
 func get_input_vector():
 	var input_vector = Vector2.ZERO
 	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
@@ -180,3 +181,6 @@ func player_set_direction(input_vector):
 	animationTree.set("parameters/Run/blend_position", input_vector)
 	animationTree.set("parameters/Attack/blend_position", input_vector)
 	animationTree.set("parameters/Roll/blend_position", input_vector)
+	animationTree.set("parameters/SpinCharge/blend_position", input_vector)
+	animationTree.set("parameters/SpinHold/blend_position", input_vector)
+	animationTree.set("parameters/SpinRelease/blend_position", input_vector)
