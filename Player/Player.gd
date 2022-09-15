@@ -34,6 +34,7 @@ onready var animationTree = $AnimationTree #this is the tree with all the animat
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var chargeTimer = $ChargeTimer
+onready var chargeEffect = $ChargeEffect
 onready var animationState = animationTree.get("parameters/playback") #this is used to travel() between nodes of the animation tree
 																	#for example, animationState.travel("Attack") goes to the Attack node
 
@@ -95,11 +96,14 @@ func spin_charge_state(delta):
 	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
+		lost_charge()
 	#from run ro attack state
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
+		lost_charge()
 	if !Input.is_action_pressed("spin"):
 		state = MOVE
+		lost_charge()
 	
 	var input_vector = get_input_vector()
 	if input_vector != Vector2.ZERO:
@@ -114,9 +118,11 @@ func spin_hold_state(delta):
 			state = SPIN_RELEASE
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
+		lost_charge()
 	#from run ro attack state
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
+		lost_charge()
 		
 	var input_vector = get_input_vector()
 	if input_vector != Vector2.ZERO:
@@ -127,6 +133,7 @@ func spin_hold_state(delta):
 
 func spin_release_state(_delta):
 	animationState.travel("SpinRelease")
+	lost_charge()
 
 func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED 
@@ -142,9 +149,6 @@ func attack_animation_finished():
 func roll_animation_fisnished():
 	velocity = velocity * 0.8 #just having it slide a lot after roll is weird. But sliding a bit is nice.
 	state = MOVE
-
-func charge_animation_finished():
-	state = SPIN_HOLD
 
 func spin_animation_finished():
 	state = MOVE
@@ -168,6 +172,7 @@ func _on_Hurtbox_invincibility_ended():
 func _on_ChargeTimer_timeout():
 	if state == SPIN_CHARGE:
 		state = SPIN_HOLD
+		start_charge()
 	
 func get_input_vector():
 	var input_vector = Vector2.ZERO
@@ -175,6 +180,12 @@ func get_input_vector():
 	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
 	input_vector = input_vector.normalized()
 	return input_vector
+
+func lost_charge():
+	chargeEffect.visible = false;
+
+func start_charge():
+	chargeEffect.visible = true;
 
 func player_set_direction(input_vector):
 	roll_vector = input_vector

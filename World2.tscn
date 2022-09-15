@@ -1,4 +1,4 @@
-[gd_scene load_steps=61 format=2]
+[gd_scene load_steps=62 format=2]
 
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
 [ext_resource path="res://World/DirtTileset.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
 [ext_resource path="res://NextLevelColider.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=50]
@@ -559,6 +560,9 @@ position = Vector2( 176, 48 )
 [node name="SpawnPoint3" type="Position2D" parent="YSort/SpawnPoints"]
 position = Vector2( 168, 128 )
 
+[node name="Bat" parent="YSort" instance=ExtResource( 11 )]
+position = Vector2( 176, 136 )
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 6 )]
@@ -568,6 +572,6 @@ margin_right = 83.0
 margin_bottom = 16.0
 
 [node name="NextLevelColider" parent="." instance=ExtResource( 10 )]
-position = Vector2( 288, 160 )
+position = Vector2( 48, 88 )
 
 [editable path="Camera2D"]
