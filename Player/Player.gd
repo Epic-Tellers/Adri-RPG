@@ -103,6 +103,7 @@ func spin_charge_state(delta):
 	
 	var input_vector = get_input_vector()
 	if input_vector != Vector2.ZERO:
+		animationState.travel("SpinRun")
 		player_set_direction(input_vector)
 		velocity = velocity.move_toward(input_vector * MAX_SPEED* SPIN_SPEED_MODIFIER, ACCELERATION * delta) #moving towards FIRST arguemnt. By how much? SECOND argument
 		move()
@@ -119,6 +120,7 @@ func spin_hold_state(delta):
 		
 	var input_vector = get_input_vector()
 	if input_vector != Vector2.ZERO:
+		animationState.travel("SpinRun")
 		player_set_direction(input_vector)
 		velocity = velocity.move_toward(input_vector * MAX_SPEED * SPIN_SPEED_MODIFIER, ACCELERATION * delta) #moving towards FIRST arguemnt. By how much? SECOND argument
 		move()
@@ -184,3 +186,4 @@ func player_set_direction(input_vector):
 	animationTree.set("parameters/SpinCharge/blend_position", input_vector)
 	animationTree.set("parameters/SpinHold/blend_position", input_vector)
 	animationTree.set("parameters/SpinRelease/blend_position", input_vector)
+	animationTree.set("parameters/SpinRun/blend_position", input_vector)
