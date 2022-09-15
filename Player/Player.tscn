@@ -1,4 +1,4 @@
-[gd_scene load_steps=62 format=2]
+[gd_scene load_steps=86 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -288,6 +288,40 @@ tracks/4/keys = {
 "stream": ExtResource( 7 )
 } ],
 "times": PoolRealArray( 0.1 )
+}
+
+[sub_resource type="Animation" id=59]
+resource_name = "Charge"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 60, 60 ]
+}
+
+[sub_resource type="Animation" id=60]
+resource_name = "Hold"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 61, 61 ]
 }
 
 [sub_resource type="Animation" id=9]
@@ -653,6 +687,36 @@ tracks/0/keys = {
 "values": [ 7, 8, 9, 10, 11, 6 ]
 }
 
+[sub_resource type="Animation" id=61]
+resource_name = "Spin"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ 62, 62 ]
+}
+tracks/1/type = "method"
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0.2 ),
+"transitions": PoolRealArray( 1 ),
+"values": [ {
+"args": [  ],
+"method": "spin_animation_finished"
+} ]
+}
+
 [sub_resource type="AnimationNodeAnimation" id=29]
 animation = "AttackLeft"
 
@@ -753,6 +817,78 @@ min_space = Vector2( -1, -1.1 )
 max_space = Vector2( 1, 1.1 )
 blend_mode = 1
 
+[sub_resource type="AnimationNodeAnimation" id=62]
+animation = "Charge"
+
+[sub_resource type="AnimationNodeAnimation" id=63]
+animation = "Charge"
+
+[sub_resource type="AnimationNodeAnimation" id=64]
+animation = "Charge"
+
+[sub_resource type="AnimationNodeAnimation" id=65]
+animation = "Charge"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=53]
+blend_point_0/node = SubResource( 62 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 63 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 64 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 65 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+
+[sub_resource type="AnimationNodeAnimation" id=66]
+animation = "Hold"
+
+[sub_resource type="AnimationNodeAnimation" id=67]
+animation = "Hold"
+
+[sub_resource type="AnimationNodeAnimation" id=68]
+animation = "Hold"
+
+[sub_resource type="AnimationNodeAnimation" id=69]
+animation = "Hold"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=70]
+blend_point_0/node = SubResource( 66 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 67 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 68 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 69 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+
+[sub_resource type="AnimationNodeAnimation" id=71]
+animation = "Spin"
+
+[sub_resource type="AnimationNodeAnimation" id=72]
+animation = "Spin"
+
+[sub_resource type="AnimationNodeAnimation" id=73]
+animation = "Spin"
+
+[sub_resource type="AnimationNodeAnimation" id=74]
+animation = "Spin"
+
+[sub_resource type="AnimationNodeBlendSpace2D" id=75]
+blend_point_0/node = SubResource( 71 )
+blend_point_0/pos = Vector2( -1, 0 )
+blend_point_1/node = SubResource( 72 )
+blend_point_1/pos = Vector2( 0, 1.1 )
+blend_point_2/node = SubResource( 73 )
+blend_point_2/pos = Vector2( 1, 0 )
+blend_point_3/node = SubResource( 74 )
+blend_point_3/pos = Vector2( 0, -1.1 )
+min_space = Vector2( -1, -1.1 )
+max_space = Vector2( 1, 1.1 )
+
 [sub_resource type="AnimationNodeStateMachineTransition" id=23]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=24]
@@ -765,6 +901,18 @@ blend_mode = 1
 
 [sub_resource type="AnimationNodeStateMachineTransition" id=43]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id=55]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=56]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=76]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=77]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=78]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id=79]
+
 [sub_resource type="AnimationNodeStateMachine" id=16]
 states/Attack/node = SubResource( 33 )
 states/Attack/position = Vector2( 530, 53 )
@@ -774,9 +922,15 @@ states/Roll/node = SubResource( 41 )
 states/Roll/position = Vector2( 530, 250 )
 states/Run/node = SubResource( 22 )
 states/Run/position = Vector2( 628, 157 )
-transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ) ]
+states/SpinCharge/node = SubResource( 53 )
+states/SpinCharge/position = Vector2( 231, 53 )
+states/SpinHold/node = SubResource( 70 )
+states/SpinHold/position = Vector2( 89, 157 )
+states/SpinRelease/node = SubResource( 75 )
+states/SpinRelease/position = Vector2( 231, 250 )
+transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ), "Idle", "SpinCharge", SubResource( 55 ), "SpinCharge", "Idle", SubResource( 56 ), "SpinCharge", "SpinHold", SubResource( 76 ), "SpinHold", "Idle", SubResource( 77 ), "SpinHold", "SpinRelease", SubResource( 78 ), "SpinRelease", "Idle", SubResource( 79 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -15, 216 )
+graph_offset = Vector2( -173, -66.7943 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
@@ -846,7 +1000,7 @@ texture = ExtResource( 6 )
 [node name="Sprite" type="Sprite" parent="."]
 material = SubResource( 49 )
 texture = ExtResource( 2 )
-hframes = 60
+hframes = 63
 frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -859,6 +1013,8 @@ anims/AttackDown = SubResource( 25 )
 anims/AttackLeft = SubResource( 26 )
 anims/AttackRight = SubResource( 27 )
 anims/AttackUp = SubResource( 28 )
+anims/Charge = SubResource( 59 )
+anims/Hold = SubResource( 60 )
 anims/IdleDown = SubResource( 9 )
 anims/IdleLeft = SubResource( 10 )
 anims/IdleRight = SubResource( 7 )
@@ -872,6 +1028,7 @@ anims/RunDown = SubResource( 6 )
 anims/RunLeft = SubResource( 5 )
 anims/RunRight = SubResource( 3 )
 anims/RunUp = SubResource( 4 )
+anims/Spin = SubResource( 61 )
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource( 16 )
@@ -881,6 +1038,9 @@ parameters/Attack/blend_position = Vector2( 0, 1 )
 parameters/Idle/blend_position = Vector2( 0, 1 )
 parameters/Roll/blend_position = Vector2( 0, 1 )
 parameters/Run/blend_position = Vector2( 0, 1 )
+parameters/SpinCharge/blend_position = Vector2( 0, 0.00478256 )
+parameters/SpinHold/blend_position = Vector2( 0, 0 )
+parameters/SpinRelease/blend_position = Vector2( 0, 0 )
 
 [node name="HitboxPivot" type="Position2D" parent="."]
 position = Vector2( 0, 4 )
@@ -905,16 +1065,19 @@ position = Vector2( 0, 3 )
 shape = SubResource( 48 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 7 )
+stream = ExtResource( 8 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 52 )
 anims/Start = SubResource( 50 )
 anims/Stop = SubResource( 51 )
 
+[node name="ChargeTimer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
+[connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
 
 [editable path="HitboxPivot/SwordHitbox"]
 [editable path="Hurtbox"]

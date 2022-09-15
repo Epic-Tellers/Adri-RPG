@@ -3,7 +3,10 @@ extends KinematicBody2D
 enum {
 	MOVE,
 	ROLL,
-	ATTACK
+	ATTACK,
+	SPIN_CHARGE,
+	SPIN_HOLD,
+	SPIN_RELEASE #spin = charged attack
 }
 
 var state = MOVE
@@ -17,6 +20,8 @@ export var ROLL_SPEED = 120 #adjust manually
 export var HITSTOP_POWER = 0.3 #adjust manually. closer to 0, the greatests the hitstop
 export var HITSTOP_DURATION = 0.5 #adjust manually. this is in seconds.
 export var INVINCIBILITY_DURATION = 0.6
+export var SPIN_CHARGE_TIME = 1.5
+export var SPIN_SPEED_MODIFIER = 0.45 
 
 var stats = PlayerStats #since it is a singleton, you could skip this. However, this looks cleaner
 var hitstop = Hitstop
@@ -28,6 +33,7 @@ onready var blinkAnimationPlayer = $BlinkAnimationPlayer
 onready var animationTree = $AnimationTree #this is the tree with all the animations
 onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
+onready var chargeTimer = $ChargeTimer
 onready var animationState = animationTree.get("parameters/playback") #this is used to travel() between nodes of the animation tree
 																	#for example, animationState.travel("Attack") goes to the Attack node
 
@@ -49,20 +55,17 @@ func _process(delta):
 			roll_state(delta)
 		ATTACK: 
 			attack_state(delta)
+		SPIN_CHARGE:
+			spin_charge_state(delta)
+		SPIN_HOLD:
+			spin_hold_state(delta)
+		SPIN_RELEASE:
+			spin_release_state(delta)
 	
 func move_state(delta):
-	var input_vector = Vector2.ZERO
-	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
-	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
-	input_vector = input_vector.normalized()
-	
+	var input_vector = get_input_vector()
 	if input_vector != Vector2.ZERO:
-		roll_vector = input_vector
-		swordHitbox.knockback_vector = input_vector
-		animationTree.set("parameters/Idle/blend_position", input_vector)
-		animationTree.set("parameters/Run/blend_position", input_vector)
-		animationTree.set("parameters/Attack/blend_position", input_vector)
-		animationTree.set("parameters/Roll/blend_position", input_vector)
+		player_set_direction(input_vector)
 		animationState.travel("Run")
 		velocity = velocity.move_toward(input_vector * MAX_SPEED, ACCELERATION * delta) #moving towards FIRST arguemnt. By how much? SECOND argument
 	else:
@@ -77,10 +80,51 @@ func move_state(delta):
 	#from run ro attack state
 	if Input.is_action_just_pressed("attack"):
 		state = ATTACK
-		
+	
+	if Input.is_action_just_pressed("spin"):
+		state = SPIN_CHARGE
+		chargeTimer.start(SPIN_CHARGE_TIME)
+	
+
 func attack_state(_delta):
 	velocity = velocity / 2
 	animationState.travel("Attack")
+
+func spin_charge_state(delta):
+	animationState.travel("SpinCharge")
+	
+	if Input.is_action_just_pressed("Roll"):
+		state = ROLL
+	#from run ro attack state
+	if Input.is_action_just_pressed("attack"):
+		state = ATTACK
+	if !Input.is_action_pressed("spin"):
+		state = MOVE
+	
+	var input_vector = get_input_vector()
+	if input_vector != Vector2.ZERO:
+		player_set_direction(input_vector)
+		velocity = velocity.move_toward(input_vector * MAX_SPEED* SPIN_SPEED_MODIFIER, ACCELERATION * delta) #moving towards FIRST arguemnt. By how much? SECOND argument
+		move()
+	
+func spin_hold_state(delta):
+	animationState.travel("SpinHold")
+	if Input.is_action_just_released("spin"):
+			state = SPIN_RELEASE
+	if Input.is_action_just_pressed("Roll"):
+		state = ROLL
+	#from run ro attack state
+	if Input.is_action_just_pressed("attack"):
+		state = ATTACK
+		
+	var input_vector = get_input_vector()
+	if input_vector != Vector2.ZERO:
+		player_set_direction(input_vector)
+		velocity = velocity.move_toward(input_vector * MAX_SPEED * SPIN_SPEED_MODIFIER, ACCELERATION * delta) #moving towards FIRST arguemnt. By how much? SECOND argument
+		move()
+
+func spin_release_state(_delta):
+	animationState.travel("SpinRelease")
 
 func roll_state(_delta):
 	velocity = roll_vector * ROLL_SPEED 
@@ -95,6 +139,12 @@ func attack_animation_finished():
 
 func roll_animation_fisnished():
 	velocity = velocity * 0.8 #just having it slide a lot after roll is weird. But sliding a bit is nice.
+	state = MOVE
+
+func charge_animation_finished():
+	state = SPIN_HOLD
+
+func spin_animation_finished():
 	state = MOVE
 
 func _on_Hurtbox_area_entered(area):
@@ -112,3 +162,21 @@ func _on_Hurtbox_invincibility_started():
 
 func _on_Hurtbox_invincibility_ended():
 	blinkAnimationPlayer.play("Stop")
+
+func _on_ChargeTimer_timeout():
+	if state == SPIN_CHARGE:
+		state = SPIN_HOLD
+func get_input_vector():
+	var input_vector = Vector2.ZERO
+	input_vector.x = Input.get_action_strength("ui_right") - Input.get_action_strength("ui_left")
+	input_vector.y = Input.get_action_strength("ui_down") - Input.get_action_strength("ui_up")
+	input_vector = input_vector.normalized()
+	return input_vector
+
+func player_set_direction(input_vector):
+	roll_vector = input_vector
+	swordHitbox.knockback_vector = input_vector
+	animationTree.set("parameters/Idle/blend_position", input_vector)
+	animationTree.set("parameters/Run/blend_position", input_vector)
+	animationTree.set("parameters/Attack/blend_position", input_vector)
+	animationTree.set("parameters/Roll/blend_position", input_vector)

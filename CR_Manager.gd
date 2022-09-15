@@ -3,6 +3,7 @@ extends Node
 var currentCR = 0
 export(Array, String) var EnemiesPath #list of paths to scenes of enemies
 export var CR_INCREMENT = 3
+export (bool) var ACTIVATE_SPAWN = true
 var enemiesArray = [] #list of instanced enemies
 
 func _ready():
@@ -27,4 +28,7 @@ func getEnemiesToSpawn():
 			CRBudget -= enemyCR
 		else:
 			auxEnemiesArray.pop_back()
-	return enemiesToSpawn
+	if (ACTIVATE_SPAWN):
+		return enemiesToSpawn
+	else: 
+		return []
