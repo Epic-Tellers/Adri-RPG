@@ -27,6 +27,7 @@ var stats = PlayerStats #since it is a singleton, you could skip this. However, 
 var hitstop = Hitstop
 
 const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
+const PlayerGhost = preload("res://Player/Ghost.tscn")
 
 onready var animationPlayer = $AnimationPlayer #this is called to play animations
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
@@ -188,7 +189,9 @@ func start_charge():
 	chargeEffect.visible = true;
 
 func player_death():
-	#Die animation?
+	var ghost = PlayerGhost.instance()
+	get_tree().current_scene.add_child(ghost)
+	ghost.global_position = global_position
 	queue_free()
 
 func player_set_direction(input_vector):

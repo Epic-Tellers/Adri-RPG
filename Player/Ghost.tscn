@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Player/Ghosts.png" type="Texture" id=1]
+[ext_resource path="res://Player/Ghost.gd" type="Script" id=2]
+[ext_resource path="res://Player/death.wav" type="AudioStream" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 20, 20 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 20, 0, 20, 20 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "Animate",
+"speed": 5.0
+} ]
+
+[node name="Ghost" type="AnimatedSprite"]
+frames = SubResource( 3 )
+animation = "Animate"
+playing = true
+script = ExtResource( 2 )
+
+[node name="DeathSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+autoplay = true
