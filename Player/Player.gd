@@ -40,7 +40,7 @@ onready var animationState = animationTree.get("parameters/playback") #this is u
 
 func _ready():
 	randomize()
-	stats.connect("no_health",self,"queue_free")
+	stats.connect("no_health",self,"player_death")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 
@@ -186,6 +186,10 @@ func lost_charge():
 
 func start_charge():
 	chargeEffect.visible = true;
+
+func player_death():
+	#Die animation?
+	queue_free()
 
 func player_set_direction(input_vector):
 	roll_vector = input_vector

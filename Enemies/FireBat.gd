@@ -15,18 +15,22 @@ var state = IDLE
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 var canAttack = true
+var fireballRounds = 0
 
 export var KNOCKBACK_FORCE = 130 #how hard is pushed back upon getting hit
 export var FLY_DRAG = 200 #fly acc
 export var MAX_SPEED = 50 #max speed of bat
 export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away from other bats
 export var INVINCIBILITY_DURATION = 0.3 #invul time after getting hit
-export var ATTACK_RANGE = 700 #range at which it can shoot fireballs
+export var ATTACK_RANGE = 800 #range at which it can shoot fireballs
 export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
-export var DEATH_DELAY = 0.6
+export var ATTACK_WAVES = 1 #how many rounds of fireballs it shoots on its attack round
+export var ATTACK_INSTANCES = 1 #how many fireballs it shoots in a round
+export var DEATH_DELAY = 0.6 #time that it waits before exploding
+export var WAVE_DELAY = 0.3 #delay between shots in same round of attack
 export var CR_VALUE = 3 #Challenge Rating of the enemy
 export var FLEE_RANGE = 300 #Range at which it will flee player
-export var CONE_OBERTURE = 20
+export var CONE_OBERTURE = 25 #Oberture on the cone if shooting multiple fireballs
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -76,12 +80,15 @@ func _physics_process(delta):
 				state = WANDER
 		
 		FLEE:
-			var player = playerDetectionZone.player
-			if player != null:
-				var fleeVector = Vector2(global_position - player.global_position)
-				accelerate_towards_point(global_position + fleeVector, delta)
+			if canAttack:
+				state = CHASE
 			else:
-				state = WANDER
+				var player = playerDetectionZone.player
+				if player != null:
+					var fleeVector = Vector2(global_position - player.global_position)
+					accelerate_towards_point(global_position + fleeVector, delta)
+				else:
+					state = WANDER
 		EXPLODE:
 			velocity = velocity.move_toward(Vector2.ZERO, FLY_DRAG * delta)
 			
@@ -92,7 +99,7 @@ func _physics_process(delta):
 func try_to_attack(position):
 	var attackRange = global_position.distance_to(position)
 	if attackRange <= ATTACK_RANGE:
-		fireball_attack(position) #vector looking up from the bat's mouth to the player
+		fireball_attack(position, ATTACK_INSTANCES) #vector looking up from the bat's mouth to the player
 
 func try_to_avoid(position):
 	if global_position.distance_to(position) <= FLEE_RANGE:
@@ -117,14 +124,46 @@ func pick_random_new_state(state_list):
 	state_list.shuffle()
 	return state_list.pop_front()
 
-func fireball_attack(pos): 
+func rounds_update():
+	fireballRounds += 1
+	if fireballRounds >= ATTACK_WAVES:
+		attackCD.start(ATTACK_CD)
+		fireballRounds = 0
+	else:
+		attackCD.start(WAVE_DELAY)
+
+func fireball_attack(pos, times):
+	if times == 1:
+		instance_single_fireball(pos)
+	else:
+		instance_multiple_fireballs(pos,times) 
+	canAttack = false;
+	rounds_update()
+
+func instance_single_fireball(pos):
 	var fireball = FireballScene.instance()
 	get_tree().root.add_child(fireball)
 	fireball.set_origin_position(fireballSpawnPoint.global_position)
 	fireball.direction_set(pos)
-	canAttack = false;
-	attackCD.start(ATTACK_CD)
 
+func instance_multiple_fireballs(pos, times):
+	var auxOrigin = (pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
+	var increment = CONE_OBERTURE / (times - 1)
+	for n in times:
+		var fireball = FireballScene.instance()
+		get_tree().root.add_child(fireball)
+		fireball.set_origin_position(fireballSpawnPoint.global_position)
+		fireball.direction_set(auxOrigin)
+		auxOrigin += Vector2(increment, increment)
+
+#func fireball_attack(pos): 
+#	var fireball = FireballScene.instance()
+#	get_tree().root.add_child(fireball)
+#	fireball.set_origin_position(fireballSpawnPoint.global_position)
+#	fireball.direction_set(pos)
+#	canAttack = false;
+#	rounds_update()
+#
 #func double_fireball_attack(pos): 
 #	var fireball1 = FireballScene.instance()
 #	var fireball2 = FireballScene.instance()
@@ -135,7 +174,7 @@ func fireball_attack(pos):
 #	fireball1.direction_set(pos + Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
 #	fireball2.direction_set(pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
 #	canAttack = false;
-#	attackCD.start(ATTACK_CD)
+#	rounds_update()
 #
 #func triple_fireball_attack(pos): #number = number of fireballs to shoot
 #	var fireball1 = FireballScene.instance()
@@ -151,7 +190,7 @@ func fireball_attack(pos):
 #	fireball2.direction_set(pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
 #	fireball3.direction_set(pos)
 #	canAttack = false;
-#	attackCD.start(ATTACK_CD)
+#	rounds_update()
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage

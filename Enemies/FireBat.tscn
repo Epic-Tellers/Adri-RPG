@@ -53,7 +53,7 @@ radius = 7.0
 height = 4.0
 
 [sub_resource type="CircleShape2D" id=9]
-radius = 73.0069
+radius = 98.4124
 
 [sub_resource type="CircleShape2D" id=10]
 radius = 5.0
@@ -152,7 +152,6 @@ material = SubResource( 12 )
 position = Vector2( 0, -11 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 4
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]
