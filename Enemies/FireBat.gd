@@ -26,6 +26,7 @@ export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
 export var DEATH_DELAY = 0.6
 export var CR_VALUE = 3 #Challenge Rating of the enemy
 export var FLEE_RANGE = 300 #Range at which it will flee player
+export var CONE_OBERTURE = 20
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -116,13 +117,41 @@ func pick_random_new_state(state_list):
 	state_list.shuffle()
 	return state_list.pop_front()
 
-func fireball_attack(pos):
+func fireball_attack(pos): 
 	var fireball = FireballScene.instance()
 	get_tree().root.add_child(fireball)
 	fireball.set_origin_position(fireballSpawnPoint.global_position)
 	fireball.direction_set(pos)
 	canAttack = false;
 	attackCD.start(ATTACK_CD)
+
+#func double_fireball_attack(pos): 
+#	var fireball1 = FireballScene.instance()
+#	var fireball2 = FireballScene.instance()
+#	get_tree().root.add_child(fireball1)
+#	get_tree().root.add_child(fireball2)
+#	fireball1.set_origin_position(fireballSpawnPoint.global_position)
+#	fireball2.set_origin_position(fireballSpawnPoint.global_position)
+#	fireball1.direction_set(pos + Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
+#	fireball2.direction_set(pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
+#	canAttack = false;
+#	attackCD.start(ATTACK_CD)
+#
+#func triple_fireball_attack(pos): #number = number of fireballs to shoot
+#	var fireball1 = FireballScene.instance()
+#	var fireball2 = FireballScene.instance()
+#	var fireball3 = FireballScene.instance()
+#	get_tree().root.add_child(fireball1)
+#	get_tree().root.add_child(fireball2)
+#	get_tree().root.add_child(fireball3)
+#	fireball1.set_origin_position(fireballSpawnPoint.global_position)
+#	fireball2.set_origin_position(fireballSpawnPoint.global_position)
+#	fireball3.set_origin_position(fireballSpawnPoint.global_position)
+#	fireball1.direction_set(pos + Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
+#	fireball2.direction_set(pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
+#	fireball3.direction_set(pos)
+#	canAttack = false;
+#	attackCD.start(ATTACK_CD)
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage

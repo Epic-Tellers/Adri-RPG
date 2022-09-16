@@ -515,7 +515,7 @@ format = 1
 tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 196609, 6, 0, 7, 131071, 0, 0, 65536, 0, 131079, 65542, 0, 196612, 65543, 0, 7, 196607, 0, 65540, 131072, 0, 131074, 131079, 0, 65539, 262143, 0, 65539, 196614, 0, 0, 196615, 0, 131079, 327679, 0, 131076, 262144, 0, 2, 262150, 0, 65540, 262151, 0, 131074, 393215, 0, 65536, 327680, 0, 131077, 327681, 0, 2, 327686, 0, 65539, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 196613, 393218, 0, 196609, 393219, 0, 196609, 393220, 0, 196609, 393221, 0, 196609, 393222, 0, 196615 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
-position = Vector2( 83, 56 )
+position = Vector2( 58, 61 )
 
 [node name="TopLeft" parent="Camera2D/Limits" index="0"]
 position = Vector2( -1, 0 )
@@ -526,7 +526,7 @@ position = Vector2( 248, 216 )
 [node name="YSort" type="YSort" parent="."]
 
 [node name="Player" parent="YSort" instance=ExtResource( 7 )]
-position = Vector2( 83, 56 )
+position = Vector2( 58, 61 )
 __meta__ = {
 "_edit_group_": true
 }
@@ -569,9 +569,9 @@ margin_right = 83.0
 margin_bottom = 16.0
 
 [node name="NextLevelColider" parent="." instance=ExtResource( 10 )]
-position = Vector2( 48, 88 )
+position = Vector2( 73, 184 )
 
 [node name="FireBat" parent="." instance=ExtResource( 11 )]
-position = Vector2( 108, 168 )
+position = Vector2( 184, 88 )
 
 [editable path="Camera2D"]
