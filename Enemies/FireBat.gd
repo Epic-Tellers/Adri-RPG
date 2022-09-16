@@ -3,6 +3,7 @@ extends KinematicBody2D
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const FireballScene = preload("res://Overlap/Fireball.tscn")
 const ExplosionEffect = preload("res://Effects/ExplosionEffect.tscn")
+const ChargeFireballEffect = preload("res://Enemies/FireballCharge.tscn")
 
 enum {
 	IDLE,
@@ -99,7 +100,15 @@ func _physics_process(delta):
 func try_to_attack(position):
 	var attackRange = global_position.distance_to(position)
 	if attackRange <= ATTACK_RANGE:
-		fireball_attack(position, ATTACK_INSTANCES) #vector looking up from the bat's mouth to the player
+		canAttack = false;
+		var chargeFireball = ChargeFireballEffect.instance()
+		sprite.add_child(chargeFireball)
+		chargeFireball.connect("animation_finished",self,"_on_charge_completed")
+		
+func _on_charge_completed():
+	var player = playerDetectionZone.player
+	if player != null:
+		fireball_attack(player.global_position, ATTACK_INSTANCES) #vector looking up from the bat's mouth to the player
 
 func try_to_avoid(position):
 	if global_position.distance_to(position) <= FLEE_RANGE:
@@ -137,7 +146,6 @@ func fireball_attack(pos, times):
 		instance_single_fireball(pos)
 	else:
 		instance_multiple_fireballs(pos,times) 
-	canAttack = false;
 	rounds_update()
 
 func instance_single_fireball(pos):
