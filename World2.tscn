@@ -10,7 +10,7 @@
 [ext_resource path="res://World/Grass.tscn" type="PackedScene" id=8]
 [ext_resource path="res://World/Tree.tscn" type="PackedScene" id=9]
 [ext_resource path="res://NextLevelColider.tscn" type="PackedScene" id=10]
-[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Enemies/FireBat.tscn" type="PackedScene" id=11]
 [ext_resource path="res://World.gd" type="Script" id=12]
 
 [sub_resource type="TileSet" id=50]
@@ -512,7 +512,7 @@ tile_set = SubResource( 51 )
 cell_size = Vector2( 32, 32 )
 collision_mask = 0
 format = 1
-tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 196609, 6, 0, 7, 131071, 0, 0, 65536, 0, 131079, 65542, 0, 196612, 65543, 0, 7, 196607, 0, 65540, 131072, 0, 131074, 131079, 0, 65539, 262143, 0, 65539, 196614, 0, 0, 196615, 0, 131079, 327679, 0, 131076, 262144, 0, 2, 262150, 0, 131072, 262151, 0, 131074, 393215, 0, 65536, 327680, 0, 131077, 327681, 0, 2, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 196613, 393218, 0, 196609, 393219, 0, 196609, 393220, 0, 196609, 393221, 0, 196609, 393222, 0, 196610 )
+tile_data = PoolIntArray( 0, 0, 4, 1, 0, 196609, 2, 0, 196609, 3, 0, 196609, 4, 0, 196609, 5, 0, 196609, 6, 0, 7, 131071, 0, 0, 65536, 0, 131079, 65542, 0, 196612, 65543, 0, 7, 196607, 0, 65540, 131072, 0, 131074, 131079, 0, 65539, 262143, 0, 65539, 196614, 0, 0, 196615, 0, 131079, 327679, 0, 131076, 262144, 0, 2, 262150, 0, 65540, 262151, 0, 131074, 393215, 0, 65536, 327680, 0, 131077, 327681, 0, 2, 327686, 0, 65539, 458751, 0, 131072, 393216, 0, 131073, 393217, 0, 196613, 393218, 0, 196609, 393219, 0, 196609, 393220, 0, 196609, 393221, 0, 196609, 393222, 0, 196615 )
 
 [node name="Camera2D" parent="." instance=ExtResource( 4 )]
 position = Vector2( 83, 56 )
@@ -560,9 +560,6 @@ position = Vector2( 176, 48 )
 [node name="SpawnPoint3" type="Position2D" parent="YSort/SpawnPoints"]
 position = Vector2( 168, 128 )
 
-[node name="Bat" parent="YSort" instance=ExtResource( 11 )]
-position = Vector2( 176, 136 )
-
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthUI" parent="CanvasLayer" instance=ExtResource( 6 )]
@@ -573,5 +570,8 @@ margin_bottom = 16.0
 
 [node name="NextLevelColider" parent="." instance=ExtResource( 10 )]
 position = Vector2( 48, 88 )
+
+[node name="FireBat" parent="." instance=ExtResource( 11 )]
+position = Vector2( 108, 168 )
 
 [editable path="Camera2D"]

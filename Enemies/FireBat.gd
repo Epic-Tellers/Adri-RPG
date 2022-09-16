@@ -2,12 +2,14 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const FireballScene = preload("res://Overlap/Fireball.tscn")
+const ExplosionEffect = preload("res://Effects/ExplosionEffect.tscn")
 
 enum {
 	IDLE,
 	WANDER,
 	CHASE,
-	FLEE
+	FLEE,
+	EXPLODE
 }
 var state = IDLE
 var velocity = Vector2.ZERO
@@ -21,6 +23,7 @@ export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away fro
 export var INVINCIBILITY_DURATION = 0.3 #invul time after getting hit
 export var ATTACK_RANGE = 700 #range at which it can shoot fireballs
 export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
+export var DEATH_DELAY = 0.6
 export var CR_VALUE = 3 #Challenge Rating of the enemy
 export var FLEE_RANGE = 300 #Range at which it will flee player
 
@@ -31,8 +34,12 @@ onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
+onready var animationPlayerExplode = $AnimationPlayerExplode
 onready var attackCD = $AttackCD
 onready var fireballSpawnPoint = $FireballSpawnPoint
+onready var deathDealy = $DeathDealy
+onready var audioStreamPlayer = $AudioStreamPlayer
+
 func _ready():
 	state = pick_random_new_state([IDLE, WANDER])
 	sprite.frame = rand_range(0, 4)
@@ -74,6 +81,8 @@ func _physics_process(delta):
 				accelerate_towards_point(global_position + fleeVector, delta)
 			else:
 				state = WANDER
+		EXPLODE:
+			velocity = velocity.move_toward(Vector2.ZERO, FLY_DRAG * delta)
 			
 	if softCollision.is_colliding():
 		velocity += softCollision.get_push_vector() * delta * SOFT_COLLISION_FORCE
@@ -89,14 +98,6 @@ func try_to_avoid(position):
 		state = FLEE
 	else:
 		state = WANDER
-
-func fireball_attack(pos):
-	var fireball = FireballScene.instance()
-	get_tree().root.add_child(fireball)
-	fireball.set_origin_position(fireballSpawnPoint.global_position)
-	fireball.direction_set(pos)
-	canAttack = false;
-	attackCD.start(ATTACK_CD)
 	
 func update_wander():
 	state = pick_random_new_state([IDLE, WANDER])
@@ -115,6 +116,14 @@ func pick_random_new_state(state_list):
 	state_list.shuffle()
 	return state_list.pop_front()
 
+func fireball_attack(pos):
+	var fireball = FireballScene.instance()
+	get_tree().root.add_child(fireball)
+	fireball.set_origin_position(fireballSpawnPoint.global_position)
+	fireball.direction_set(pos)
+	canAttack = false;
+	attackCD.start(ATTACK_CD)
+
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * KNOCKBACK_FORCE
@@ -122,10 +131,17 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 
 func _on_Stats_no_health():
+	state = EXPLODE
+	deathDealy.start(DEATH_DELAY)
+	animationPlayerExplode.play("Explode")
+	audioStreamPlayer.play()
+
+func death_explosion():
 	queue_free()
-	var enemyDeathEffect = EnemyDeathEffect.instance()
-	get_parent().add_child(enemyDeathEffect)
-	enemyDeathEffect.global_position = global_position
+	animationPlayer.play("Stop")
+	var explosionEffect = ExplosionEffect.instance()
+	get_parent().add_child(explosionEffect)
+	explosionEffect.global_position = sprite.global_position
 
 
 func _on_Hurtbox_invincibility_started():
@@ -138,3 +154,11 @@ func _on_Hurtbox_invincibility_ended():
 
 func _on_AttackCD_timeout():
 	canAttack = true
+
+
+func _on_DeathDealy_timeout():
+	death_explosion()
+
+func get_bigger():
+	sprite.scale += Vector2(0.3,0.3)
+	sprite.global_position -= Vector2(0,0.15)
