@@ -13,6 +13,9 @@ func _ready():
 
 func IncrementCR():
 	currentCR += CR_INCREMENT
+	
+func reset_CR():
+	currentCR = 0
 
 func getEnemiesToSpawn():
 	var auxEnemiesArray = enemiesArray.duplicate()

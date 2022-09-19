@@ -19,6 +19,7 @@ export var FRICTION = 500 #adjust manually
 export var ROLL_SPEED = 140 #adjust manually
 export var HITSTOP_POWER = 0.3 #adjust manually. closer to 0, the greatests the hitstop
 export var HITSTOP_DURATION = 0.5 #adjust manually. this is in seconds.
+export var ROLL_INVINCIBILITY = 0.25
 export var INVINCIBILITY_DURATION = 0.6
 export var SPIN_CHARGE_TIME = 1.5
 export var SPIN_SPEED_MODIFIER = 0.45 
@@ -162,6 +163,8 @@ func _on_Hurtbox_area_entered(area):
 	var playerHurtSoundInstance = PlayerHurtSound.instance()
 	get_tree().current_scene.add_child(playerHurtSoundInstance)
 
+func roll_start_invincibility():
+	hurtbox.start_invincibility_no_blink(ROLL_INVINCIBILITY)
 
 func _on_Hurtbox_invincibility_started():
 	blinkAnimationPlayer.play("Start")

@@ -20,5 +20,11 @@ func set_health(value):
 	if invincible:
 		health = max_health
 
+func heal(value):
+	if (health + value) <= max_health:
+		self.health += value
+	else:
+		self.health = max_health
+
 func _ready():
 	self.health = max_health

@@ -18,6 +18,8 @@ var knockback = Vector2.ZERO
 var canAttack = true
 var fireballRounds = 0
 
+signal died(position)
+
 export var KNOCKBACK_FORCE = 130 #how hard is pushed back upon getting hit
 export var FLY_DRAG = 200 #fly acc
 export var MAX_SPEED = 50 #max speed of bat
@@ -164,42 +166,6 @@ func instance_multiple_fireballs(pos, times):
 		fireball.direction_set(auxOrigin)
 		auxOrigin += Vector2(increment, increment)
 
-#func fireball_attack(pos): 
-#	var fireball = FireballScene.instance()
-#	get_tree().root.add_child(fireball)
-#	fireball.set_origin_position(fireballSpawnPoint.global_position)
-#	fireball.direction_set(pos)
-#	canAttack = false;
-#	rounds_update()
-#
-#func double_fireball_attack(pos): 
-#	var fireball1 = FireballScene.instance()
-#	var fireball2 = FireballScene.instance()
-#	get_tree().root.add_child(fireball1)
-#	get_tree().root.add_child(fireball2)
-#	fireball1.set_origin_position(fireballSpawnPoint.global_position)
-#	fireball2.set_origin_position(fireballSpawnPoint.global_position)
-#	fireball1.direction_set(pos + Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
-#	fireball2.direction_set(pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
-#	canAttack = false;
-#	rounds_update()
-#
-#func triple_fireball_attack(pos): #number = number of fireballs to shoot
-#	var fireball1 = FireballScene.instance()
-#	var fireball2 = FireballScene.instance()
-#	var fireball3 = FireballScene.instance()
-#	get_tree().root.add_child(fireball1)
-#	get_tree().root.add_child(fireball2)
-#	get_tree().root.add_child(fireball3)
-#	fireball1.set_origin_position(fireballSpawnPoint.global_position)
-#	fireball2.set_origin_position(fireballSpawnPoint.global_position)
-#	fireball3.set_origin_position(fireballSpawnPoint.global_position)
-#	fireball1.direction_set(pos + Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
-#	fireball2.direction_set(pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
-#	fireball3.direction_set(pos)
-#	canAttack = false;
-#	rounds_update()
-
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
 	knockback = area.knockback_vector * KNOCKBACK_FORCE
@@ -214,6 +180,7 @@ func _on_Stats_no_health():
 
 func death_explosion():
 	queue_free()
+	emit_signal("died",global_position)
 	animationPlayer.play("Stop")
 	var explosionEffect = ExplosionEffect.instance()
 	get_parent().add_child(explosionEffect)
@@ -222,7 +189,9 @@ func death_explosion():
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("Start")
-
+	canAttack = false
+	attackCD.start(ATTACK_CD)
+	
 
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("Stop")

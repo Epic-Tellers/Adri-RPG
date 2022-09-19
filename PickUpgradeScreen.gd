@@ -5,7 +5,7 @@ onready var button2 = $HBoxContainer/Button2
 onready var button3 = $HBoxContainer/Button3
 
 var PlaceHolderUpgradeArray = [1,2,3,4,5,6]
-var PlaceHolderWorldArray = ["res://World.tscn","res://World2.tscn"]
+var PlaceHolderWorldArray = ["res://World2.tscn"] #soon, "res://World1.tscn"
 
 func _ready():
 	button1.text = "Upgrade Number: " + assign_upgrade()

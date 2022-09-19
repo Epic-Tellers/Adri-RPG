@@ -22,6 +22,10 @@ func start_invincibility(duration):
 	self.invincible = true
 	timer.start(duration)
 
+func start_invincibility_no_blink(duration):
+	collisionShape.set_deferred("disabled", true)
+	timer.start(duration)
+
 func create_hit_effect():
 	var effect = HitEffect.instance()
 	var main = get_tree().current_scene

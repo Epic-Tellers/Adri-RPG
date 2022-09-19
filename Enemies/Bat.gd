@@ -2,13 +2,14 @@ extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 
+signal died(position)
+
 enum {
 	IDLE,
 	WANDER,
 	CHASE
 }
 var state = IDLE
-
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
 export var KNOCKBACK_FORCE = 130
@@ -85,6 +86,7 @@ func _on_Hurtbox_area_entered(area):
 
 func _on_Stats_no_health():
 	queue_free()
+	emit_signal("died",global_position)
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position

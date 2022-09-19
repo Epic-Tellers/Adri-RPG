@@ -4,4 +4,5 @@ onready var world = "res://World2.tscn"
 
 func _on_Button_pressed():
 	PlayerStats.health = PlayerStats.max_health
+	CrManager.reset_CR()
 	get_tree().change_scene(world)
