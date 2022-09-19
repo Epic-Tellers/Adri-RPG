@@ -1356,7 +1356,7 @@ texture = ExtResource( 6 )
 material = SubResource( 49 )
 texture = ExtResource( 2 )
 hframes = 84
-frame = 1
+frame = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 9 )
@@ -1430,7 +1430,7 @@ position = Vector2( 0, 3 )
 shape = SubResource( 48 )
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource( 8 )
+stream = ExtResource( 7 )
 
 [node name="BlinkAnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 52 )
@@ -1443,7 +1443,7 @@ anims/Stop = SubResource( 51 )
 visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 0.5, 0.5 )
-frame = 57
+frame = 20
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

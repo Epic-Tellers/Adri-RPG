@@ -11,6 +11,7 @@ func _ready():
 	button1.text = "Upgrade Number: " + assign_upgrade()
 	button3.text = "Upgrade Number: " + assign_upgrade()
 	button2.text = "Upgrade Number: " + assign_upgrade()
+	button1.grab_focus()
 
 func assign_upgrade():
 	PlaceHolderUpgradeArray.shuffle()
