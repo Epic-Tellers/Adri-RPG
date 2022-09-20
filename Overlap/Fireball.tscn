@@ -4,7 +4,8 @@
 [ext_resource path="res://Effects/FireEffect.tscn" type="PackedScene" id=2]
 
 [sub_resource type="CapsuleShape2D" id=1]
-radius = 6.0
+radius = 5.99999
+height = 8.00003
 
 [node name="Hitbox" type="Area2D"]
 collision_layer = 0
@@ -17,8 +18,12 @@ rotation = 1.5708
 shape = SubResource( 1 )
 
 [node name="FireEffect" parent="." instance=ExtResource( 2 )]
-position = Vector2( -48, 45 )
+position = Vector2( -50, 45 )
 rotation = -1.5708
 frame = 0
 
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+position = Vector2( -11, 0 )
+
 [connection signal="area_entered" from="." to="." method="_on_Hitbox_area_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

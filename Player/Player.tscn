@@ -41,9 +41,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "on_fireball_check"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -109,9 +112,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "on_fireball_check"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -177,9 +183,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "on_fireball_check"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -245,9 +254,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.4 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "on_fireball_check"
+}, {
 "args": [  ],
 "method": "attack_animation_finished"
 } ]
@@ -500,11 +512,14 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "roll_start_invincibility"
+}, {
+"args": [  ],
+"method": "buff_dancer"
 }, {
 "args": [  ],
 "method": "roll_animation_fisnished"
@@ -561,11 +576,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "roll_start_invincibility"
+}, {
+"args": [  ],
+"method": "buff_dancer"
 }, {
 "args": [  ],
 "method": "roll_animation_fisnished"
@@ -608,11 +626,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "roll_start_invincibility"
+}, {
+"args": [  ],
+"method": "buff_dancer"
 }, {
 "args": [  ],
 "method": "roll_animation_fisnished"
@@ -655,11 +676,14 @@ tracks/2/loop_wrap = true
 tracks/2/imported = false
 tracks/2/enabled = true
 tracks/2/keys = {
-"times": PoolRealArray( 0.1, 0.5 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.1, 0.5 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
 "args": [  ],
 "method": "roll_start_invincibility"
+}, {
+"args": [  ],
+"method": "buff_dancer"
 }, {
 "args": [  ],
 "method": "roll_animation_fisnished"
@@ -825,9 +849,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spend_buff_dancer"
+}, {
 "args": [  ],
 "method": "spin_animation_finished"
 } ]
@@ -880,9 +907,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spend_buff_dancer"
+}, {
 "args": [  ],
 "method": "spin_animation_finished"
 } ]
@@ -935,9 +965,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spend_buff_dancer"
+}, {
 "args": [  ],
 "method": "spin_animation_finished"
 } ]
@@ -990,9 +1023,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0.2 ),
-"transitions": PoolRealArray( 1 ),
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spend_buff_dancer"
+}, {
 "args": [  ],
 "method": "spin_animation_finished"
 } ]
@@ -1273,7 +1309,7 @@ states/SpinRun/node = SubResource( 128 )
 states/SpinRun/position = Vector2( -1.13812, 17.031 )
 transitions = [ "Idle", "Run", SubResource( 23 ), "Run", "Idle", SubResource( 24 ), "Idle", "Attack", SubResource( 34 ), "Attack", "Idle", SubResource( 35 ), "Idle", "Roll", SubResource( 42 ), "Roll", "Idle", SubResource( 43 ), "Idle", "SpinCharge", SubResource( 105 ), "SpinCharge", "Idle", SubResource( 106 ), "SpinRelease", "Idle", SubResource( 114 ), "SpinHold", "Idle", SubResource( 117 ), "SpinCharge", "SpinHold", SubResource( 118 ), "SpinHold", "SpinRelease", SubResource( 119 ), "SpinCharge", "SpinRun", SubResource( 129 ), "SpinRun", "SpinCharge", SubResource( 130 ), "SpinHold", "SpinRun", SubResource( 131 ), "SpinRun", "SpinHold", SubResource( 132 ) ]
 start_node = "Idle"
-graph_offset = Vector2( -291.138, -93.969 )
+graph_offset = Vector2( -276.138, 156.031 )
 
 [sub_resource type="AnimationNodeStateMachinePlayback" id=17]
 
@@ -1356,7 +1392,7 @@ texture = ExtResource( 6 )
 material = SubResource( 49 )
 texture = ExtResource( 2 )
 hframes = 84
-frame = 2
+frame = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2( 0, 9 )
@@ -1417,6 +1453,7 @@ __meta__ = {
 position = Vector2( 15, 0 )
 collision_mask = 8
 script = ExtResource( 4 )
+KNOCKBACK_FORCE = 100
 
 [node name="CollisionShape2D" parent="HitboxPivot/SwordHitbox" index="0"]
 shape = SubResource( 36 )
@@ -1443,7 +1480,7 @@ anims/Stop = SubResource( 51 )
 visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 0.5, 0.5 )
-frame = 20
+frame = 48
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

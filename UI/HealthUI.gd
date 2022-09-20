@@ -21,5 +21,7 @@ func set_max_hearts(value):
 func _ready():
 	self.max_hearts = PlayerStats.max_health
 	self.hearts = PlayerStats.health
-	PlayerStats.connect("health_changed",self, "set_hearts")
-	PlayerStats.connect("max_health_changed",self, "set_max_hearts")
+	if PlayerStats.connect("health_changed",self, "set_hearts") != OK:
+		print("Error in Health UI trying to connect health_changed signal to set_hearts method")
+	if PlayerStats.connect("max_health_changed",self, "set_max_hearts") != OK:
+		print("Error in Health UI trying to connect max_health_changed signal to set_max_hearts method")

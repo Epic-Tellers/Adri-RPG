@@ -9,9 +9,10 @@ func _ready():
 	limit_left = topLeft.position.x
 	limit_bottom = bottomRight.position.y
 	limit_right = bottomRight.position.x
-	PlayerStats.connect("no_health",self,"death_zoom")
+	if PlayerStats.connect("no_health",self,"death_zoom") != OK:
+		print("Error trying to connect the camera with no_health signal to death_zoom method")
 
-func _process(delta):
+func _process(_delta):
 	if (zooming):
 		zoom_slowly()
 

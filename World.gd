@@ -20,7 +20,8 @@ func _ready():
 		targetPoint.add_child(item)
 		item.connect("died",self,"_on_enemy_death")
 	create_scene_timer()
-	PlayerStats.connect("no_health",self,"start_scene_timer")
+	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
+		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")
 	
 func create_scene_timer():
 	changeScenesTimer = Timer.new()
@@ -32,7 +33,8 @@ func start_scene_timer():
 		changeScenesTimer.start(CHANGE_SCENES_DELAY)
 	
 func _on_timer_timeout():
-	get_tree().change_scene(deathScene)
+	if get_tree().change_scene(deathScene) != OK:
+		print("Error in World.gd trying to change scene to: " + deathScene)
 
 func _on_enemy_death(pos):
 	enemiesInScene -= 1

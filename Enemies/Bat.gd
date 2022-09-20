@@ -12,7 +12,7 @@ enum {
 var state = IDLE
 var velocity = Vector2.ZERO
 var knockback = Vector2.ZERO
-export var KNOCKBACK_FORCE = 130
+export var KNOCKBACK_FORCE = 30
 export var FLY_DRAG = 200
 export var MAX_SPEED = 50
 export var SOFT_COLLISION_FORCE = 400
@@ -80,7 +80,7 @@ func pick_random_new_state(state_list):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	knockback = area.knockback_vector * KNOCKBACK_FORCE
+	knockback = area.knockback_vector * (KNOCKBACK_FORCE + area.KNOCKBACK_FORCE)
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 

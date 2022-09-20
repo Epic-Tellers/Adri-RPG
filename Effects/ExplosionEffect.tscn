@@ -94,6 +94,7 @@ autoplay = true
 visible = false
 collision_mask = 12
 damage = 2
+KNOCKBACK_FORCE = 350
 
 [node name="CollisionShape2D" parent="Hitbox" index="0"]
 position = Vector2( -1, 0 )

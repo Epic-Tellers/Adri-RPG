@@ -20,7 +20,7 @@ var fireballRounds = 0
 
 signal died(position)
 
-export var KNOCKBACK_FORCE = 130 #how hard is pushed back upon getting hit
+export var KNOCKBACK_FORCE = 30 #how hard is pushed back upon getting hit
 export var FLY_DRAG = 200 #fly acc
 export var MAX_SPEED = 50 #max speed of bat
 export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away from other bats
@@ -168,7 +168,7 @@ func instance_multiple_fireballs(pos, times):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	knockback = area.knockback_vector * KNOCKBACK_FORCE
+	knockback = area.knockback_vector * (KNOCKBACK_FORCE + area.KNOCKBACK_FORCE)
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 

@@ -2,7 +2,7 @@ extends Node2D
 
 onready var audioStreamPlayer = $AudioStreamPlayer
 
-func _on_Area2D_body_entered(body):
+func _on_Area2D_body_entered(_body):
 	PlayerStats.heal(1)
 	audioStreamPlayer.play()
 
