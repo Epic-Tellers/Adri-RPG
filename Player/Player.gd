@@ -32,14 +32,6 @@ export var DELAY_BETWEEN_HALOS = 0.6
 
 
 var dancerBuffed = false
-var upgradeArray = [0,0,0,0,0,0] setget upgrade_array_got_changed #updated from a signal fired on a setget on PlayerStats
-#Each position in the array codifies for an upgrade. The number on the position, number of instances player has of that upgrade.
-# pos 0 : Berserker: Take +1 from everythinh, do +1 on everything
-# pos 1 : Resilient: Max hp +1
-# pos 2 : Sorcerer: On attack, shoot a fireball
-# pos 3 : Dancer: Rolling decreases charge time on charged attack
-# pos 4 : Babe Ruth: More knockback on ememies. Increased movement speed.
-# pos 5 : Echo: Releasing a charged attack makes it trigger an additional time 
 
 var stats = PlayerStats #since it is a singleton, you could skip this. However, this looks cleaner
 var hitstop = Hitstop
@@ -108,7 +100,7 @@ func move_state(delta):
 	if Input.is_action_just_pressed("spin"):
 		state = SPIN_CHARGE
 		if dancerBuffed:
-			chargeTimer.start(SPIN_CHARGE_TIME - upgradeArray[3] * DANCER_REDUCTION)
+			chargeTimer.start(SPIN_CHARGE_TIME - stats.upgradeArrayStats[3] * DANCER_REDUCTION)
 		else:
 			chargeTimer.start(SPIN_CHARGE_TIME)
 
@@ -235,7 +227,7 @@ func player_set_direction(input_vector):
 	animationTree.set("parameters/SpinRun/blend_position", input_vector)
 
 func set_upgrades(newArray):
-	self.upgradeArray = newArray
+	print(newArray)
 	apply_berserker(newArray[0])
 	apply_resilient(newArray[1])
 	apply_sorcerer(newArray[2])
@@ -243,8 +235,8 @@ func set_upgrades(newArray):
 	apply_babe_ruth(newArray[4])
 	apply_echo(newArray[5])
 
-func upgrade_array_got_changed(_value):
-	upgradeArray = stats.upgradeArrayStats
+#func upgrade_array_got_changed(_value):
+#	upgradeArray = stats.upgradeArrayStats
 
 func apply_berserker(times):
 	swordHitbox.damage = 1 + times
@@ -274,8 +266,9 @@ func spend_buff_dancer():
 	dancerBuffed = false
 
 func on_fireball_check():
-	if upgradeArray[2] > 0:
-		fireball_attack(swordHitbox.global_position + roll_vector.normalized()*100, upgradeArray[2])
+	var aux = stats.upgradeArrayStats[2]
+	if aux > 0:
+		fireball_attack(swordHitbox.global_position + roll_vector.normalized()*100, aux)
 
 func fireball_attack(pos, times):
 	if times == 1:
@@ -308,7 +301,8 @@ func spawn_one_halo():
 	halo.global_position = global_position
 
 func spawn_echo_halo():
-	if upgradeArray[5] > 0:
-		var TW = create_tween().set_loops(upgradeArray[5])
+	print("got to check for spawns. Spawns: " +String(stats.upgradeArrayStats[5]))
+	if stats.upgradeArrayStats[5] > 0:
+		var TW = create_tween().set_loops(stats.upgradeArrayStats[5])
 		TW.tween_callback(self, "spawn_one_halo")
 		TW.tween_interval(DELAY_BETWEEN_HALOS)

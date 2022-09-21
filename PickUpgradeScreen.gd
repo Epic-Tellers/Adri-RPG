@@ -32,8 +32,8 @@ func _ready():
 	upgradeButton2 = aux.pop_back()
 	upgradeButton3 = aux.pop_back()
 	button1.text = UPGRADES[upgradeButton1]
-	button3.text = UPGRADES[upgradeButton2]
-	button2.text = UPGRADES[upgradeButton3]
+	button2.text = UPGRADES[upgradeButton2]
+	button3.text = UPGRADES[upgradeButton3]
 	button1.grab_focus()
 
 func change_scene():
@@ -46,14 +46,17 @@ func change_scene():
 
 func _on_Button1_pressed():
 	emit_signal("picked_upgrade",upgradeButton1)
+	print("picked upgrade on position: "+String(upgradeButton1))
 	change_scene()
 
 
 func _on_Button2_pressed():
 	emit_signal("picked_upgrade",upgradeButton2)
+	print("picked upgrade on position: "+String(upgradeButton2))
 	change_scene()
 
 
 func _on_Button3_pressed():
 	emit_signal("picked_upgrade",upgradeButton3)
+	print("picked upgrade on position: "+String(upgradeButton3))
 	change_scene()

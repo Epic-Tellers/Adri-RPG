@@ -168,7 +168,8 @@ func instance_multiple_fireballs(pos, times):
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
-	knockback = area.knockback_vector * (KNOCKBACK_FORCE + area.KNOCKBACK_FORCE)
+	if area.knockback_vector != Vector2.ZERO:
+		knockback = area.knockback_vector * (KNOCKBACK_FORCE + area.KNOCKBACK_FORCE)
 	hurtbox.create_hit_effect()
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 

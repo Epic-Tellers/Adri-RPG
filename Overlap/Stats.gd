@@ -7,6 +7,14 @@ var berserkerModifier = 0 #makes you take more damage
 var initialMaxHealth
 
 var upgradeArrayStats = [0,0,0,0,0,0] setget upgrades_changed #for more info, go to Player.gd
+#var upgradeArray = [0,0,0,0,0,0] setget upgrade_array_got_changed #updated from a signal fired on a setget on PlayerStats
+#Each position in the array codifies for an upgrade. The number on the position, number of instances player has of that upgrade.
+# pos 0 : Berserker: Take +1 from everythinh, do +1 on everything
+# pos 1 : Resilient: Max hp +1
+# pos 2 : Sorcerer: On attack, shoot a fireball
+# pos 3 : Dancer: Rolling decreases charge time on charged attack
+# pos 4 : Babe Ruth: More knockback on ememies. Increased movement speed.
+# pos 5 : Echo: Releasing a charged attack makes it trigger an additional time 
 
 signal no_health
 signal upgrades_change(newArray)
