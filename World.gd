@@ -32,6 +32,7 @@ func create_scene_timer():
 	#add_child(changeScenesTimer)
 	
 func start_scene_timer():
+	#basically, this is on player death
 	if changeScenesTimer != null:
 		changeScenesTimer.start(CHANGE_SCENES_DELAY)
 	

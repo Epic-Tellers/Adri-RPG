@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=2]
@@ -10,6 +10,7 @@
 [ext_resource path="res://Overlap/SoftCollision.tscn" type="PackedScene" id=8]
 [ext_resource path="res://Enemies/WanderController.tscn" type="PackedScene" id=9]
 [ext_resource path="res://WhiteColorShader.tres" type="Shader" id=10]
+[ext_resource path="res://Enemies/EnemyGroupZone.tscn" type="PackedScene" id=11]
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
@@ -108,6 +109,9 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
+[sub_resource type="CircleShape2D" id=16]
+radius = 157.156
+
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 4 )
@@ -162,6 +166,12 @@ anims/RESET = SubResource( 13 )
 anims/Start = SubResource( 14 )
 anims/Stop = SubResource( 15 )
 
+[node name="EnemyGroupZone" parent="." instance=ExtResource( 11 )]
+
+[node name="CollisionShape2D" parent="EnemyGroupZone" index="0"]
+modulate = Color( 0.564706, 0.145098, 0.682353, 1 )
+shape = SubResource( 16 )
+
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
@@ -171,3 +181,4 @@ anims/Stop = SubResource( 15 )
 [editable path="PlayerDetectionZone"]
 [editable path="Hitbox"]
 [editable path="SoftCollision"]
+[editable path="EnemyGroupZone"]

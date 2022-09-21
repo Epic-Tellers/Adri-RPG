@@ -74,7 +74,7 @@ shape = SubResource( 14 )
 position = Vector2( 2, 0 )
 frames = SubResource( 13 )
 animation = "Animate"
-frame = 1
+frame = 9
 playing = true
 script = ExtResource( 3 )
 

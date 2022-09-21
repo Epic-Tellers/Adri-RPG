@@ -21,6 +21,7 @@ export var CR_VALUE = 1
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
+onready var enemyGroupZone = $EnemyGroupZone
 onready var sprite = $AnimatedSprite
 onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
@@ -30,6 +31,10 @@ onready var animationPlayer = $AnimationPlayer
 func _ready():
 	state = pick_random_new_state([IDLE, WANDER])
 	sprite.frame = rand_range(0, 4)
+	if PlayerStats.connect("no_health",self,"set_player_null") != OK:
+		print("Error in a bat trying to connect player's no_health signal to bat's set_player_null method")
+	
+	
 	
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FLY_DRAG * delta)
@@ -92,10 +97,19 @@ func _on_Stats_no_health():
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
 
-
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("Start")
 
-
 func _on_Hurtbox_invincibility_ended():
 	animationPlayer.play("Stop")
+
+func _on_player_detected(body):
+	if body != null:
+		enemyGroupZone.call_all_allies(body)
+
+func asign_player(body):
+	playerDetectionZone.player = body
+
+func set_player_null():
+	playerDetectionZone.player = null
+	state = WANDER
