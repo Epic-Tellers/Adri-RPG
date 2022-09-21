@@ -21,12 +21,12 @@ var fireballRounds = 0
 signal died(position)
 
 export var KNOCKBACK_FORCE = 30 #how hard is pushed back upon getting hit
-export var FLY_DRAG = 200 #fly acc
-export var MAX_SPEED = 50 #max speed of bat
+export var FLY_DRAG = 170 #fly acc
+export var MAX_SPEED = 35 #max speed of bat
 export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away from other bats
 export var INVINCIBILITY_DURATION = 0.3 #invul time after getting hit
 export var ATTACK_RANGE = 800 #range at which it can shoot fireballs
-export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
+export var ATTACK_CD = 2.3 #interval between fireballs at optimum speed
 export var ATTACK_WAVES = 1 #how many rounds of fireballs it shoots on its attack round
 export var ATTACK_INSTANCES = 1 #how many fireballs it shoots in a round
 export var DEATH_DELAY = 0.6 #time that it waits before exploding

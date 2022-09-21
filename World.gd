@@ -26,7 +26,8 @@ func _ready():
 func create_scene_timer():
 	changeScenesTimer = Timer.new()
 	changeScenesTimer.connect("timeout",self, "_on_timer_timeout")
-	add_child(changeScenesTimer)
+	self.call_deferred("add_child", changeScenesTimer)
+	#add_child(changeScenesTimer)
 	
 func start_scene_timer():
 	if changeScenesTimer != null:
@@ -44,12 +45,13 @@ func _on_enemy_death(pos):
 func _on_grass_died(pos):
 	if randi()%4 == 0:
 		var healHeart = HealHeart.instance()
-		self.add_child(healHeart)
+		self.call_deferred("add_child",healHeart)
 		healHeart.global_position = pos	
 	pass
 
 func last_enemy_death(pos):
 	var nextLevelCollider = NextLevelCollider.instance()
-	add_child(nextLevelCollider)
+	#self.add_child(nextLevelCollider)
+	self.call_deferred("add_child",nextLevelCollider)
 	nextLevelCollider.global_position = pos
 	

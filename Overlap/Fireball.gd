@@ -3,7 +3,6 @@ extends "res://Overlap/Hitbox.gd"
 export var FIREBALL_SPEED = 200
 var direction setget direction_set, direction_get
 var origin_position = Vector2.ZERO
-var knockback_vector
 
 func _ready():
 	set_process(true)
