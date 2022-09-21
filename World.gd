@@ -14,6 +14,7 @@ func _ready():
 	var spawnPointsNumber = spawnPointsArray.size()
 	CrManager.IncrementCR()
 	var enemiesToSpawn = CrManager.getEnemiesToSpawn()
+	print("There are these enemies to spwan: "+ String(enemiesToSpawn))
 	enemiesInScene = enemiesToSpawn.size()
 	for item in enemiesToSpawn:
 		var targetPoint = spawnPointsArray[(randi() % spawnPointsNumber)]
@@ -25,7 +26,8 @@ func _ready():
 	
 func create_scene_timer():
 	changeScenesTimer = Timer.new()
-	changeScenesTimer.connect("timeout",self, "_on_timer_timeout")
+	if (changeScenesTimer.connect("timeout",self, "_on_timer_timeout")) != OK:
+		print("Error in world trying to connect timeout to _on_timer_timeout")
 	self.call_deferred("add_child", changeScenesTimer)
 	#add_child(changeScenesTimer)
 	
@@ -39,7 +41,8 @@ func _on_timer_timeout():
 
 func _on_enemy_death(pos):
 	enemiesInScene -= 1
-	if enemiesInScene <= 0:
+	if enemiesInScene == 0: #we don't do <= bc we get stacked signals and multiple portal spawns
+		print("On spawn, there were enemies: " + String(enemiesInScene))
 		last_enemy_death(pos)
 
 func _on_grass_died(pos):

@@ -20,13 +20,14 @@ var fireballRounds = 0
 
 signal died(position)
 
+export var EXPLODE_ON_DEATH = true
 export var KNOCKBACK_FORCE = 30 #how hard is pushed back upon getting hit
 export var FLY_DRAG = 170 #fly acc
 export var MAX_SPEED = 35 #max speed of bat
 export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away from other bats
 export var INVINCIBILITY_DURATION = 0.3 #invul time after getting hit
 export var ATTACK_RANGE = 800 #range at which it can shoot fireballs
-export var ATTACK_CD = 2.3 #interval between fireballs at optimum speed
+export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
 export var ATTACK_WAVES = 1 #how many rounds of fireballs it shoots on its attack round
 export var ATTACK_INSTANCES = 1 #how many fireballs it shoots in a round
 export var DEATH_DELAY = 0.6 #time that it waits before exploding
@@ -174,10 +175,18 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 
 func _on_Stats_no_health():
-	state = EXPLODE
-	deathDealy.start(DEATH_DELAY)
-	animationPlayerExplode.play("Explode")
-	audioStreamPlayer.play()
+	if (EXPLODE_ON_DEATH):
+		state = EXPLODE
+		deathDealy.start(DEATH_DELAY)
+		animationPlayerExplode.play("Explode")
+		audioStreamPlayer.play()
+	else:
+		queue_free()
+		emit_signal("died",global_position)
+		var enemyDeathEffect = EnemyDeathEffect.instance()
+		get_parent().add_child(enemyDeathEffect)
+		enemyDeathEffect.global_position = global_position
+		enemyDeathEffect.scale = self.scale
 
 func death_explosion():
 	queue_free()
