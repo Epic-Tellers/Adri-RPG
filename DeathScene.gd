@@ -1,6 +1,6 @@
 extends Control
 
-onready var world = "res://World2.tscn"
+onready var worlds = ["res://World1.tscn", "res://World2.tscn"]
 onready var retry = $VBoxContainer/Button
 var quotes = []
 func _ready():
@@ -8,12 +8,16 @@ func _ready():
 	retry.grab_focus()
 	fill_quotes()
 	$VBoxContainer2/Label.text = quotes[randi() % quotes.size()]
-
-func _on_Button_pressed():
+	PlayerStats.reset_upgrades()
 	PlayerStats.health = PlayerStats.max_health
 	CrManager.reset_CR()
-	if get_tree().change_scene(world) != OK:
-		print("Error from death scene trying to change scene to world")
+
+func _on_Button_pressed():
+	worlds.shuffle()
+	var scene = worlds.back()
+	if get_tree().change_scene(scene) != OK:
+		print("Error in DeathScene trying to change scene to: " +String(scene))
+#	FancyFade.pixelated_noise(scene)
 
 func _on_Button2_pressed():
 	get_tree().quit()
@@ -34,5 +38,11 @@ func fill_quotes():
 		"Better quit for today...",
 		"Back here so soon?",
 		"Git gud",
-		"Look at you, gaming it up!"
+		"Look at you, gaming it up!",
+		"I'm not angry, just disappointed",
+		"Was that a bug? Or lack of skill?",
+		"I worry about you, seriously",
+		"Perhaps I should just do it",
+		"Are your hands on vacation?",
+		"Did your controller unplug?"
 	]

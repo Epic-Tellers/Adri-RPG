@@ -54,4 +54,7 @@ func on_upgrade_picked(position):
 	
 func upgrades_changed(newArray):
 	emit_signal("upgrades_change", newArray)
+
+func reset_upgrades():
+	self.upgradeArrayStats = [0,0,0,0,0,0]
 	

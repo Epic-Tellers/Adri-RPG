@@ -20,8 +20,7 @@ onready var richLabel = $VBoxContainer/Panel/RichTextLabel
 # pos 5 : Echo: Releasing a charged attack makes it trigger an additional time 
 var UPGRADES = ["Berserker", "Resilient", "Sorcerer", "Dancer", "Babe Ruth", "Echo"]
 var UPGRADES_DESCRIPTION = ["Take +1 damage from all sources, do +1 damage on all sources", "+1 Max HP", "Doing a normal attack will shoot a magic projectile from the sword", "Rolling decreases the charge timer of your next charged attack", "Increases pushback dealt to enemies on hit. Move slightly faster","Doing a charged attack makes an additional AoE trigger"]
-var PlaceHolderWorldArray = ["res://World2.tscn"] #soon, "res://World1.tscn"
-
+onready var worlds = ["res://World1.tscn", "res://World2.tscn"]
 signal picked_upgrade(position)
 
 func _ready():
@@ -40,11 +39,11 @@ func _ready():
 
 func change_scene():
 	print("Player going to next level")
-	PlaceHolderWorldArray.shuffle()
-	var scene = PlaceHolderWorldArray.back()
+	worlds.shuffle()
+	var scene = worlds.back()
 	if get_tree().change_scene(scene) != OK:
 		print("Error in PickUpgradeScreen trying to change scene to: " +String(scene))
-
+	#FancyFade.wipe_right(scene)
 
 func _on_Button1_pressed():
 	emit_signal("picked_upgrade",upgradeButton1)
