@@ -134,7 +134,7 @@ margin_top = 20.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Container"]
 frames = SubResource( 16 )
-frame = 2
+frame = 7
 playing = true
 
 [node name="Control" type="Control" parent="."]

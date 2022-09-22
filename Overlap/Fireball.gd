@@ -8,7 +8,7 @@ func _ready():
 	set_process(true)
 
 func _process(delta):
-	var motion =  (direction - origin_position).normalized() * FIREBALL_SPEED
+	var motion =  (direction).normalized() * FIREBALL_SPEED
 	self.position += motion * delta
 	
 func _on_Hitbox_area_entered(_area):
@@ -16,7 +16,7 @@ func _on_Hitbox_area_entered(_area):
 
 func direction_set(value):
 	direction = value
-	self.look_at(direction)
+	self.look_at(self.position + direction)
 
 func direction_get():
 	return direction
@@ -27,8 +27,6 @@ func set_origin_position(value):
 
 func set_damage(value):
 	self.damage = value
-	
-
 
 func _on_VisibilityNotifier2D_screen_exited():
 	queue_free()

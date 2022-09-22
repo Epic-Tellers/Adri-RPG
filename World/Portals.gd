@@ -17,12 +17,12 @@ func _ready():
 
 func _on_PortalDoor1_body_entered(body):
 	if operative:
-		body.global_position = portal2.global_position
+		body.global_position = portal2.global_position + Vector2 (0,10)
 		deactivate_portals()
 
 func _on_PortalDoor2_body_entered(body):
 	if operative:
-		body.global_position = portal1.global_position
+		body.global_position = portal1.global_position + Vector2 (0,10)
 		deactivate_portals()
 	
 func _on_Cooldown_timeout():

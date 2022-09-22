@@ -396,6 +396,14 @@ __meta__ = {
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="YSort/Player"]
 remote_path = NodePath("../../../Camera2D")
 
+[node name="Portals2" parent="YSort" instance=ExtResource( 10 )]
+
+[node name="Portal1" parent="YSort/Portals2" index="0"]
+position = Vector2( 176, 16 )
+
+[node name="Portal2" parent="YSort/Portals2" index="1"]
+position = Vector2( 592, 336 )
+
 [node name="Portals" parent="YSort" instance=ExtResource( 10 )]
 position = Vector2( 440, 124 )
 
@@ -408,10 +416,10 @@ position = Vector2( -224, 372 )
 [node name="Bushes" type="YSort" parent="YSort"]
 
 [node name="Bush" parent="YSort/Bushes" instance=ExtResource( 5 )]
-position = Vector2( 48, 144 )
+position = Vector2( 8, 120 )
 
 [node name="Bush2" parent="YSort/Bushes" instance=ExtResource( 5 )]
-position = Vector2( 16, 240 )
+position = Vector2( 8, 223 )
 
 [node name="Bush3" parent="YSort/Bushes" instance=ExtResource( 5 )]
 position = Vector2( 176, 412 )
@@ -423,24 +431,21 @@ position = Vector2( 224, 472 )
 position = Vector2( 216, 432 )
 
 [node name="Bush6" parent="YSort/Bushes" instance=ExtResource( 5 )]
-position = Vector2( 560, 360 )
+position = Vector2( 560, 352 )
 
 [node name="Bush7" parent="YSort/Bushes" instance=ExtResource( 5 )]
-position = Vector2( 632, 360 )
+position = Vector2( 624, 352 )
 
 [node name="Bush8" parent="YSort/Bushes" instance=ExtResource( 5 )]
-position = Vector2( 656, 560 )
+position = Vector2( 656, 568 )
 
 [node name="Bush12" parent="YSort/Bushes" instance=ExtResource( 5 )]
-position = Vector2( 560, 47 )
+position = Vector2( 592, 32 )
 
 [node name="Grass" type="YSort" parent="YSort"]
 
-[node name="Grass" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 240, 514 )
-
 [node name="Grass2" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 144, 484 )
+position = Vector2( 144, 476 )
 
 [node name="Grass3" parent="YSort/Grass" instance=ExtResource( 8 )]
 position = Vector2( 368, 64 )
@@ -452,30 +457,30 @@ position = Vector2( 368, 80 )
 position = Vector2( 656, 384 )
 
 [node name="Grass6" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 176, 511 )
+position = Vector2( 176, 496 )
 
 [node name="Grass7" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 512, 64 )
+position = Vector2( 480, 64 )
 
 [node name="Grass13" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 656, 408 )
+position = Vector2( 656, 368 )
 
 [node name="Grass15" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 600, 352 )
+position = Vector2( 528, 304 )
 
 [node name="Grass16" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 576, 352 )
+position = Vector2( 528, 320 )
 
 [node name="Grass8" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 128, 484 )
+position = Vector2( 144, 458 )
 
 [node name="Grass9" parent="YSort/Grass" instance=ExtResource( 8 )]
-position = Vector2( 512, 80 )
+position = Vector2( 528, 64 )
 
 [node name="Trees" type="YSort" parent="YSort"]
 
 [node name="Tree" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 16, 120 )
+position = Vector2( 16, 96 )
 
 [node name="Tree2" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 592, 272 )
@@ -490,22 +495,22 @@ position = Vector2( 592, 304 )
 position = Vector2( 624, 304 )
 
 [node name="Tree6" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 144, 472 )
+position = Vector2( 144, 448 )
 
 [node name="Tree7" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 176, 496 )
+position = Vector2( 176, 488 )
 
 [node name="Tree8" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 656, 376 )
+position = Vector2( 656, 352 )
 
 [node name="Tree12" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 496, 88 )
+position = Vector2( 512, 64 )
 
 [node name="Tree13" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 400, 88 )
+position = Vector2( 400, 64 )
 
 [node name="Tree14" parent="YSort/Trees" instance=ExtResource( 9 )]
-position = Vector2( 240, 80 )
+position = Vector2( 240, 70 )
 
 [node name="Tree15" parent="YSort/Trees" instance=ExtResource( 9 )]
 position = Vector2( 432, 568 )
@@ -536,4 +541,5 @@ margin_right = 83.0
 margin_bottom = 16.0
 
 [editable path="Camera2D"]
+[editable path="YSort/Portals2"]
 [editable path="YSort/Portals"]

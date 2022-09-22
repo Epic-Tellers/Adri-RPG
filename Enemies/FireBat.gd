@@ -34,7 +34,7 @@ export var DEATH_DELAY = 0.6 #time that it waits before exploding
 export var WAVE_DELAY = 0.3 #delay between shots in same round of attack
 export var CR_VALUE = 3 #Challenge Rating of the enemy
 export var FLEE_RANGE = 300 #Range at which it will flee player
-export var CONE_OBERTURE = 25 #Oberture on the cone if shooting multiple fireballs
+export var CONE_OBERTURE = 20 #Oberture on the cone if shooting multiple fireballs
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -154,20 +154,35 @@ func fireball_attack(pos, times):
 	rounds_update()
 
 func instance_single_fireball(pos):
+	var direction = (pos - fireballSpawnPoint.global_position).normalized() 
 	var fireball = FireballScene.instance()
 	get_tree().root.add_child(fireball)
 	fireball.set_origin_position(fireballSpawnPoint.global_position)
-	fireball.direction_set(pos)
+	fireball.direction_set(direction)
+
+#func instance_multiple_fireballs(posSpawn, direction, times):
+#	var actualCone = deg2rad(CONE_OBERTURE * times)
+#	var auxDirection = direction.rotated(-actualCone/2)
+#	var increment = actualCone / (times - 1)
+#	for n in times:
+#		var fireball = FireballScene.instance()
+#		fireball.set_damage(stats.berserkerModifier +1)
+#		get_tree().current_scene.add_child(fireball)
+#		fireball.set_origin_position(posSpawn)
+#		fireball.direction_set(posSpawn + auxDirection)
+#		auxDirection = auxDirection.rotated(increment)
 
 func instance_multiple_fireballs(pos, times):
-	var auxOrigin = (pos - Vector2(CONE_OBERTURE*0.5,CONE_OBERTURE*0.5))
-	var increment = CONE_OBERTURE / (times - 1)
+	var actualCone = deg2rad(CONE_OBERTURE * times)
+	var direction = (pos - fireballSpawnPoint.global_position).normalized()
+	var auxDirection = direction.rotated(-actualCone/2)
+	var increment = actualCone / (times - 1)
 	for n in times:
 		var fireball = FireballScene.instance()
-		get_tree().root.add_child(fireball)
+		get_tree().current_scene.add_child(fireball)
 		fireball.set_origin_position(fireballSpawnPoint.global_position)
-		fireball.direction_set(auxOrigin)
-		auxOrigin += Vector2(increment, increment)
+		fireball.direction_set(auxDirection)
+		auxDirection = auxDirection.rotated(increment)
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage

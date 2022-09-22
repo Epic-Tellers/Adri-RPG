@@ -6,7 +6,7 @@ var berserkerModifier = 0 #makes you take more damage
 
 var initialMaxHealth
 
-var upgradeArrayStats = [0,0,0,0,0,0] setget upgrades_changed #for more info, go to Player.gd
+var upgradeArrayStats = [0,0,1,0,0,0] setget upgrades_changed #for more info, go to Player.gd
 #var upgradeArray = [0,0,0,0,0,0] setget upgrade_array_got_changed #updated from a signal fired on a setget on PlayerStats
 #Each position in the array codifies for an upgrade. The number on the position, number of instances player has of that upgrade.
 # pos 0 : Berserker: Take +1 from everythinh, do +1 on everything
@@ -29,12 +29,13 @@ func set_max_health(value):
 func set_health(value):
 	if value < health:
 		value -= berserkerModifier
-	health = value
-	emit_signal("health_changed", health)
-	if health <= 0:
-		emit_signal("no_health")
 	if invincible:
 		health = max_health
+	else:
+		health = value
+		emit_signal("health_changed", health)
+		if health <= 0:
+			emit_signal("no_health")
 	
 func heal(value):
 	if (health + value) <= max_health:

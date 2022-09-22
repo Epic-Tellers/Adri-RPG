@@ -3,7 +3,7 @@
 [ext_resource path="res://Enemies/GhostBat.png" type="Texture" id=1]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=2]
 [ext_resource path="res://Overlap/Hurtbox.tscn" type="PackedScene" id=3]
-[ext_resource path="res://Enemies/FireBat.gd" type="Script" id=4]
+[ext_resource path="res://Enemies/GhostBat.gd" type="Script" id=4]
 [ext_resource path="res://Overlap/Stats.tscn" type="PackedScene" id=5]
 [ext_resource path="res://Enemies/PlayerDetectionZone.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Overlap/Hitbox.tscn" type="PackedScene" id=7]
@@ -54,7 +54,7 @@ radius = 7.0
 height = 4.0
 
 [sub_resource type="CircleShape2D" id=9]
-radius = 44.4
+radius = 50.0016
 
 [sub_resource type="CircleShape2D" id=10]
 radius = 5.0
@@ -142,21 +142,15 @@ tracks/1/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=28]
-radius = 54.519
+radius = 72.6162
 
 [node name="GhostBat" type="KinematicBody2D"]
 scale = Vector2( 2.5, 2.5 )
 collision_layer = 16
 script = ExtResource( 4 )
 EXPLODE_ON_DEATH = false
-FLY_DRAG = 220
-MAX_SPEED = 45
-SOFT_COLLISION_FORCE = 450
-ATTACK_CD = 1.6
 ATTACK_WAVES = 3
 ATTACK_INSTANCES = 3
-WAVE_DELAY = 0.4
-CR_VALUE = 10
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
@@ -164,7 +158,7 @@ position = Vector2( 0, -14 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 3
+frame = 2
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]

@@ -19,7 +19,7 @@ onready var richLabel = $VBoxContainer/Panel/RichTextLabel
 # pos 4 : Babe Ruth: More knockback on ememies. Increased movement speed.
 # pos 5 : Echo: Releasing a charged attack makes it trigger an additional time 
 var UPGRADES = ["Berserker", "Resilient", "Sorcerer", "Dancer", "Babe Ruth", "Echo"]
-var UPGRADES_DESCRIPTION = ["Take +1 damage from all sources, do +1 damage on all sources", "+1 Max HP", "Doing a normal attack will shoot a magic projectile from the sword", "Rolling decreases the charge timer of your next charged attack", "Increases pushback dealt to enemies on hit. Move slightly faster","Doing a charged attack makes an additional AoE trigger"]
+var UPGRADES_DESCRIPTION = ["Take +1 damage from all sources, do +1 damage on all sources", "+1 Max HP + instant full heal", "Doing a normal attack will shoot a magic projectile from the sword", "Rolling decreases the charge timer of your next charged attack", "Increases pushback dealt to enemies on hit. Move slightly faster","Doing a charged attack makes an additional AoE trigger"]
 onready var worlds = ["res://World1.tscn", "res://World2.tscn"]
 signal picked_upgrade(position)
 

@@ -22,10 +22,10 @@ export var ROLL_SPEED = 140 #adjust manually
 export var HITSTOP_POWER = 0.3 #adjust manually. closer to 0, the greatests the hitstop
 export var HITSTOP_DURATION = 0.5 #adjust manually. this is in seconds.
 export var ROLL_INVINCIBILITY = 0.25
-export var INVINCIBILITY_DURATION = 0.6
+export var INVINCIBILITY_DURATION = 1.1
 export var SPIN_CHARGE_TIME = 1.5
 export var SPIN_SPEED_MODIFIER = 0.45
-export var CONE_OBERTURE = 12
+export var CONE_OBERTURE = 10 #(degrees, gets multipled by n of fireballs)
 export var DANCER_REDUCTION = 0.2
 export var BABE_RUTH_AUGMENT = 15 #in raw units, so stack this scales linearly
 export var DELAY_BETWEEN_HALOS = 0.6
@@ -243,8 +243,11 @@ func apply_berserker(times):
 	stats.set_berskerker_modifier(times)
 	
 func apply_resilient(times):
+	var nowMaxHealth = stats.max_health
 	stats.max_health = stats.initialMaxHealth + times
-
+	if stats.max_health > nowMaxHealth:
+		stats.heal(stats.max_health)
+	
 func apply_sorcerer(_times):
 	pass #when shooting fireball, we just access the array and see what number is there
 
@@ -268,32 +271,32 @@ func spend_buff_dancer():
 func on_fireball_check():
 	var aux = stats.upgradeArrayStats[2]
 	if aux > 0:
-		fireball_attack(swordHitbox.global_position + roll_vector.normalized()*100, aux)
+		fireball_attack(swordHitbox.global_position, roll_vector.normalized(), aux)
 
-func fireball_attack(pos, times):
+func fireball_attack(posSpawn, direction, times):
 	if times == 1:
-		instance_single_fireball(pos)
+		instance_single_fireball(posSpawn, direction)
 	else:
-		instance_multiple_fireballs(pos,times)
+		instance_multiple_fireballs(posSpawn, direction, times)
 
-func instance_single_fireball(pos):
+func instance_single_fireball(posSpawn, direction):
 	var fireball = FireballScene.instance()
-	get_tree().root.add_child(fireball)
-	fireball.set_origin_position(swordHitbox.global_position)
-	fireball.direction_set(pos)
+	get_tree().current_scene.add_child(fireball)
+	fireball.set_origin_position(posSpawn)
+	fireball.direction_set(posSpawn + direction)
 	fireball.set_damage(stats.berserkerModifier +1)
 
-func instance_multiple_fireballs(pos, times):
-	var actualCone = times * CONE_OBERTURE
-	var auxOrigin = (pos - Vector2(actualCone*0.5,actualCone*0.5))
+func instance_multiple_fireballs(posSpawn, direction, times):
+	var actualCone = deg2rad(CONE_OBERTURE * times)
+	var auxDirection = direction.rotated(-actualCone/2)
 	var increment = actualCone / (times - 1)
 	for n in times:
 		var fireball = FireballScene.instance()
 		fireball.set_damage(stats.berserkerModifier +1)
-		get_tree().root.add_child(fireball)
-		fireball.set_origin_position(swordHitbox.global_position)
-		fireball.direction_set(auxOrigin)
-		auxOrigin += Vector2(increment, increment)
+		get_tree().current_scene.add_child(fireball)
+		fireball.set_origin_position(posSpawn)
+		fireball.direction_set(posSpawn + auxDirection)
+		auxDirection = auxDirection.rotated(increment)
 
 func spawn_one_halo():
 	var halo = HaloScene.instance()
