@@ -4,6 +4,13 @@ onready var button1 = $VBoxContainer/HBoxContainer/Button1
 onready var button2 = $VBoxContainer/HBoxContainer/Button2
 onready var button3 = $VBoxContainer/HBoxContainer/Button3
 
+onready var text1 = $VBoxContainer/HBoxContainer2/Row1/Upgrade1/RichTextLabel
+onready var text2 = $VBoxContainer/HBoxContainer2/Row1/Upgrade2/RichTextLabel
+onready var text3 = $VBoxContainer/HBoxContainer2/Row1/Upgrade3/RichTextLabel
+onready var text4 = $VBoxContainer/HBoxContainer2/Row2/Upgrade4/RichTextLabel
+onready var text5 = $VBoxContainer/HBoxContainer2/Row2/Upgrade5/RichTextLabel
+onready var text6 = $VBoxContainer/HBoxContainer2/Row2/Upgrade6/RichTextLabel
+
 var upgradeButton1
 var upgradeButton2
 var upgradeButton3
@@ -35,7 +42,9 @@ func _ready():
 	button1.text = UPGRADES[upgradeButton1]
 	button2.text = UPGRADES[upgradeButton2]
 	button3.text = UPGRADES[upgradeButton3]
+	updateUpgradeCounter()
 	button1.grab_focus()
+	
 
 func change_scene():
 	print("Player going to next level")
@@ -44,6 +53,15 @@ func change_scene():
 	if get_tree().change_scene(scene) != OK:
 		print("Error in PickUpgradeScreen trying to change scene to: " +String(scene))
 	#FancyFade.wipe_right(scene)
+
+func updateUpgradeCounter():
+	# ["Berserker", "Resilient", "Sorcerer", "Dancer", "Babe Ruth", "Echo"]
+	text1.text = "Berserker stacks: " + String(PlayerStats.upgradeArrayStats[0])
+	text2.text  = "Resilient stacks: " + String(PlayerStats.upgradeArrayStats[1])
+	text3.text  = "Sorcerer stacks: " + String(PlayerStats.upgradeArrayStats[2])
+	text4.text  = "Dancer stacks: " + String(PlayerStats.upgradeArrayStats[3])
+	text5.text  = "BabeRuth stacks: " + String(PlayerStats.upgradeArrayStats[4])
+	text6.text  = "Echo stacks: " + String(PlayerStats.upgradeArrayStats[5])
 
 func _on_Button1_pressed():
 	emit_signal("picked_upgrade",upgradeButton1)

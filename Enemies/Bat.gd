@@ -93,6 +93,7 @@ func _on_Hurtbox_area_entered(area):
 func _on_Stats_no_health():
 	queue_free()
 	emit_signal("died",global_position)
+	print("I fired a DIED signal")
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position

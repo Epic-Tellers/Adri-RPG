@@ -200,6 +200,7 @@ func _on_Stats_no_health():
 	else:
 		queue_free()
 		emit_signal("died",global_position)
+		print("I fired a DIED signal")
 		var enemyDeathEffect = EnemyDeathEffect.instance()
 		get_parent().add_child(enemyDeathEffect)
 		enemyDeathEffect.global_position = global_position
@@ -208,6 +209,7 @@ func _on_Stats_no_health():
 func death_explosion():
 	queue_free()
 	emit_signal("died",global_position)
+	print("I fired a DIED signal")
 	animationPlayer.play("Stop")
 	var explosionEffect = ExplosionEffect.instance()
 	get_parent().add_child(explosionEffect)

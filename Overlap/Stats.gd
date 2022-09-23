@@ -3,10 +3,10 @@ export var max_health = 1 setget set_max_health #var appears in editor
 export var invincible = false
 var health = max_health setget set_health #values put in editor are updated on ready!
 var berserkerModifier = 0 #makes you take more damage
-
+var died = false
 var initialMaxHealth
 
-var upgradeArrayStats = [0,0,1,0,0,0] setget upgrades_changed #for more info, go to Player.gd
+var upgradeArrayStats = [0,0,0,0,0,0] setget upgrades_changed #for more info, go to Player.gd
 #var upgradeArray = [0,0,0,0,0,0] setget upgrade_array_got_changed #updated from a signal fired on a setget on PlayerStats
 #Each position in the array codifies for an upgrade. The number on the position, number of instances player has of that upgrade.
 # pos 0 : Berserker: Take +1 from everythinh, do +1 on everything
@@ -35,7 +35,9 @@ func set_health(value):
 		health = value
 		emit_signal("health_changed", health)
 		if health <= 0:
-			emit_signal("no_health")
+			if !died :
+				emit_signal("no_health")
+				died = true
 	
 func heal(value):
 	if (health + value) <= max_health:

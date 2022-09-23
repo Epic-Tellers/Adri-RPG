@@ -45,6 +45,14 @@ func _on_enemy_death(pos):
 	if enemiesInScene == 0: #we don't do <= bc we get stacked signals and multiple portal spawns
 		print("On spawn, there were enemies: " + String(enemiesInScene))
 		last_enemy_death(pos)
+#	var isLevelDone = true
+#	for spawnPoint in spawnPointHolder.get_children():
+#		if spawnPoint.get_children() != []:
+#			for eachEnemy in spawnPoint.get_children():
+#				if is_instance_valid(eachEnemy):
+#					isLevelDone = false
+#	if isLevelDone:
+#		last_enemy_death(pos)
 
 func _on_grass_died(pos):
 	if randi()%4 == 0:
