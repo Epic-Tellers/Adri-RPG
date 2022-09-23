@@ -1,0 +1,15 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+path="res://.import/batnoises6.mp3-55b6dbc8676e7cdfd5954bc34a1da585.mp3str"
+
+[deps]
+
+source_file="res://Music and Sounds/batnoises6.mp3"
+dest_files=[ "res://.import/batnoises6.mp3-55b6dbc8676e7cdfd5954bc34a1da585.mp3str" ]
+
+[params]
+
+loop=false
+loop_offset=0

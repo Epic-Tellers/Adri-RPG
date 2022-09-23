@@ -29,8 +29,6 @@ export var CONE_OBERTURE = 10 #(degrees, gets multipled by n of fireballs)
 export var DANCER_REDUCTION = 0.2
 export var BABE_RUTH_AUGMENT = 15 #in raw units, so stack this scales linearly
 export var DELAY_BETWEEN_HALOS = 0.6
-
-
 var dancerBuffed = false
 
 var stats = PlayerStats #since it is a singleton, you could skip this. However, this looks cleaner
@@ -48,6 +46,10 @@ onready var swordHitbox = $HitboxPivot/SwordHitbox
 onready var hurtbox = $Hurtbox
 onready var chargeTimer = $ChargeTimer
 onready var chargeEffect = $ChargeEffect
+onready var chargeIndicator = $ChargeIndicator
+onready var chargeOngoingSound = $ChargeAttack
+onready var chargeCompletedSound = $ChargeCompleted
+onready var ChargeTW
 onready var animationState = animationTree.get("parameters/playback") #this is used to travel() between nodes of the animation tree
 																	#for example, animationState.travel("Attack") goes to the Attack node
 
@@ -99,10 +101,14 @@ func move_state(delta):
 	
 	if Input.is_action_just_pressed("spin"):
 		state = SPIN_CHARGE
+		chargeOngoingSound.play()
 		if dancerBuffed:
-			chargeTimer.start(SPIN_CHARGE_TIME - stats.upgradeArrayStats[3] * DANCER_REDUCTION)
+			var time = SPIN_CHARGE_TIME - stats.upgradeArrayStats[3] * DANCER_REDUCTION
+			chargeTimer.start(time)
+			start_charge_indicator(time)
 		else:
 			chargeTimer.start(SPIN_CHARGE_TIME)
+			start_charge_indicator(SPIN_CHARGE_TIME)
 
 func attack_state(_delta):
 	velocity = velocity / 2
@@ -193,6 +199,8 @@ func _on_Hurtbox_invincibility_ended():
 func _on_ChargeTimer_timeout():
 	if state == SPIN_CHARGE:
 		state = SPIN_HOLD
+		chargeOngoingSound.stop()
+		chargeCompletedSound.play()
 		start_charge()
 	
 func get_input_vector():
@@ -203,6 +211,8 @@ func get_input_vector():
 	return input_vector
 
 func lost_charge():
+	chargeOngoingSound.stop()
+	stop_charge_indicator()
 	chargeEffect.visible = false;
 
 func start_charge():
@@ -309,3 +319,16 @@ func spawn_echo_halo():
 		var TW = create_tween().set_loops(stats.upgradeArrayStats[5])
 		TW.tween_callback(self, "spawn_one_halo")
 		TW.tween_interval(DELAY_BETWEEN_HALOS)
+
+func start_charge_indicator(time):
+	chargeIndicator.visible = true
+	ChargeTW = create_tween()
+	ChargeTW.tween_property(chargeIndicator,"value",float(100),time)
+	ChargeTW.tween_callback(self, "stop_charge_indicator")
+	
+func stop_charge_indicator():
+	if ChargeTW.is_running():
+		ChargeTW.stop()
+	chargeIndicator.visible = false
+	chargeIndicator.value = 0
+	

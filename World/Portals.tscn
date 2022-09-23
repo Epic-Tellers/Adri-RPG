@@ -1,7 +1,8 @@
-[gd_scene load_steps=23 format=2]
+[gd_scene load_steps=24 format=2]
 
 [ext_resource path="res://World/Portals.gd" type="Script" id=1]
 [ext_resource path="res://World/Portal.png" type="Texture" id=2]
+[ext_resource path="res://Music and Sounds/Teleport.wav" type="AudioStream" id=3]
 
 [sub_resource type="AtlasTexture" id=19]
 atlas = ExtResource( 2 )
@@ -128,6 +129,9 @@ scale = Vector2( 0.8, 0.7 )
 shape = SubResource( 36 )
 
 [node name="Cooldown" type="Timer" parent="."]
+
+[node name="TPSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
 
 [connection signal="body_entered" from="Portal1/PortalDoor1" to="." method="_on_PortalDoor1_body_entered"]
 [connection signal="body_entered" from="Portal2/PortalDoor2" to="." method="_on_PortalDoor2_body_entered"]

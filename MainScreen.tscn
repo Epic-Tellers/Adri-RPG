@@ -135,7 +135,6 @@ margin_top = 20.0
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="Container"]
 frames = SubResource( 16 )
-frame = 4
 playing = true
 
 [node name="Control" type="Control" parent="."]
@@ -197,6 +196,7 @@ uppercase = true
 
 [node name="MainMenuMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 7 )
+volume_db = -5.0
 autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]

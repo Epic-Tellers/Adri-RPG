@@ -13,6 +13,7 @@ func can_see_player():
 func _on_PlayerDetectionZone_body_entered(body):
 	player = body
 	emit_signal("player_detected", body)
+	$AudioStreamPlayer.play_random_batcry()
 
 func _on_PlayerDetectionZone_body_exited(_body):
 	#player = null

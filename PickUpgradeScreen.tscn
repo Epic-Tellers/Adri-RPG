@@ -186,6 +186,7 @@ valign = 1
 
 [node name="Music" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+volume_db = -5.0
 autoplay = true
 
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Button1" to="." method="_on_Button1_focus_entered"]

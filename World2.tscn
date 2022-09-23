@@ -543,6 +543,7 @@ margin_bottom = 16.0
 
 [node name="CombatMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
+volume_db = -10.0
 autoplay = true
 
 [editable path="Camera2D"]
