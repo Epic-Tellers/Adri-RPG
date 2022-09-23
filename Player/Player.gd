@@ -92,6 +92,9 @@ func move_state(delta):
 	
 	move()
 	
+	if Input.is_action_just_pressed("Invul"):
+		stats.invincible = !stats.invincible
+	
 	if Input.is_action_just_pressed("Roll"):
 		state = ROLL
 	
