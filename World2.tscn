@@ -545,6 +545,7 @@ margin_bottom = 16.0
 stream = ExtResource( 11 )
 volume_db = -10.0
 autoplay = true
+bus = "Music"
 
 [editable path="Camera2D"]
 [editable path="YSort/Portals2"]

@@ -12,6 +12,7 @@ func _on_HealSound_finished():
 [node name="HealSound" type="AudioStreamPlayer"]
 stream = ExtResource( 2 )
 autoplay = true
+bus = "SFX"
 script = SubResource( 1 )
 
 [connection signal="finished" from="." to="." method="_on_HealSound_finished"]

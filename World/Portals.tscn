@@ -132,6 +132,7 @@ shape = SubResource( 36 )
 
 [node name="TPSound" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 3 )
+bus = "SFX"
 
 [connection signal="body_entered" from="Portal1/PortalDoor1" to="." method="_on_PortalDoor1_body_entered"]
 [connection signal="body_entered" from="Portal2/PortalDoor2" to="." method="_on_PortalDoor2_body_entered"]

@@ -89,6 +89,7 @@ anims/RESET = SubResource( 12 )
 [node name="MySound" type="AudioStreamPlayer" parent="ExplosionEffect"]
 stream = ExtResource( 4 )
 autoplay = true
+bus = "SFX"
 
 [node name="Hitbox" parent="." instance=ExtResource( 1 )]
 visible = false

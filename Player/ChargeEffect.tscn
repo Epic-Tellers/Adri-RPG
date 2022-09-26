@@ -256,5 +256,5 @@ animations = [ {
 
 [node name="ChargeEffect" type="AnimatedSprite"]
 frames = SubResource( 194 )
-frame = 14
+frame = 2
 playing = true

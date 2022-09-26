@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://UI/DefaultTheme.tres" type="Theme" id=1]
+[ext_resource path="res://RangeControl.gd" type="Script" id=2]
+
+[node name="RangeControl" type="HBoxContainer"]
+margin_right = 44.0
+margin_bottom = 14.0
+size_flags_horizontal = 10
+theme = ExtResource( 1 )
+script = ExtResource( 2 )
+
+[node name="SubtractButton" type="Button" parent="."]
+margin_right = 14.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 0 )
+text = "-"
+
+[node name="Label" type="Label" parent="."]
+margin_left = 18.0
+margin_top = 3.0
+margin_right = 26.0
+margin_bottom = 11.0
+text = "10"
+
+[node name="AddButton" type="Button" parent="."]
+margin_left = 30.0
+margin_right = 44.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 14, 0 )
+text = "+"

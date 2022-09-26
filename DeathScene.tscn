@@ -66,6 +66,7 @@ align = 1
 [node name="DeathMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 2 )
 autoplay = true
+bus = "Music"
 
 [connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_Button_pressed"]
 [connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_Button2_pressed"]

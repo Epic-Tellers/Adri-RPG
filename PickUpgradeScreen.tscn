@@ -188,6 +188,7 @@ valign = 1
 stream = ExtResource( 3 )
 volume_db = -5.0
 autoplay = true
+bus = "Music"
 
 [connection signal="focus_entered" from="VBoxContainer/HBoxContainer/Button1" to="." method="_on_Button1_focus_entered"]
 [connection signal="focus_exited" from="VBoxContainer/HBoxContainer/Button1" to="." method="_on_Button1_focus_exited"]

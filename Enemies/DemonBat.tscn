@@ -126,7 +126,7 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 2
+frame = 1
 playing = true
 offset = Vector2( 0, -11 )
 
