@@ -16,8 +16,9 @@ func _ready():
 func _on_StartButton_pressed():
 	worlds.shuffle()
 	var scene = worlds.back()
-	if get_tree().change_scene(scene) != OK:
-		print("Error in MainScene trying to change scene to: " +String(scene))
+	#if get_tree().change_scene(scene) != OK:
+	#	print("Error in MainScene trying to change scene to: " +String(scene))
+	ScreenTransitionManager.transition_to_scene(scene)
 
 func _on_OptionsButton_pressed():
 	optionsMenuScene = OptionsMenuScene.instance()

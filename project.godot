@@ -21,6 +21,7 @@ Hitstop="*res://Overlap/Hitstop.tscn"
 CrManager="*res://CR_Manager.tscn"
 Transitions="*res://addons/transitions/Transitions.gd"
 FancyFade="*res://addons/transitions/FancyFade.gd"
+ScreenTransitionManager="*res://ScreenTransitionManager.tscn"
 
 [display]
 

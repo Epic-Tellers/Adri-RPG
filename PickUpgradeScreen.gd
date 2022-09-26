@@ -50,8 +50,9 @@ func change_scene():
 	print("Player going to next level")
 	worlds.shuffle()
 	var scene = worlds.back()
-	if get_tree().change_scene(scene) != OK:
-		print("Error in PickUpgradeScreen trying to change scene to: " +String(scene))
+#	if get_tree().change_scene(scene) != OK:
+#		print("Error in PickUpgradeScreen trying to change scene to: " +String(scene))
+	ScreenTransitionManager.transition_to_scene(scene)
 	#FancyFade.wipe_right(scene)
 
 func updateUpgradeCounter():

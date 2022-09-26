@@ -25,11 +25,11 @@ func _ready():
 	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
 		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")
 
+
 func _unhandled_input(event):
 	if (event.is_action_pressed("pause")):
 		var pauseInstance = PauseScene.instance()
 		add_child(pauseInstance)
-
 func create_scene_timer():
 	changeScenesTimer = Timer.new()
 	if (changeScenesTimer.connect("timeout",self, "_on_timer_timeout")) != OK:
@@ -43,13 +43,14 @@ func start_scene_timer():
 		changeScenesTimer.start(CHANGE_SCENES_DELAY)
 	
 func _on_timer_timeout():
-	if get_tree().change_scene(deathScene) != OK:
-		print("Error in World.gd trying to change scene to: " + deathScene)
-
+#	if get_tree().change_scene(deathScene) != OK:
+#		print("Error in World.gd trying to change scene to: " + deathScene)
+	ScreenTransitionManager.transition_to_scene(deathScene)
+	
 func _on_enemy_death(pos):
 	enemiesInScene -= 1
 	if enemiesInScene == 0: #we don't do <= bc we get stacked signals and multiple portal spawns
-		print("On spawn, there were enemies: " + String(enemiesInScene))
+		#print("On spawn, there were enemies: " + String(enemiesInScene))
 		last_enemy_death(pos)
 #	var isLevelDone = true
 #	for spawnPoint in spawnPointHolder.get_children():

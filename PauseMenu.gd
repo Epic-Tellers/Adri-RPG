@@ -31,9 +31,10 @@ func _on_options_back_pressed():
 	$MarginContainer.visible = true
 
 func _on_MainMenuButton_pressed():
-	if get_tree().change_scene(mainMenuPath) != OK:
-		print("Error in Pause Menu trying to change scene to: " +String(mainMenuPath))
+#	if get_tree().change_scene(mainMenuPath) != OK:
+#		print("Error in Pause Menu trying to change scene to: " +String(mainMenuPath))
 	unpause()
+	ScreenTransitionManager.transition_to_scene(mainMenuPath)
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("pause")):

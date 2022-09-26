@@ -15,8 +15,9 @@ func _ready():
 func _on_Button_pressed():
 	worlds.shuffle()
 	var scene = worlds.back()
-	if get_tree().change_scene(scene) != OK:
-		print("Error in DeathScene trying to change scene to: " +String(scene))
+	ScreenTransitionManager.transition_to_scene(scene)
+#	if get_tree().change_scene(scene) != OK:
+#		print("Error in DeathScene trying to change scene to: " +String(scene))
 #	FancyFade.pixelated_noise(scene)
 
 func _on_Button2_pressed():
