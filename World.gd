@@ -6,6 +6,7 @@ onready var camera = $Camera2D
 onready var deathScene = "res://DeathScene.tscn"
 const NextLevelCollider = preload("res://NextLevelColider.tscn")
 const HealHeart = preload("res://World/RotatingHeart.tscn")
+const PauseScene = preload("res://PauseMenu.tscn")
 var changeScenesTimer = null
 var enemiesInScene = 0
 
@@ -23,7 +24,12 @@ func _ready():
 	create_scene_timer()
 	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
 		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")
-	
+
+func _unhandled_input(event):
+	if (event.is_action_pressed("pause")):
+		var pauseInstance = PauseScene.instance()
+		add_child(pauseInstance)
+
 func create_scene_timer():
 	changeScenesTimer = Timer.new()
 	if (changeScenesTimer.connect("timeout",self, "_on_timer_timeout")) != OK:

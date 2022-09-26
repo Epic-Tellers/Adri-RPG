@@ -1,80 +1,11 @@
-[gd_scene load_steps=24 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://MainScreen.gd" type="Script" id=1]
-[ext_resource path="res://Effects/crystalEffect.png" type="Texture" id=2]
 [ext_resource path="res://Player/Player.png" type="Texture" id=3]
 [ext_resource path="res://Enemies/Bat.png" type="Texture" id=4]
 [ext_resource path="res://Enemies/EldritchBat.png" type="Texture" id=5]
 [ext_resource path="res://World/GrassBackground.png" type="Texture" id=6]
 [ext_resource path="res://Music and Sounds/MainMenu.ogg" type="AudioStream" id=7]
-
-[sub_resource type="AtlasTexture" id=1]
-atlas = ExtResource( 2 )
-region = Rect2( 64, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=2]
-atlas = ExtResource( 2 )
-region = Rect2( 128, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=3]
-atlas = ExtResource( 2 )
-region = Rect2( 192, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=4]
-atlas = ExtResource( 2 )
-region = Rect2( 256, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=5]
-atlas = ExtResource( 2 )
-region = Rect2( 320, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=6]
-atlas = ExtResource( 2 )
-region = Rect2( 384, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=7]
-atlas = ExtResource( 2 )
-region = Rect2( 448, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=8]
-atlas = ExtResource( 2 )
-region = Rect2( 512, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=9]
-atlas = ExtResource( 2 )
-region = Rect2( 576, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=10]
-atlas = ExtResource( 2 )
-region = Rect2( 640, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=11]
-atlas = ExtResource( 2 )
-region = Rect2( 704, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=12]
-atlas = ExtResource( 2 )
-region = Rect2( 768, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=13]
-atlas = ExtResource( 2 )
-region = Rect2( 832, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=14]
-atlas = ExtResource( 2 )
-region = Rect2( 896, 0, 64, 32 )
-
-[sub_resource type="AtlasTexture" id=15]
-atlas = ExtResource( 2 )
-region = Rect2( 960, 0, 64, 32 )
-
-[sub_resource type="SpriteFrames" id=16]
-animations = [ {
-"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ), SubResource( 8 ), SubResource( 9 ), SubResource( 10 ), SubResource( 11 ), SubResource( 12 ), SubResource( 13 ), SubResource( 14 ), SubResource( 15 ) ],
-"loop": true,
-"name": "default",
-"speed": 15.0
-} ]
 
 [node name="MainScreen" type="Control"]
 anchor_right = 1.0
@@ -126,16 +57,6 @@ focus_neighbour_bottom = NodePath("../StartButton")
 focus_next = NodePath(".")
 focus_previous = NodePath("../OptionsButton")
 text = "Quit"
-
-[node name="Container" type="Control" parent="."]
-visible = false
-anchor_left = 0.5
-anchor_right = 0.5
-margin_top = 20.0
-
-[node name="AnimatedSprite" type="AnimatedSprite" parent="Container"]
-frames = SubResource( 16 )
-playing = true
 
 [node name="Control" type="Control" parent="."]
 margin_right = 40.0
@@ -198,6 +119,10 @@ uppercase = true
 stream = ExtResource( 7 )
 volume_db = -5.0
 autoplay = true
+
+[node name="Holder" type="Control" parent="."]
+margin_right = 40.0
+margin_bottom = 40.0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
