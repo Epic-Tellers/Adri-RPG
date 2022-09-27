@@ -40,3 +40,6 @@ func toggle_hide():
 	$VBoxContainer.set_visible(!$VBoxContainer.visible)
 	$Control.set_visible(!$Control.visible)
 	$Label.set_visible(!$Label.visible)
+
+func _on_SaveGameButton_pressed():
+	PlayerSaveInfo._save_game()

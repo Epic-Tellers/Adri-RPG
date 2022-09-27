@@ -152,6 +152,7 @@ EXPLODE_ON_DEATH = false
 ATTACK_WAVES = 3
 ATTACK_INSTANCES = 3
 CR_VALUE = 10
+mySoulSprite = 11
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
@@ -159,7 +160,6 @@ position = Vector2( 0, -14 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 4
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]

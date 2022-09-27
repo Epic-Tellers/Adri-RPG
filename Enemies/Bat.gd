@@ -1,6 +1,7 @@
 extends KinematicBody2D
 
 const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
+const Soul = preload("res://Enemies/BatSoul.tscn")
 
 signal died(position)
 
@@ -18,6 +19,7 @@ export var MAX_SPEED = 50
 export var SOFT_COLLISION_FORCE = 400
 export var INVINCIBILITY_DURATION = 0.3
 export var CR_VALUE = 1
+export var mySoulSprite = 0
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -91,12 +93,13 @@ func _on_Hurtbox_area_entered(area):
 	hurtbox.start_invincibility(INVINCIBILITY_DURATION)
 
 func _on_Stats_no_health():
-	queue_free()
 	emit_signal("died",global_position)
 	print("I fired a DIED signal")
 	var enemyDeathEffect = EnemyDeathEffect.instance()
 	get_parent().add_child(enemyDeathEffect)
 	enemyDeathEffect.global_position = global_position
+	drop_souls()
+	queue_free()
 
 func _on_Hurtbox_invincibility_started():
 	animationPlayer.play("Start")
@@ -114,3 +117,11 @@ func asign_player(body):
 func set_player_null():
 	playerDetectionZone.player = null
 	state = WANDER
+
+func drop_souls():
+	for i in CR_VALUE * 2:
+		var soulDrop = Soul.instance()
+		soulDrop.myFrame = mySoulSprite
+		get_tree().current_scene.call_deferred("add_child", soulDrop)
+		var randVec = Vector2(randi() % 50 -25 , randi() % 50 - 25)
+		soulDrop.global_position = self.global_position + randVec

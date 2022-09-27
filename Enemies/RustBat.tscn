@@ -158,6 +158,7 @@ ATTACK_INSTANCES = 2
 WAVE_DELAY = 0.4
 CR_VALUE = 6
 FLEE_RANGE = 150
+mySoulSprite = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
@@ -165,7 +166,7 @@ position = Vector2( 0, -14 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 1
+frame = 4
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]

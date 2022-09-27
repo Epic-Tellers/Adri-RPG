@@ -24,7 +24,7 @@ func _ready():
 	create_scene_timer()
 	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
 		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")
-
+	PlayerSaveInfo._save_game()
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("pause")):
@@ -48,6 +48,7 @@ func _on_timer_timeout():
 	ScreenTransitionManager.transition_to_scene(deathScene)
 	
 func _on_enemy_death(pos):
+	PlayerSaveInfo.enemiesKilled += 1
 	enemiesInScene -= 1
 	if enemiesInScene == 0: #we don't do <= bc we get stacked signals and multiple portal spawns
 		#print("On spawn, there were enemies: " + String(enemiesInScene))

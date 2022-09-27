@@ -1660,7 +1660,7 @@ value = 0.0
 visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 0.5, 0.5 )
-frame = 2
+frame = 35
 
 [node name="ChargeCompleted" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )

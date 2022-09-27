@@ -120,6 +120,7 @@ KNOCKBACK_FORCE = 5
 FLY_DRAG = 250
 MAX_SPEED = 75
 CR_VALUE = 8
+mySoulSprite = 9
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
@@ -127,7 +128,7 @@ position = Vector2( 0, -5.33333 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 2
+frame = 3
 playing = true
 offset = Vector2( 0, -11 )
 

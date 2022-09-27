@@ -5,6 +5,7 @@ var health = max_health setget set_health #values put in editor are updated on r
 var berserkerModifier = 0 #makes you take more damage
 var died = false
 var initialMaxHealth
+var batSoulsThisRun = 0
 
 var upgradeArrayStats = [0,0,0,0,0,0] setget upgrades_changed #for more info, go to Player.gd
 #var upgradeArray = [0,0,0,0,0,0] setget upgrade_array_got_changed #updated from a signal fired on a setget on PlayerStats

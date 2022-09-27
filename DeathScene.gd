@@ -1,6 +1,7 @@
 extends Control
 
 onready var worlds = ["res://World1.tscn", "res://World2.tscn"]
+onready var mainScene = "res://MainScreen.tscn"
 onready var retry = $VBoxContainer/Button
 var quotes = []
 func _ready():
@@ -11,10 +12,12 @@ func _ready():
 	PlayerStats.reset_upgrades()
 	PlayerStats.health = PlayerStats.max_health
 	CrManager.reset_CR()
-
+	add_bat_souls()
+	PlayerSaveInfo._save_game()
+	
 func _on_Button_pressed():
 	worlds.shuffle()
-	var scene = worlds.back()
+	var scene = mainScene #worlds.back()
 	ScreenTransitionManager.transition_to_scene(scene)
 #	if get_tree().change_scene(scene) != OK:
 #		print("Error in DeathScene trying to change scene to: " +String(scene))
@@ -22,6 +25,10 @@ func _on_Button_pressed():
 
 func _on_Button2_pressed():
 	get_tree().quit()
+
+func add_bat_souls():
+	# Display an animation or something that shows the souls getting stashed?
+	PlayerStats.batSoulsThisRun = 0
 
 func fill_quotes():
 	quotes = [

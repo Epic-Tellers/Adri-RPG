@@ -1,0 +1,144 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Overlap/material_preview.png" type="Texture" id=1]
+[ext_resource path="res://Enemies/BatSoul.gd" type="Script" id=2]
+[ext_resource path="res://Overlap/shine.png" type="Texture" id=3]
+
+[sub_resource type="CircleShape2D" id=1]
+radius = 146.667
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 20.0
+
+[sub_resource type="Animation" id=3]
+resource_name = "Animate"
+length = 0.8
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -2 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:visible")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.2, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 1,
+"values": [ false, true, false ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:scale")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.2, 0.3, 0.4 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.05, 0.05 ), Vector2( 0.07, 0.07 ), Vector2( 0.05, 0.05 ) ]
+}
+
+[sub_resource type="Animation" id=4]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, -2 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ 140.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Sprite:visible")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ true ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("Sprite:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0.07, 0.05 ) ]
+}
+
+[node name="BatSoulHolder" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BatSoul" type="Sprite" parent="."]
+light_mask = 0
+position = Vector2( 0, -2 )
+scale = Vector2( 0.3, 0.3 )
+texture = ExtResource( 1 )
+hframes = 16
+
+[node name="Sprite" type="Sprite" parent="BatSoul"]
+position = Vector2( -6.66667, -8.97138 )
+rotation = 2.44346
+scale = Vector2( 0.07, 0.05 )
+texture = ExtResource( 3 )
+
+[node name="PlayerDetectZone" type="Area2D" parent="BatSoul"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BatSoul/PlayerDetectZone"]
+shape = SubResource( 1 )
+
+[node name="PlayerCollectZone" type="Area2D" parent="BatSoul"]
+visible = false
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BatSoul/PlayerCollectZone"]
+modulate = Color( 0.0980392, 0.254902, 0.988235, 1 )
+shape = SubResource( 2 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="BatSoul"]
+autoplay = "Animate"
+anims/Animate = SubResource( 3 )
+anims/RESET = SubResource( 4 )
+
+[connection signal="body_entered" from="BatSoul/PlayerDetectZone" to="." method="_on_PlayerDetectZone_body_entered"]
+[connection signal="body_entered" from="BatSoul/PlayerCollectZone" to="." method="_on_PlayerCollectZone_body_entered"]

@@ -4,6 +4,7 @@ const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const FireballScene = preload("res://Overlap/Fireball.tscn")
 const ExplosionEffect = preload("res://Effects/ExplosionEffect.tscn")
 const ChargeFireballEffect = preload("res://Enemies/FireballCharge.tscn")
+const Soul = preload("res://Enemies/BatSoul.tscn")
 
 enum {
 	IDLE,
@@ -35,6 +36,7 @@ export var WAVE_DELAY = 0.3 #delay between shots in same round of attack
 export var CR_VALUE = 3 #Challenge Rating of the enemy
 export var FLEE_RANGE = 300 #Range at which it will flee player
 export var CONE_OBERTURE = 20 #Oberture on the cone if shooting multiple fireballs
+export var mySoulSprite = 0
 
 onready var stats = $Stats
 onready var playerDetectionZone = $PlayerDetectionZone
@@ -198,16 +200,26 @@ func _on_Stats_no_health():
 		animationPlayerExplode.play("Explode")
 		audioStreamPlayer.play()
 	else:
-		queue_free()
 		emit_signal("died",global_position)
 		print("I fired a DIED signal")
 		var enemyDeathEffect = EnemyDeathEffect.instance()
 		get_parent().add_child(enemyDeathEffect)
 		enemyDeathEffect.global_position = global_position
 		enemyDeathEffect.scale = self.scale
+		drop_souls()
+		queue_free()
+
+func drop_souls():
+	for i in CR_VALUE:
+		var soulDrop = Soul.instance()
+		soulDrop.myFrame = mySoulSprite
+		get_tree().current_scene.call_deferred("add_child", soulDrop)
+		var randVec = Vector2(randi() % 50 -25 , randi() % 50 - 25)
+		soulDrop.global_position = self.global_position + randVec
 
 func death_explosion():
 	queue_free()
+	drop_souls()
 	emit_signal("died",global_position)
 	print("I fired a DIED signal")
 	animationPlayer.play("Stop")

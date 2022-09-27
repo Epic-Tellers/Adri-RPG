@@ -13,6 +13,11 @@ func _ready():
 
 func IncrementCR():
 	currentCR += CR_INCREMENT
+	update_highest_floor()
+
+func update_highest_floor():
+	var currentFloor = currentCR / CR_INCREMENT
+	PlayerSaveInfo.highestFloor = max(currentFloor, PlayerSaveInfo.highestFloor)
 	
 func reset_CR():
 	currentCR = 0

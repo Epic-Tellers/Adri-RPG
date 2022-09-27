@@ -115,13 +115,14 @@ radius = 134.015
 [node name="Bat" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 4 )
+mySoulSprite = 6
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
 position = Vector2( 0, 3 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 1
+frame = 3
 playing = true
 offset = Vector2( 0, -11 )
 

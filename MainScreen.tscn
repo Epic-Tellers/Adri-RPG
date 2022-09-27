@@ -24,9 +24,9 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -42.0
+margin_left = -55.0
 margin_top = -28.0
-margin_right = 42.0
+margin_right = 56.0
 margin_bottom = -14.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
@@ -48,9 +48,19 @@ focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../StartButton")
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
+[node name="SaveGameButton" type="Button" parent="VBoxContainer"]
 margin_left = 64.0
-margin_right = 84.0
+margin_right = 87.0
+margin_bottom = 14.0
+focus_neighbour_top = NodePath("../StartButton")
+focus_neighbour_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
+focus_previous = NodePath("../StartButton")
+text = "Save"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_left = 91.0
+margin_right = 111.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../OptionsButton")
 focus_neighbour_bottom = NodePath("../StartButton")
@@ -127,4 +137,5 @@ margin_bottom = 40.0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/SaveGameButton" to="." method="_on_SaveGameButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

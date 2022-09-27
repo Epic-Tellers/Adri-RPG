@@ -119,6 +119,7 @@ script = ExtResource( 4 )
 FLY_DRAG = 175
 MAX_SPEED = 35
 CR_VALUE = 4
+mySoulSprite = 3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
@@ -126,7 +127,6 @@ position = Vector2( 0, -12 )
 scale = Vector2( 0.2, 0.2 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 1
 playing = true
 offset = Vector2( 0, -11 )
 
