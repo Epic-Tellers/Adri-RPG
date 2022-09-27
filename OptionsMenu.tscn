@@ -20,6 +20,10 @@ stretch_mode = 2
 [node name="Panel" type="Panel" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
+margin_left = 35.0
+margin_top = 35.0
+margin_right = -35.0
+margin_bottom = -35.0
 
 [node name="MainScreen" type="Control" parent="Panel"]
 anchor_right = 1.0

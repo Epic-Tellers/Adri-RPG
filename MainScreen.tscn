@@ -24,43 +24,43 @@ anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-margin_left = -55.0
-margin_top = -28.0
-margin_right = 56.0
-margin_bottom = -14.0
+margin_left = -63.0
+margin_top = -27.0
+margin_right = 63.0
+margin_bottom = -13.0
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
 margin_right = 25.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../QuitButton")
-focus_neighbour_bottom = NodePath("../OptionsButton")
-focus_next = NodePath("../OptionsButton")
+focus_neighbour_bottom = NodePath("../Upgrades")
+focus_next = NodePath("../Upgrades")
 focus_previous = NodePath("../QuitButton")
 text = "Start"
 
-[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+[node name="Upgrades" type="Button" parent="VBoxContainer"]
 margin_left = 29.0
-margin_right = 60.0
+margin_right = 67.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../StartButton")
+focus_neighbour_bottom = NodePath("../OptionsButton")
+focus_next = NodePath("../OptionsButton")
+focus_previous = NodePath("../StartButton")
+text = "Upgrades"
+
+[node name="OptionsButton" type="Button" parent="VBoxContainer"]
+margin_left = 71.0
+margin_right = 102.0
+margin_bottom = 14.0
+focus_neighbour_top = NodePath("../Upgrades")
 focus_neighbour_bottom = NodePath("../QuitButton")
 focus_next = NodePath("../QuitButton")
-focus_previous = NodePath("../StartButton")
+focus_previous = NodePath("../Upgrades")
 text = "Options"
 
-[node name="SaveGameButton" type="Button" parent="VBoxContainer"]
-margin_left = 64.0
-margin_right = 87.0
-margin_bottom = 14.0
-focus_neighbour_top = NodePath("../StartButton")
-focus_neighbour_bottom = NodePath("../QuitButton")
-focus_next = NodePath("../QuitButton")
-focus_previous = NodePath("../StartButton")
-text = "Save"
-
 [node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_left = 91.0
-margin_right = 111.0
+margin_left = 106.0
+margin_right = 126.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../OptionsButton")
 focus_neighbour_bottom = NodePath("../StartButton")
@@ -136,6 +136,6 @@ margin_right = 40.0
 margin_bottom = 40.0
 
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/Upgrades" to="." method="_on_Upgrades_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
-[connection signal="pressed" from="VBoxContainer/SaveGameButton" to="." method="_on_SaveGameButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

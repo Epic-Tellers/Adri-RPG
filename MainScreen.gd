@@ -8,10 +8,13 @@ onready var worlds = [world1, world2]
 
 var OptionsMenuScene = preload("res://OptionsMenu.tscn")
 var optionsMenuScene = null
+var UpgradeMenuScene = preload("res://UpgradesMenu.tscn")
+var upgradeMenuScene = null
 
 func _ready():
 	randomize()
 	startButton.grab_focus()
+	PlayerSaveInfo._save_game()
 
 func _on_StartButton_pressed():
 	worlds.shuffle()
@@ -35,11 +38,19 @@ func _on_options_back_pressed():
 func _on_QuitButton_pressed():
 	get_tree().quit()
 	
-
 func toggle_hide():
 	$VBoxContainer.set_visible(!$VBoxContainer.visible)
 	$Control.set_visible(!$Control.visible)
 	$Label.set_visible(!$Label.visible)
 
-func _on_SaveGameButton_pressed():
-	PlayerSaveInfo._save_game()
+func _on_Upgrades_pressed():
+	upgradeMenuScene = UpgradeMenuScene.instance()
+	add_child(upgradeMenuScene)
+	upgradeMenuScene.connect("back_pressed",self,"_on_upgrade_back_pressed")
+	toggle_hide()
+
+func _on_upgrade_back_pressed():
+	if upgradeMenuScene != null:
+			upgradeMenuScene.queue_free()
+			toggle_hide()
+			startButton.grab_focus()
