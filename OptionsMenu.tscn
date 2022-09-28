@@ -2,34 +2,30 @@
 
 [ext_resource path="res://OptionsMenu.gd" type="Script" id=1]
 [ext_resource path="res://RangeControl.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/GrassBackground.png" type="Texture" id=4]
+[ext_resource path="res://UI/ControlsMenu.gd" type="Script" id=3]
 
 [node name="Options" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="TextureRect" type="TextureRect" parent="."]
+[node name="Panel" type="Panel" parent="."]
+anchor_left = 0.152
+anchor_top = 0.194
+anchor_right = 0.848
+anchor_bottom = 0.8
+margin_left = 0.0399971
+margin_top = 0.079998
+margin_right = -0.0400085
+margin_bottom = 1.0
+
+[node name="MainScreenOptions" type="Control" parent="Panel"]
 visible = false
 anchor_right = 1.0
 anchor_bottom = 1.0
-texture = ExtResource( 4 )
-expand = true
-stretch_mode = 2
+margin_bottom = -20.0
 
-[node name="Panel" type="Panel" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 35.0
-margin_top = 35.0
-margin_right = -35.0
-margin_bottom = -35.0
-
-[node name="MainScreen" type="Control" parent="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-
-[node name="Holder" type="VBoxContainer" parent="Panel/MainScreen"]
+[node name="Holder" type="VBoxContainer" parent="Panel/MainScreenOptions"]
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
@@ -40,20 +36,20 @@ margin_right = 50.0
 margin_bottom = 40.0
 rect_min_size = Vector2( 100, 0 )
 
-[node name="Label" type="Label" parent="Panel/MainScreen/Holder"]
+[node name="Label" type="Label" parent="Panel/MainScreenOptions/Holder"]
 margin_right = 100.0
 margin_bottom = 8.0
 text = "Options"
 align = 1
 valign = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MainScreen/Holder"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/MainScreenOptions/Holder"]
 margin_top = 12.0
 margin_right = 100.0
 margin_bottom = 26.0
 alignment = 1
 
-[node name="WindowModeLabel" type="Label" parent="Panel/MainScreen/Holder/HBoxContainer"]
+[node name="WindowModeLabel" type="Label" parent="Panel/MainScreenOptions/Holder/HBoxContainer"]
 margin_top = 3.0
 margin_right = 46.0
 margin_bottom = 11.0
@@ -62,7 +58,7 @@ text = "Window Mode"
 align = 1
 valign = 1
 
-[node name="ButtonWindowMode" type="Button" parent="Panel/MainScreen/Holder/HBoxContainer"]
+[node name="ButtonWindowMode" type="Button" parent="Panel/MainScreenOptions/Holder/HBoxContainer"]
 margin_left = 56.0
 margin_right = 96.0
 margin_bottom = 14.0
@@ -70,13 +66,13 @@ size_flags_horizontal = 6
 size_flags_vertical = 6
 text = "Windowed"
 
-[node name="MusicVolumeContainer" type="HBoxContainer" parent="Panel/MainScreen/Holder"]
+[node name="MusicVolumeContainer" type="HBoxContainer" parent="Panel/MainScreenOptions/Holder"]
 margin_top = 30.0
 margin_right = 100.0
 margin_bottom = 44.0
 alignment = 1
 
-[node name="WindowModeLabel" type="Label" parent="Panel/MainScreen/Holder/MusicVolumeContainer"]
+[node name="WindowModeLabel" type="Label" parent="Panel/MainScreenOptions/Holder/MusicVolumeContainer"]
 margin_top = 3.0
 margin_right = 44.0
 margin_bottom = 11.0
@@ -85,17 +81,17 @@ text = "Music Volume"
 align = 1
 valign = 1
 
-[node name="RangeControl" parent="Panel/MainScreen/Holder/MusicVolumeContainer" instance=ExtResource( 2 )]
+[node name="RangeControl" parent="Panel/MainScreenOptions/Holder/MusicVolumeContainer" instance=ExtResource( 2 )]
 margin_left = 56.0
 margin_right = 100.0
 
-[node name="SfxVolumeContainer" type="HBoxContainer" parent="Panel/MainScreen/Holder"]
+[node name="SfxVolumeContainer" type="HBoxContainer" parent="Panel/MainScreenOptions/Holder"]
 margin_top = 48.0
 margin_right = 100.0
 margin_bottom = 62.0
 alignment = 1
 
-[node name="WindowModeLabel" type="Label" parent="Panel/MainScreen/Holder/SfxVolumeContainer"]
+[node name="WindowModeLabel" type="Label" parent="Panel/MainScreenOptions/Holder/SfxVolumeContainer"]
 margin_top = 3.0
 margin_right = 40.0
 margin_bottom = 11.0
@@ -104,18 +100,275 @@ text = "SFX Volume"
 align = 1
 valign = 1
 
-[node name="RangeControl" parent="Panel/MainScreen/Holder/SfxVolumeContainer" instance=ExtResource( 2 )]
+[node name="RangeControl" parent="Panel/MainScreenOptions/Holder/SfxVolumeContainer" instance=ExtResource( 2 )]
 margin_left = 56.0
 margin_right = 100.0
 
-[node name="BackButton" type="Button" parent="Panel/MainScreen/Holder"]
-margin_left = 39.0
+[node name="Controls" type="Button" parent="Panel/MainScreenOptions/Holder"]
+margin_left = 33.0
 margin_top = 66.0
-margin_right = 61.0
+margin_right = 67.0
 margin_bottom = 80.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Controls"
+
+[node name="BackButton" type="Button" parent="Panel/MainScreenOptions/Holder"]
+margin_left = 39.0
+margin_top = 84.0
+margin_right = 61.0
+margin_bottom = 98.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 text = "Back"
 
-[connection signal="pressed" from="Panel/MainScreen/Holder/HBoxContainer/ButtonWindowMode" to="." method="_on_ButtonWindowMode_pressed"]
-[connection signal="pressed" from="Panel/MainScreen/Holder/BackButton" to="." method="_on_BackButton_pressed"]
+[node name="ControlsMenu" type="Control" parent="Panel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="Panel/ControlsMenu"]
+anchor_left = 0.5
+anchor_right = 0.5
+margin_left = -35.0
+margin_top = 4.0
+margin_right = 35.0
+margin_bottom = 12.0
+text = "Controls"
+align = 1
+valign = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ControlsMenu"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -35.0
+margin_right = 80.0
+margin_bottom = 61.0
+
+[node name="Holder" type="VBoxContainer" parent="Panel/ControlsMenu/HBoxContainer"]
+margin_right = 70.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 70, 0 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder"]
+margin_right = 70.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Up" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer"]
+margin_top = 3.0
+margin_right = 9.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Up"
+align = 1
+valign = 1
+
+[node name="UpChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder"]
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Down" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 19.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Down"
+align = 1
+valign = 1
+
+[node name="DownChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer2"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder"]
+margin_top = 36.0
+margin_right = 70.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Right" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer3"]
+margin_top = 3.0
+margin_right = 18.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Right"
+align = 1
+valign = 1
+
+[node name="RightChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer3"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder"]
+margin_top = 54.0
+margin_right = 70.0
+margin_bottom = 68.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Left" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer4"]
+margin_top = 3.0
+margin_right = 14.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Left"
+align = 1
+valign = 1
+
+[node name="LeftChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer4"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="Holder2" type="VBoxContainer" parent="Panel/ControlsMenu/HBoxContainer"]
+margin_left = 74.0
+margin_right = 144.0
+margin_bottom = 96.0
+rect_min_size = Vector2( 70, 0 )
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder2"]
+margin_right = 70.0
+margin_bottom = 14.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Attack" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer"]
+margin_top = 3.0
+margin_right = 22.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Attack"
+align = 1
+valign = 1
+
+[node name="AttackChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder2"]
+margin_top = 18.0
+margin_right = 70.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Charge" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer2"]
+margin_top = 3.0
+margin_right = 24.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Charge"
+align = 1
+valign = 1
+
+[node name="ChargeChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer2"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Panel/ControlsMenu/HBoxContainer/Holder2"]
+margin_top = 36.0
+margin_right = 70.0
+margin_bottom = 50.0
+rect_min_size = Vector2( 45, 10 )
+alignment = 1
+
+[node name="Roll" type="Label" parent="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer3"]
+margin_top = 3.0
+margin_right = 13.0
+margin_bottom = 11.0
+size_flags_horizontal = 2
+text = "Roll"
+align = 1
+valign = 1
+
+[node name="RollChange" type="Button" parent="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer3"]
+margin_left = 38.0
+margin_right = 68.0
+margin_bottom = 14.0
+size_flags_horizontal = 6
+size_flags_vertical = 6
+text = "Change"
+
+[node name="ControlsBackButton" type="Button" parent="Panel/ControlsMenu"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -35.0
+margin_top = -25.0
+margin_right = -13.0
+margin_bottom = -11.0
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+
+[node name="PanelPress" type="Panel" parent="Panel/ControlsMenu"]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -72.0
+margin_top = -41.5
+margin_right = 72.0
+margin_bottom = 41.5
+
+[node name="PressAnyKey" type="Label" parent="Panel/ControlsMenu/PanelPress"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -38.0
+margin_top = -4.0
+margin_right = 38.0
+margin_bottom = 4.0
+text = "Waiting for new input..."
+
+[connection signal="pressed" from="Panel/MainScreenOptions/Holder/HBoxContainer/ButtonWindowMode" to="." method="_on_ButtonWindowMode_pressed"]
+[connection signal="pressed" from="Panel/MainScreenOptions/Holder/Controls" to="." method="_on_Controls_pressed"]
+[connection signal="pressed" from="Panel/MainScreenOptions/Holder/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer/UpChange" to="Panel/ControlsMenu" method="_on_UpChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer2/DownChange" to="Panel/ControlsMenu" method="_on_DownChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer3/RightChange" to="Panel/ControlsMenu" method="_on_RightChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder/HBoxContainer4/LeftChange" to="Panel/ControlsMenu" method="_on_LeftChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer/AttackChange" to="Panel/ControlsMenu" method="_on_AttackChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer2/ChargeChange" to="Panel/ControlsMenu" method="_on_ChargeChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/HBoxContainer/Holder2/HBoxContainer3/RollChange" to="Panel/ControlsMenu" method="_on_RollChange_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/ControlsBackButton" to="." method="_on_ControlsBackButton_pressed"]
+[connection signal="pressed" from="Panel/ControlsMenu/ControlsBackButton" to="Panel/ControlsMenu" method="_on_ControlsBackButton_pressed"]

@@ -10,7 +10,16 @@ var timeSpent = 0 setget set_time_spent, get_time_spent
 var _save := SaveGameAsJSON.new()
 
 func _ready():
-	_create_or_load_save()
+	#save file: coins, highest floor, etc.
+	_create_or_load_save() 
+	#check for input remap file
+	var directory = Directory.new();
+	var doFileExists = directory.dir_exists("user://my_remap.tres")
+	if doFileExists:
+		var remap = load("user://my_remap.tres")
+		remap.apply_remap()
+	else:
+		print("No control remap file exists")
 
 func set_highest_floor(value):
 	_save.highestFloor = value

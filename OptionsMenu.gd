@@ -2,11 +2,15 @@ extends Control
 
 signal back_pressed
 
-onready var backButton = $Panel/MainScreen/Holder/BackButton
-onready var windowModeButton = $Panel/MainScreen/Holder/HBoxContainer/ButtonWindowMode
-onready var musicRangeControl = $Panel/MainScreen/Holder/MusicVolumeContainer/RangeControl
-onready var sfxRangeControl = $Panel/MainScreen/Holder/SfxVolumeContainer/RangeControl
+onready var backButton = $Panel/MainScreenOptions/Holder/BackButton
+onready var windowModeButton = $Panel/MainScreenOptions/Holder/HBoxContainer/ButtonWindowMode
+onready var musicRangeControl = $Panel/MainScreenOptions/Holder/MusicVolumeContainer/RangeControl
+onready var sfxRangeControl = $Panel/MainScreenOptions/Holder/SfxVolumeContainer/RangeControl
+onready var options = $Panel/MainScreenOptions
 
+
+onready var controls = $Panel/ControlsMenu
+onready var controlBackButton = $Panel/ControlsMenu/ControlsBackButton
 
 var fullscreen = false
 
@@ -49,3 +53,15 @@ func _on_ButtonWindowMode_pressed():
 
 func _on_BackButton_pressed():
 	emit_signal("back_pressed")
+
+func _on_Controls_pressed():
+	toggle_visibility_options()
+	controlBackButton.grab_focus()
+	
+func toggle_visibility_options():
+	options.visible = !options.visible
+	controls.visible = !controls.visible
+
+func _on_ControlsBackButton_pressed():
+	toggle_visibility_options()
+	windowModeButton.grab_focus()
