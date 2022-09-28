@@ -3,6 +3,7 @@ extends Node
 var currentCR = 0
 export(Array, String) var EnemiesPath #list of paths to scenes of enemies
 export var CR_INCREMENT = 3
+export var BOSS_FLOORS = 5 #keeps track every how many floors does a boss wave spawn
 export (bool) var ACTIVATE_SPAWN = true
 var enemiesArray = [] #list of instanced enemies
 
@@ -14,6 +15,13 @@ func _ready():
 func IncrementCR():
 	currentCR += CR_INCREMENT
 	update_highest_floor()
+	
+
+func check_if_boss_floor():
+	if currentCR % BOSS_FLOORS == 0:
+		return true
+	else:
+		return false
 
 func update_highest_floor():
 	var currentFloor = currentCR / CR_INCREMENT
@@ -26,6 +34,8 @@ func getEnemiesToSpawn():
 	var auxEnemiesArray = enemiesArray.duplicate()
 	var enemiesToSpawn = []
 	var CRBudget = currentCR
+	if check_if_boss_floor():
+		CRBudget *= 2
 	while CRBudget > 0:
 		auxEnemiesArray.shuffle()
 		var randomEnemy = auxEnemiesArray.back()

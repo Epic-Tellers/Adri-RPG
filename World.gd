@@ -7,6 +7,7 @@ onready var deathScene = "res://DeathScene.tscn"
 const NextLevelCollider = preload("res://NextLevelColider.tscn")
 const HealHeart = preload("res://World/RotatingHeart.tscn")
 const PauseScene = preload("res://PauseMenu.tscn")
+const BossWaveScene = preload("res://UI/BossWaveBanner.tscn")
 var changeScenesTimer = null
 var enemiesInScene = 0
 
@@ -21,6 +22,9 @@ func _ready():
 		var targetPoint = spawnPointsArray[(randi() % spawnPointsNumber)]
 		targetPoint.add_child(item)
 		item.connect("died",self,"_on_enemy_death")
+	if CrManager.check_if_boss_floor():
+		var bossBanner = BossWaveScene.instance()
+		$CanvasLayer.add_child(bossBanner)
 	create_scene_timer()
 	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
 		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")

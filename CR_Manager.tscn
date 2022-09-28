@@ -5,4 +5,4 @@
 [node name="CR_Manager" type="Node"]
 script = ExtResource( 1 )
 EnemiesPath = [ "res://Enemies/Bat.tscn", "res://Enemies/DemonBat.tscn", "res://Enemies/RustBat.tscn", "res://Enemies/FireBat.tscn", "res://Enemies/EldritchBat.tscn", "res://Enemies/GhostBat.tscn" ]
-CR_INCREMENT = 2
+CR_INCREMENT = 4
