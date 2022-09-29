@@ -1,4 +1,5 @@
 extends "res://Overlap/Hitbox.gd"
+var FireGone = preload("res://Effects/FireGone.tscn")
 
 export var FIREBALL_SPEED = 200
 var direction setget direction_set, direction_get
@@ -29,4 +30,12 @@ func set_damage(value):
 	self.damage = value
 
 func _on_VisibilityNotifier2D_screen_exited():
+	queue_free()
+
+func _on_WorldArea_body_entered(_body):
+	var fireGone = FireGone.instance()
+	fireGone.global_position = global_position
+	fireGone.rotation = rotation
+	fireGone.rotate(-PI/2)
+	get_tree().current_scene.add_child(fireGone)
 	queue_free()

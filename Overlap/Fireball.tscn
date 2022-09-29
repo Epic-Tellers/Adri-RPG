@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Overlap/Fireball.gd" type="Script" id=1]
 [ext_resource path="res://Effects/FireEffect.tscn" type="PackedScene" id=2]
@@ -6,6 +6,9 @@
 [sub_resource type="CapsuleShape2D" id=1]
 radius = 5.99999
 height = 8.00003
+
+[sub_resource type="CircleShape2D" id=2]
+radius = 7.14286
 
 [node name="Hitbox" type="Area2D"]
 scale = Vector2( 0.7, 0.7 )
@@ -26,5 +29,16 @@ frame = 0
 [node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
 position = Vector2( -11, 0 )
 
+[node name="WorldArea" type="Area2D" parent="."]
+position = Vector2( 4.28571, 0 )
+scale = Vector2( 1, 1 )
+collision_layer = 0
+
+[node name="WorldCollider" type="CollisionShape2D" parent="WorldArea"]
+position = Vector2( 4.76837e-07, 0 )
+scale = Vector2( 1, 1 )
+shape = SubResource( 2 )
+
 [connection signal="area_entered" from="." to="." method="_on_Hitbox_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
+[connection signal="body_entered" from="WorldArea" to="." method="_on_WorldArea_body_entered"]
