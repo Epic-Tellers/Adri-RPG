@@ -1,9 +1,10 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Overlap/material_preview.png" type="Texture" id=1]
 [ext_resource path="res://Enemies/BatSoul.gd" type="Script" id=2]
 [ext_resource path="res://Overlap/shine.png" type="Texture" id=3]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=4]
+[ext_resource path="res://addons/Trail/trail_2d.gd" type="Script" id=5]
 
 [sub_resource type="Animation" id=5]
 resource_name = "Animate"
@@ -38,7 +39,7 @@ tracks/0/keys = {
 }
 
 [sub_resource type="CircleShape2D" id=1]
-radius = 146.667
+radius = 130.0
 
 [sub_resource type="CircleShape2D" id=2]
 radius = 20.0
@@ -137,6 +138,7 @@ tracks/3/keys = {
 
 [node name="BatSoulHolder" type="Node2D"]
 script = ExtResource( 2 )
+TARGET_SPEED = 160
 
 [node name="Sprite" type="Sprite" parent="."]
 position = Vector2( 0, 3 )
@@ -182,6 +184,15 @@ shape = SubResource( 2 )
 autoplay = "Animate"
 anims/Animate = SubResource( 3 )
 anims/RESET = SubResource( 4 )
+
+[node name="Trail2D" type="Line2D" parent="."]
+points = PoolVector2Array( 11, -2 )
+width = 3.0
+default_color = Color( 1, 1, 1, 0.235294 )
+script = ExtResource( 5 )
+lifetime = 0.2
+distance = 3.0
+segments = 15
 
 [connection signal="body_entered" from="BatSoul/PlayerDetectZone" to="." method="_on_PlayerDetectZone_body_entered"]
 [connection signal="body_entered" from="BatSoul/PlayerCollectZone" to="." method="_on_PlayerCollectZone_body_entered"]

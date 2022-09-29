@@ -210,12 +210,13 @@ func _on_Stats_no_health():
 		queue_free()
 
 func drop_souls():
-	for i in CR_VALUE:
+	for i in CR_VALUE * 2:
 		var soulDrop = Soul.instance()
 		soulDrop.myFrame = mySoulSprite
-		get_tree().current_scene.call_deferred("add_child", soulDrop)
 		var randVec = Vector2(randi() % 50 -25 , randi() % 50 - 25)
-		soulDrop.global_position = self.global_position + randVec
+		soulDrop.targetPos = global_position + randVec
+		get_tree().current_scene.call_deferred("add_child", soulDrop)
+		soulDrop.global_position = self.global_position
 
 func death_explosion():
 	queue_free()
