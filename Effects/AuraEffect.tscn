@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Effects/circle_fade.jpg" type="Texture" id=1]
+
+[sub_resource type="Shader" id=1]
+code = "shader_type canvas_item;
+uniform sampler2D n;
+uniform float intensity = 0.0f;
+uniform float speed = 1.0f;
+
+void fragment(){
+	vec4 tx = texture(TEXTURE, UV);
+	vec4 noise = texture(n, UV - TIME / (1.0f * speed));
+	COLOR.a = clamp(tx.r * noise.r * intensity, 0.0f, 1.0f);
+	COLOR.a = pow(COLOR.a, 2);
+}"
+
+[sub_resource type="OpenSimplexNoise" id=3]
+period = 66.4
+lacunarity = 0.23
+
+[sub_resource type="NoiseTexture" id=4]
+width = 64
+height = 64
+seamless = true
+noise = SubResource( 3 )
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = SubResource( 1 )
+shader_param/intensity = 1.7
+shader_param/speed = 1.5
+shader_param/n = SubResource( 4 )
+
+[node name="Node2D" type="Node2D"]
+
+[node name="circle_fade" type="Sprite" parent="."]
+material = SubResource( 2 )
+texture = ExtResource( 1 )

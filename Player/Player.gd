@@ -9,6 +9,8 @@ enum {
 	SPIN_RELEASE #spin = charged attack
 }
 
+signal playerSpawned
+
 var state = MOVE
 var velocity = Vector2.ZERO
 var roll_vector = Vector2.DOWN #cause player default anim is idle left
@@ -60,6 +62,12 @@ func _ready():
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
 	set_upgrades(stats.upgradeArrayStats)
+	var world = get_tree().current_scene
+	if (self.connect("playerSpawned",world,"_on_player_spawn")) != OK:
+		print("Error in World trying to connect to player")
+	else:
+		emit_signal("playerSpawned",self)
+	
 
 # _process = update. Happens each frase AS FAST AS POSSIBLE -> delta is not constant
 # _physics_process. Framerate is sinked to the physics. It waits until phys have already been processed. "stable" delta.

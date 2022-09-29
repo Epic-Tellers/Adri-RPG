@@ -10,11 +10,23 @@ const PauseScene = preload("res://PauseMenu.tscn")
 const BossWaveScene = preload("res://UI/BossWaveBanner.tscn")
 var changeScenesTimer = null
 var enemiesInScene = 0
+var player = null
 
 func _ready():
+	#map logic
+	create_scene_timer()
+	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
+		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")
+	
+	#checking CR and check if that correlates to boss floor
+	CrManager.IncrementCR()
+	if CrManager.check_if_boss_floor():
+		var bossBanner = BossWaveScene.instance()
+		$CanvasLayer.add_child(bossBanner)
+	
+	#spawn thy enemies
 	var spawnPointsArray = spawnPointHolder.get_children()
 	var spawnPointsNumber = spawnPointsArray.size()
-	CrManager.IncrementCR()
 	var enemiesToSpawn = CrManager.getEnemiesToSpawn()
 	print("There are these enemies to spwan: "+ String(enemiesToSpawn))
 	enemiesInScene = enemiesToSpawn.size()
@@ -22,13 +34,11 @@ func _ready():
 		var targetPoint = spawnPointsArray[(randi() % spawnPointsNumber)]
 		targetPoint.add_child(item)
 		item.connect("died",self,"_on_enemy_death")
-	if CrManager.check_if_boss_floor():
-		var bossBanner = BossWaveScene.instance()
-		$CanvasLayer.add_child(bossBanner)
-	create_scene_timer()
-	if PlayerStats.connect("no_health",self,"start_scene_timer") != OK:
-		print("Error in World.gd trying to connect no_health signal to start_scene_timer method")
+		item.asign_player(player)
+	
+	#and save progress!
 	PlayerSaveInfo._save_game()
+
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("pause")):
@@ -78,4 +88,8 @@ func last_enemy_death(pos):
 	#self.add_child(nextLevelCollider)
 	self.call_deferred("add_child",nextLevelCollider)
 	nextLevelCollider.global_position = pos
+
+func _on_player_spawn(spawnedPlayer):
+	player = spawnedPlayer
+	print("I got a player: "+str(player))
 	

@@ -16,8 +16,9 @@ func _physics_process(delta):
 		move_towards_player(delta)
 
 func move_towards_player(delta):
-	var motion =  (player.global_position - self.global_position).normalized() * speed
-	self.position += motion * delta
+	if player != null:
+		var motion =  (player.global_position - self.global_position).normalized() * speed
+		self.position += motion * delta
 
 func _on_PlayerDetectZone_body_entered(body):
 	player = body

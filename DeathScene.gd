@@ -10,7 +10,8 @@ func _ready():
 	fill_quotes()
 	$VBoxContainer2/Label.text = quotes[randi() % quotes.size()]
 	PlayerStats.reset_upgrades()
-	PlayerStats.health = PlayerStats.max_health
+	PlayerStats.health = PlayerStats.initialMaxHealth
+	PlayerStats.max_health = PlayerStats.initialMaxHealth
 	CrManager.reset_CR()
 	add_bat_souls()
 	PlayerSaveInfo._save_game()

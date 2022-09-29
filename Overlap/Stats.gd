@@ -60,5 +60,6 @@ func upgrades_changed(newArray):
 	emit_signal("upgrades_change", newArray)
 
 func reset_upgrades():
-	self.upgradeArrayStats = [0,0,0,0,0,0]
+	upgradeArrayStats = [0,0,0,0,0,0] #this one is for adjusting it directly
+	self.upgradeArrayStats = [0,0,0,0,0,0] #this one so we can emit the signal
 	

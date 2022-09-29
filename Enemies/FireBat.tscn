@@ -147,16 +147,14 @@ radius = 140.0
 [node name="FireBat" type="KinematicBody2D"]
 collision_layer = 16
 script = ExtResource( 4 )
-ATTACK_RANGE = 750
+ATTACK_RANGE = 250
 ATTACK_CD = 1.8
-FLEE_RANGE = 150
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )
 position = Vector2( 0, -11 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 2
 playing = true
 
 [node name="Shadow" type="Sprite" parent="."]

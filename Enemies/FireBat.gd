@@ -27,14 +27,14 @@ export var FLY_DRAG = 170 #fly acc
 export var MAX_SPEED = 35 #max speed of bat
 export var SOFT_COLLISION_FORCE = 400 #how aggresively it tries to stay away from other bats
 export var INVINCIBILITY_DURATION = 0.3 #invul time after getting hit
-export var ATTACK_RANGE = 800 #range at which it can shoot fireballs
+export var ATTACK_RANGE = 300 #range at which it can shoot fireballs
 export var ATTACK_CD = 1.5 #interval between fireballs at optimum speed
 export var ATTACK_WAVES = 1 #how many rounds of fireballs it shoots on its attack round
 export var ATTACK_INSTANCES = 1 #how many fireballs it shoots in a round
 export var DEATH_DELAY = 0.6 #time that it waits before exploding
 export var WAVE_DELAY = 0.3 #delay between shots in same round of attack
 export var CR_VALUE = 3 #Challenge Rating of the enemy
-export var FLEE_RANGE = 300 #Range at which it will flee player
+export var FLEE_RANGE = 100 #Range at which it will flee player
 export var CONE_OBERTURE = 20 #Oberture on the cone if shooting multiple fireballs
 export var mySoulSprite = 0
 
