@@ -8,9 +8,17 @@ onready var heartUIEmpty = $HeartUIEmpty
 const UI_HEART_WIDTH = 15 #15 because thats how much pixel wide is each heart
 
 func set_hearts(value):
+	var gotHit = false
+	if value < hearts:
+			gotHit = true
 	hearts = clamp(value,0,max_hearts)
 	if heartUIFull != null:
-		heartUIFull.rect_size.x = hearts * UI_HEART_WIDTH 
+		heartUIFull.rect_size.x = hearts * UI_HEART_WIDTH
+	if gotHit:
+		var TW = create_tween()
+		TW.tween_property(self, "rect_scale", Vector2(1.3,1.3),0.1).set_trans(Tween.TRANS_CUBIC)
+		TW.tween_property(self, "rect_scale", Vector2(1.0,1.0),0.05).set_trans(Tween.TRANS_CUBIC)
+	
 
 func set_max_hearts(value):
 	max_hearts = max(value,1)

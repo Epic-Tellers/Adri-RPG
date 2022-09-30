@@ -33,6 +33,7 @@ func _ready():
 	for item in enemiesToSpawn:
 		var targetPoint = spawnPointsArray[(randi() % spawnPointsNumber)]
 		targetPoint.add_child(item)
+		item.position += Vector2(randi() % 40 - 20, randi() % 40 - 20)
 		item.connect("died",self,"_on_enemy_death")
 		item.asign_player(player)
 	
@@ -45,6 +46,7 @@ func _unhandled_input(event):
 		var pauseInstance = PauseScene.instance()
 		add_child(pauseInstance)
 func create_scene_timer():
+	changeScenesTimer = null
 	changeScenesTimer = Timer.new()
 	if (changeScenesTimer.connect("timeout",self, "_on_timer_timeout")) != OK:
 		print("Error in world trying to connect timeout to _on_timer_timeout")

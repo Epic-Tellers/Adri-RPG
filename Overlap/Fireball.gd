@@ -7,6 +7,9 @@ var origin_position = Vector2.ZERO
 
 func _ready():
 	set_process(true)
+	var TW = create_tween()
+	TW.tween_interval(0.25)
+	TW.tween_callback(self, "activate_world_collide")
 
 func _process(delta):
 	var motion =  (direction).normalized() * FIREBALL_SPEED
@@ -14,6 +17,9 @@ func _process(delta):
 	
 func _on_Hitbox_area_entered(_area):
 	queue_free()
+
+func activate_world_collide():
+	$WorldArea.monitoring = true
 
 func direction_set(value):
 	direction = value

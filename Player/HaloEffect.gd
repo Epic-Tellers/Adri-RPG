@@ -1,7 +1,7 @@
 extends "res://Overlap/Hitbox.gd"
 
-export var TIME_TO_EXPAND = 0.3
-export var SCALE_TO_EXPAND = 4
+export var TIME_TO_EXPAND = 0.25
+export var SCALE_TO_EXPAND = 6
 
 func _ready():
 	var TW = create_tween()

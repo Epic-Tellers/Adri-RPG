@@ -7,6 +7,7 @@ const SoundScene = preload("res://Overlap/PickUpSound.tscn")
 var targetPos = null
 var ableToMove = false
 
+
 func _ready():
 	$BatSoul.frame = myFrame
 	var TW = create_tween()
@@ -19,9 +20,10 @@ func _physics_process(delta):
 		move_towards_player(delta)
 
 func move_towards_player(delta):
-	if player != null and ableToMove:
-		var motion =  (player.global_position - self.global_position).normalized() * 300
-		self.position += motion * delta
+	if player != null: #and player.is_instance_valid():
+		if is_instance_valid(player) and ableToMove: 
+			var motion =  (player.global_position - self.global_position).normalized() * 300
+			self.position += motion * delta
 
 func _on_PlayerDetectZone_body_entered(body):
 	player = body

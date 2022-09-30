@@ -12,6 +12,7 @@ func _ready():
 	PlayerStats.reset_upgrades()
 	PlayerStats.health = PlayerStats.initialMaxHealth
 	PlayerStats.max_health = PlayerStats.initialMaxHealth
+	PlayerStats.died = false
 	CrManager.reset_CR()
 	add_bat_souls()
 	PlayerSaveInfo._save_game()

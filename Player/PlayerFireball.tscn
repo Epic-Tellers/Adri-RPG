@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=18 format=2]
 
 [ext_resource path="res://Effects/PlayerFireball.png" type="Texture" id=1]
 [ext_resource path="res://Effects/ProjectileEffect.gd" type="Script" id=3]
@@ -60,6 +60,9 @@ animations = [ {
 radius = 11.0001
 height = 44.0
 
+[sub_resource type="CapsuleShape2D" id=27]
+radius = 7.00004
+
 [node name="Hitbox" type="Area2D"]
 rotation = -1.5708
 collision_layer = 0
@@ -80,6 +83,14 @@ position = Vector2( 1.1365e-06, -26 )
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="WorldCollider" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WorldCollider"]
+position = Vector2( -1.00005, 14 )
+shape = SubResource( 27 )
+
 [connection signal="area_entered" from="." to="." method="_on_Hitbox_area_entered"]
 [connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]
 [connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="body_entered" from="WorldCollider" to="." method="_on_WorldCollider_body_entered"]

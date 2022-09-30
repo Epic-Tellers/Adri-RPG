@@ -116,9 +116,10 @@ radius = 82.3273
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 16
 script = ExtResource( 4 )
-FLY_DRAG = 175
-MAX_SPEED = 40
-CR_VALUE = 4
+KNOCKBACK_FORCE = 17
+FLY_DRAG = 180
+MAX_SPEED = 45
+CR_VALUE = 7
 mySoulSprite = 3
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
@@ -126,7 +127,7 @@ material = SubResource( 12 )
 position = Vector2( 0, 5 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 2
+frame = 4
 playing = true
 offset = Vector2( 0, -11 )
 

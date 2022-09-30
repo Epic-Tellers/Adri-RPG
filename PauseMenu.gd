@@ -27,6 +27,7 @@ func _on_OptionsButton_pressed():
 	$MarginContainer.visible = false
 
 func _on_options_back_pressed():
+	continueButton.grab_focus()
 	optionsMenuInstance.queue_free()
 	$MarginContainer.visible = true
 

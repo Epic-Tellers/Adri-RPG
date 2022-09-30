@@ -2,6 +2,7 @@ extends Node
 
 var currentCR = 0
 export(Array, String) var EnemiesPath #list of paths to scenes of enemies
+export(Array, int) var Ponderings #relative to position in Enemies Path.
 export var CR_INCREMENT = 3
 export var BOSS_FLOORS = 5 #keeps track every how many floors does a boss wave spawn
 export (bool) var ACTIVATE_SPAWN = true
@@ -34,8 +35,14 @@ func getEnemiesToSpawn():
 	var auxEnemiesArray = enemiesArray.duplicate()
 	var enemiesToSpawn = []
 	var CRBudget = currentCR
+	
+	for i in enemiesArray.size():
+		for j in Ponderings[i]:
+			auxEnemiesArray.append(auxEnemiesArray[i])
+	
 	if check_if_boss_floor():
 		CRBudget *= 2
+		
 	while CRBudget > 0:
 		auxEnemiesArray.shuffle()
 		var randomEnemy = auxEnemiesArray.back()
@@ -46,6 +53,7 @@ func getEnemiesToSpawn():
 			CRBudget -= enemyCR
 		else:
 			auxEnemiesArray.pop_back()
+	
 	if (ACTIVATE_SPAWN):
 		return enemiesToSpawn
 	else: 

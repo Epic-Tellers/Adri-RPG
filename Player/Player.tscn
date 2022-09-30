@@ -957,9 +957,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spawn_echo_halo"
+}, {
 "args": [  ],
 "method": "spend_buff_dancer"
 }, {
@@ -1029,9 +1032,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spawn_echo_halo"
+}, {
 "args": [  ],
 "method": "spend_buff_dancer"
 }, {
@@ -1101,9 +1107,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spawn_echo_halo"
+}, {
 "args": [  ],
 "method": "spend_buff_dancer"
 }, {
@@ -1173,9 +1182,12 @@ tracks/1/loop_wrap = true
 tracks/1/imported = false
 tracks/1/enabled = true
 tracks/1/keys = {
-"times": PoolRealArray( 0, 0.2 ),
-"transitions": PoolRealArray( 1, 1 ),
+"times": PoolRealArray( 0, 0.05, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
 "values": [ {
+"args": [  ],
+"method": "spawn_echo_halo"
+}, {
 "args": [  ],
 "method": "spend_buff_dancer"
 }, {
@@ -1549,12 +1561,10 @@ collision_layer = 2
 script = ExtResource( 1 )
 ACCELERATION_ORIGINAL = 480
 FRICTION = 2000
-ROLL_SPEED = 110
-HITSTOP_POWER = 0.5
-HITSTOP_DURATION = 0.6
+HITSTOP_POWER = 0.25
+HITSTOP_DURATION = 1.0
 ROLL_INVINCIBILITY = 0.4
-SPIN_CHARGE_TIME = 0.8
-SPIN_SPEED_MODIFIER = 0.85
+SPIN_SPEED_MODIFIER = 0.8
 BABE_RUTH_AUGMENT = 12
 
 [node name="Shadow" type="Sprite" parent="."]
@@ -1663,7 +1673,7 @@ value = 0.0
 visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 0.5, 0.5 )
-frame = 22
+frame = 39
 
 [node name="ChargeCompleted" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )

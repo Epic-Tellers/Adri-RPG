@@ -152,9 +152,10 @@ collision_layer = 16
 script = ExtResource( 4 )
 EXPLODE_ON_DEATH = false
 ATTACK_RANGE = 325
+ATTACK_CD = 3.0
 ATTACK_WAVES = 3
 ATTACK_INSTANCES = 3
-CR_VALUE = 10
+CR_VALUE = 20
 mySoulSprite = 11
 
 [node name="Aura" parent="." instance=ExtResource( 13 )]

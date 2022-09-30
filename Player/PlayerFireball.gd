@@ -48,3 +48,13 @@ func _on_Timer_timeout():
 	dieEffect.global_position = global_position
 	dieEffect.rotation = rotation
 	dieEffect.motion = motion
+
+
+func _on_WorldCollider_body_entered(body):
+	queue_free()
+	var dieEffect = DieEffect.instance()
+	get_tree().current_scene.add_child(dieEffect)
+	dieEffect.global_position = global_position
+	dieEffect.rotation = rotation
+	dieEffect.motion = motion/5
+

@@ -149,6 +149,7 @@ collision_layer = 16
 script = ExtResource( 4 )
 ATTACK_RANGE = 250
 ATTACK_CD = 1.8
+CR_VALUE = 4
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]
 material = SubResource( 12 )

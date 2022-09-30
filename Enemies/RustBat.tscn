@@ -148,14 +148,13 @@ radius = 96.8963
 scale = Vector2( 1.5, 1.5 )
 collision_layer = 16
 script = ExtResource( 4 )
-EXPLODE_ON_DEATH = false
 KNOCKBACK_FORCE = 20
 FLY_DRAG = 160
 MAX_SPEED = 30
 SOFT_COLLISION_FORCE = 600
 ATTACK_INSTANCES = 2
 WAVE_DELAY = 0.4
-CR_VALUE = 6
+CR_VALUE = 10
 mySoulSprite = 1
 
 [node name="AnimatedSprite" type="AnimatedSprite" parent="."]

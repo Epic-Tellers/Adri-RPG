@@ -20,7 +20,8 @@ onready var MAX_SPEED = MAX_SPEED_ORIGINAL
 export var ACCELERATION_ORIGINAL = 500 #adjust manually
 onready var ACCELERATION = ACCELERATION_ORIGINAL
 export var FRICTION = 500 #adjust manually
-export var ROLL_SPEED = 140 #adjust manually
+export var ROLL_SPEED_MODIFIER = 1.35 #adjust manually
+onready var ROLL_SPEED = MAX_SPEED * ROLL_SPEED_MODIFIER
 export var HITSTOP_POWER = 0.3 #adjust manually. closer to 0, the greatests the hitstop
 export var HITSTOP_DURATION = 0.5 #adjust manually. this is in seconds.
 export var ROLL_INVINCIBILITY = 0.25
@@ -57,7 +58,8 @@ onready var animationState = animationTree.get("parameters/playback") #this is u
 
 func _ready():
 	randomize()
-	stats.connect("no_health",self,"player_death")
+	if (stats.connect("no_health",self,"player_death")) != OK:
+		print("Error in player trying to connect playerstats's no_health signal to player's player_death method")
 	stats.connect("upgrades_change",self,"set_upgrades")
 	animationTree.active = true
 	swordHitbox.knockback_vector = roll_vector
@@ -67,7 +69,6 @@ func _ready():
 		print("Error in World trying to connect to player")
 	else:
 		emit_signal("playerSpawned",self)
-	
 
 # _process = update. Happens each frase AS FAST AS POSSIBLE -> delta is not constant
 # _physics_process. Framerate is sinked to the physics. It waits until phys have already been processed. "stable" delta.
@@ -187,7 +188,7 @@ func roll_animation_fisnished():
 
 func spin_animation_finished():
 	state = MOVE
-	spawn_echo_halo()
+	#spawn_echo_halo() -> called directly from animation player
 
 func _on_Hurtbox_area_entered(area):
 	stats.health -= area.damage
@@ -279,9 +280,13 @@ func apply_babe_ruth(times):
 	swordHitbox.augment_knockback(1 + 0.25*times)
 	ACCELERATION = ACCELERATION_ORIGINAL + BABE_RUTH_AUGMENT * times
 	MAX_SPEED = MAX_SPEED_ORIGINAL + BABE_RUTH_AUGMENT * times
+	update_roll_speed()
 
 func apply_echo(_times):
 	pass
+
+func update_roll_speed():
+	ROLL_SPEED = MAX_SPEED * ROLL_SPEED_MODIFIER 
 
 func buff_dancer():
 	dancerBuffed = true
@@ -325,9 +330,10 @@ func spawn_one_halo():
 	halo.global_position = global_position
 
 func spawn_echo_halo():
-	print("got to check for spawns. Spawns: " +String(stats.upgradeArrayStats[5]))
-	if stats.upgradeArrayStats[5] > 0:
-		var TW = create_tween().set_loops(stats.upgradeArrayStats[5])
+	var spawns = stats.upgradeArrayStats[5] + 1
+	print("got to check for spawns. Spawns: " +String(spawns))
+	if spawns > 0:
+		var TW = create_tween().set_loops(spawns)
 		TW.tween_callback(self, "spawn_one_halo")
 		TW.tween_interval(DELAY_BETWEEN_HALOS)
 

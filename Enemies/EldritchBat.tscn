@@ -115,13 +115,13 @@ tracks/0/keys = {
 radius = 63.0273
 
 [node name="EldritchBat" type="KinematicBody2D"]
-scale = Vector2( 3, 3 )
+scale = Vector2( 2.2, 2.2 )
 collision_layer = 16
 script = ExtResource( 4 )
 KNOCKBACK_FORCE = 5
 FLY_DRAG = 250
 MAX_SPEED = 75
-CR_VALUE = 8
+CR_VALUE = 15
 mySoulSprite = 9
 
 [node name="Aura" parent="." instance=ExtResource( 13 )]

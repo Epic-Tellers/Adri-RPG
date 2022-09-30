@@ -15,5 +15,5 @@ func create_grass_effect():
 
 func _on_Grass_area_entered(_area):
 	create_grass_effect()
-	emit_signal("grass_died", global_position)
+	#emit_signal("grass_died", global_position)
 	queue_free() #the object that is owner of this line (in this case, Grass) is added to a QUEUE of nodes to be FREE (destroyed). It waits until the end of the frame.

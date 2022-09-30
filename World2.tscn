@@ -529,10 +529,10 @@ position = Vector2( 320, 504 )
 position = Vector2( 528, 152 )
 
 [node name="SpawnPoint2" type="Position2D" parent="YSort/SpawnPoints"]
-position = Vector2( 624, 512 )
+position = Vector2( 576, 468 )
 
 [node name="SpawnPoint3" type="Position2D" parent="YSort/SpawnPoints"]
-position = Vector2( 32, 296 )
+position = Vector2( 72, 514 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
