@@ -8,6 +8,9 @@ var highestFloor = 0
 var enemiesKilled = 0
 var batSouls = 0
 var timeSpent = 0
+var resonantStacks = 0
+var archmageStacks = 0
+var herculeanStacks = 0
 
 var version := 1
 
@@ -26,7 +29,10 @@ func write_savegame() -> void:
 		"highestFloor": highestFloor,
 		"enemiesKilled": enemiesKilled,
 		"batSouls": batSouls,
-		"timeSpent": timeSpent
+		"timeSpent": timeSpent,
+		"resonantStacks": resonantStacks,
+		"archmageStacks": archmageStacks,
+		"herculeanStacks": herculeanStacks
 	}
 	
 	print("Data on write: "+ str(data))
@@ -50,4 +56,8 @@ func load_savegame() -> void:
 	enemiesKilled = data.enemiesKilled
 	batSouls = data.batSouls
 	timeSpent = data.timeSpent
-	print("File loaded. Floor,Kills,Souls,Times = " + str(highestFloor) + ", " + str(enemiesKilled) + ", " + str(batSouls) + ", " + str(timeSpent))
+	resonantStacks = data.resonantStacks
+	archmageStacks = data.archmageStacks
+	herculeanStacks = data.herculeanStacks
+	
+	print("File loaded." + str(resonantStacks) + "" + str(archmageStacks) + "" + str(herculeanStacks))

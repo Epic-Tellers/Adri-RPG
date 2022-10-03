@@ -1559,7 +1559,7 @@ tracks/0/keys = {
 [node name="Player" type="KinematicBody2D"]
 collision_layer = 2
 script = ExtResource( 1 )
-ACCELERATION_ORIGINAL = 480
+ACCELERATION_ORIGINAL = 1000
 FRICTION = 2000
 HITSTOP_POWER = 0.25
 HITSTOP_DURATION = 1.0
@@ -1673,7 +1673,7 @@ value = 0.0
 visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 0.5, 0.5 )
-frame = 39
+frame = 21
 
 [node name="ChargeCompleted" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )

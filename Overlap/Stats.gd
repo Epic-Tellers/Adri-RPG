@@ -7,7 +7,7 @@ var died = false
 var initialMaxHealth
 var batSoulsThisRun = 0
 
-var upgradeArrayStats = [0,0,0,0,0,0] setget upgrades_changed #for more info, go to Player.gd
+var upgradeArrayStats = [0,0,0,0,0,0,0,0,0] setget upgrades_changed #for more info, go to Player.gd
 #var upgradeArray = [0,0,0,0,0,0] setget upgrade_array_got_changed #updated from a signal fired on a setget on PlayerStats
 #Each position in the array codifies for an upgrade. The number on the position, number of instances player has of that upgrade.
 # pos 0 : Berserker: Take +1 from everythinh, do +1 on everything
@@ -16,6 +16,11 @@ var upgradeArrayStats = [0,0,0,0,0,0] setget upgrades_changed #for more info, go
 # pos 3 : Dancer: Rolling decreases charge time on charged attack
 # pos 4 : Babe Ruth: More knockback on ememies. Increased movement speed.
 # pos 5 : Echo: Releasing a charged attack makes it trigger an additional time 
+
+# ---> These 3 do not reset ever, you can BUY them outside game multiple times
+# pos 6 : Resonant (Unlockable upgrade): Enemies that die from an Echo wave spawn an Echo wave. Amount of echo waves increases with each combined stack of Dancer and Echo
+# pos 7 : Archmage (Unlockable upgrade): Your fireball now spawns an AoE on hit. Reach and speed increases with each combined stack of Sorcerer and BabeRuth
+# pos 8 : Herculean (Unlockable upgrade): Killing an enemy restores health. Amount of health restored increases with each combined stack of Berserker and Resilient
 
 signal no_health
 signal upgrades_change(newArray)
@@ -60,6 +65,9 @@ func upgrades_changed(newArray):
 	emit_signal("upgrades_change", newArray)
 
 func reset_upgrades():
-	upgradeArrayStats = [0,0,0,0,0,0] #this one is for adjusting it directly
-	self.upgradeArrayStats = [0,0,0,0,0,0] #this one so we can emit the signal
+	#upgradeArrayStats = [0,0,0,0,0,0]
+	for item in 5: #we only want to reset the in-run upgrades
+		upgradeArrayStats[item] = 0
+	
+	self.upgradeArrayStats = upgradeArrayStats
 	

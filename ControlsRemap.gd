@@ -25,8 +25,9 @@ func create_remap():
 	keyboard_remap.clear()
 	joypad_remap.clear()
 	var keyboard_actions: Dictionary
+	keyboard_actions = {}
 	var joypad_actions: Dictionary
-	
+	joypad_actions = {}
 	for action in ACTION_LIST:
 		_map_input(keyboard_actions, action, get_action_key(action))
 		_map_input(joypad_actions, action, get_action_button(action))
@@ -90,6 +91,7 @@ func get_action_button(action: String) -> InputEventJoypadButton:
 
 func find_duplicates() -> Array:
 	var dupes: Array
+	dupes = []
 	
 	for action in ACTION_LIST:
 		var key1 := get_action_key(action)

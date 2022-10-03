@@ -50,7 +50,7 @@ func _on_Timer_timeout():
 	dieEffect.motion = motion
 
 
-func _on_WorldCollider_body_entered(body):
+func _on_WorldCollider_body_entered(_body):
 	queue_free()
 	var dieEffect = DieEffect.instance()
 	get_tree().current_scene.add_child(dieEffect)

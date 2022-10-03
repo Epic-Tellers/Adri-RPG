@@ -256,10 +256,12 @@ func set_upgrades(newArray):
 	apply_dancer(newArray[3])
 	apply_babe_ruth(newArray[4])
 	apply_echo(newArray[5])
+	apply_resonant(newArray[6])
+	apply_archmage(newArray[7])
+	apply_herculean(newArray[8])
 
 #func upgrade_array_got_changed(_value):
 #	upgradeArray = stats.upgradeArrayStats
-
 func apply_berserker(times):
 	swordHitbox.damage = 1 + times
 	stats.set_berskerker_modifier(times)
@@ -284,6 +286,12 @@ func apply_babe_ruth(times):
 
 func apply_echo(_times):
 	pass
+func apply_resonant(times):
+	print("Applied RESONANT atacks: " + str(times))
+func apply_archmage(times):
+	print("Applied ARCHMAGE atacks: " + str(times))
+func apply_herculean(times):
+	print("Applied HERCULEAN atacks: " + str(times))
 
 func update_roll_speed():
 	ROLL_SPEED = MAX_SPEED * ROLL_SPEED_MODIFIER 

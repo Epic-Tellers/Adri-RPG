@@ -1,7 +1,9 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://Player/UpgradesMenu.gd" type="Script" id=1]
 [ext_resource path="res://Overlap/material_preview.png" type="Texture" id=2]
+[ext_resource path="res://UI/ButtonStyleTexture.tres" type="StyleBox" id=3]
+[ext_resource path="res://Music and Sounds/nope.wav" type="AudioStream" id=4]
 
 [node name="Upgrades" type="Control"]
 anchor_right = 1.0
@@ -16,64 +18,82 @@ margin_top = 25.0
 margin_right = -25.0
 margin_bottom = -25.0
 
+[node name="BackButton" type="Button" parent="Panel"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -11.0
+margin_top = -19.0
+margin_right = 11.0
+margin_bottom = -5.0
+rect_pivot_offset = Vector2( 11, 14 )
+focus_neighbour_top = NodePath("../MainScreen/Upgrades/BuyHerculeanButton")
+focus_neighbour_bottom = NodePath("../MainScreen/Upgrades/BuyResonantButton")
+focus_next = NodePath("../MainScreen/Upgrades/BuyHerculeanButton")
+focus_previous = NodePath("../MainScreen/Upgrades/BuyResonantButton")
+size_flags_horizontal = 4
+size_flags_vertical = 4
+text = "Back"
+
 [node name="MainScreen" type="Control" parent="Panel"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="Holder" type="VBoxContainer" parent="Panel/MainScreen"]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -50.0
-margin_top = -48.0
-margin_right = 50.0
-margin_bottom = 48.0
-rect_min_size = Vector2( 100, 0 )
-
-[node name="Label" type="Label" parent="Panel/MainScreen/Holder"]
-margin_right = 100.0
-margin_bottom = 8.0
+[node name="Label" type="Label" parent="Panel/MainScreen"]
+anchor_right = 1.0
+margin_top = 3.0
+margin_bottom = 11.0
 rect_pivot_offset = Vector2( 53.25, 8 )
 text = "Upgrades"
 align = 1
 valign = 1
 
-[node name="Label2" type="Label" parent="Panel/MainScreen/Holder"]
-margin_top = 12.0
+[node name="Holder" type="VBoxContainer" parent="Panel/MainScreen"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_top = -48.0
 margin_right = 100.0
-margin_bottom = 20.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 100, 55 )
+
+[node name="Label2" type="Label" parent="Panel/MainScreen/Holder"]
+margin_right = 100.0
+margin_bottom = 8.0
 text = "You have"
 align = 1
 valign = 1
 
 [node name="Icon" type="Control" parent="Panel/MainScreen/Holder"]
-margin_top = 24.0
+margin_top = 12.0
 margin_right = 100.0
-margin_bottom = 54.0
+margin_bottom = 42.0
 rect_min_size = Vector2( 0, 30 )
 
 [node name="Sprite" type="Sprite" parent="Panel/MainScreen/Holder/Icon"]
-position = Vector2( 7, 15 )
+position = Vector2( 16, 15 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 2 )
 hframes = 16
 
 [node name="Sprite2" type="Sprite" parent="Panel/MainScreen/Holder/Icon"]
-position = Vector2( 21, 10 )
+position = Vector2( 30, 10 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 2 )
 hframes = 16
 frame = 6
 
 [node name="Sprite3" type="Sprite" parent="Panel/MainScreen/Holder/Icon"]
-position = Vector2( 17, 22 )
+position = Vector2( 26, 22 )
+scale = Vector2( 0.6, 0.6 )
 texture = ExtResource( 2 )
 hframes = 16
 frame = 4
 
 [node name="Label" type="Label" parent="Panel/MainScreen/Holder/Icon"]
-margin_left = 37.0
+margin_left = 31.0
 margin_top = 10.0
-margin_right = 77.0
+margin_right = 71.0
 margin_bottom = 18.0
 rect_scale = Vector2( 2, 2 )
 text = "Bat Souls"
@@ -81,33 +101,113 @@ align = 1
 valign = 1
 
 [node name="Label3" type="Label" parent="Panel/MainScreen/Holder"]
-margin_top = 58.0
+margin_top = 46.0
 margin_right = 100.0
-margin_bottom = 66.0
+margin_bottom = 54.0
 text = "Bat Souls"
 align = 1
 valign = 1
 
-[node name="BackButton" type="Button" parent="Panel/MainScreen/Holder"]
-margin_left = 39.0
-margin_top = 70.0
-margin_right = 61.0
-margin_bottom = 84.0
-size_flags_horizontal = 4
-size_flags_vertical = 4
-text = "Back"
+[node name="Upgrades" type="VBoxContainer" parent="Panel/MainScreen"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -69.0
+margin_top = -48.0
+margin_right = -8.0
+margin_bottom = 7.0
+rect_min_size = Vector2( 60, 55 )
 
-[node name="Coming soon" type="Label" parent="."]
-margin_left = 120.0
-margin_top = 108.0
-margin_right = 220.0
-margin_bottom = 116.0
-rect_rotation = -44.9999
-rect_pivot_offset = Vector2( 50, 4 )
-size_flags_horizontal = 0
-size_flags_vertical = 0
-text = "Coming soon!"
+[node name="ResonantLabel" type="Label" parent="Panel/MainScreen/Upgrades"]
+margin_right = 64.0
+margin_bottom = 8.0
+text = "Resonant"
 align = 1
 valign = 1
 
-[connection signal="pressed" from="Panel/MainScreen/Holder/BackButton" to="." method="_on_BackButton_pressed"]
+[node name="BuyResonantButton" type="Button" parent="Panel/MainScreen/Upgrades"]
+margin_top = 12.0
+margin_right = 64.0
+margin_bottom = 26.0
+focus_neighbour_top = NodePath("../../../BackButton")
+focus_neighbour_bottom = NodePath("../BuyArchmageButton")
+focus_next = NodePath("../BuyArchmageButton")
+focus_previous = NodePath("../../../BackButton")
+text = "BUY RESONANT"
+
+[node name="ArchmageLabel" type="Label" parent="Panel/MainScreen/Upgrades"]
+margin_top = 30.0
+margin_right = 64.0
+margin_bottom = 38.0
+text = "Archmage"
+align = 1
+valign = 1
+
+[node name="BuyArchmageButton" type="Button" parent="Panel/MainScreen/Upgrades"]
+margin_top = 42.0
+margin_right = 64.0
+margin_bottom = 56.0
+focus_neighbour_top = NodePath("../BuyResonantButton")
+focus_neighbour_bottom = NodePath("../BuyHerculeanButton")
+focus_next = NodePath("../BuyHerculeanButton")
+focus_previous = NodePath("../BuyResonantButton")
+text = "BUY ARCHMAGE"
+
+[node name="HerculeanLabel" type="Label" parent="Panel/MainScreen/Upgrades"]
+margin_top = 60.0
+margin_right = 64.0
+margin_bottom = 68.0
+text = "Herculean"
+align = 1
+valign = 1
+
+[node name="BuyHerculeanButton" type="Button" parent="Panel/MainScreen/Upgrades"]
+margin_top = 72.0
+margin_right = 64.0
+margin_bottom = 86.0
+focus_neighbour_top = NodePath("../BuyArchmageButton")
+focus_neighbour_bottom = NodePath("../../../BackButton")
+focus_next = NodePath("../../../BackButton")
+focus_previous = NodePath("../BuyArchmageButton")
+text = "BUY HERCULEAN"
+
+[node name="DescriptionPanel" type="Panel" parent="Panel/MainScreen"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 6.0
+margin_top = -57.0
+margin_right = 101.0
+margin_bottom = -27.0
+rect_min_size = Vector2( 95, 30 )
+input_pass_on_modal_close_click = false
+custom_styles/panel = ExtResource( 3 )
+
+[node name="DescriptionText" type="RichTextLabel" parent="Panel/MainScreen/DescriptionPanel"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 5.0
+margin_top = 5.0
+margin_right = -5.0
+margin_bottom = -5.0
+
+[node name="FailSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
+
+[connection signal="pressed" from="Panel/BackButton" to="." method="_on_BackButton_pressed"]
+[connection signal="focus_entered" from="Panel/MainScreen/Upgrades/BuyResonantButton" to="." method="_on_BuyResonantButton_focus_entered"]
+[connection signal="focus_exited" from="Panel/MainScreen/Upgrades/BuyResonantButton" to="." method="_on_BuyResonantButton_focus_exited"]
+[connection signal="mouse_entered" from="Panel/MainScreen/Upgrades/BuyResonantButton" to="." method="_on_BuyResonantButton_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/MainScreen/Upgrades/BuyResonantButton" to="." method="_on_BuyResonantButton_mouse_exited"]
+[connection signal="pressed" from="Panel/MainScreen/Upgrades/BuyResonantButton" to="." method="_on_BuyResonantButton_pressed"]
+[connection signal="focus_entered" from="Panel/MainScreen/Upgrades/BuyArchmageButton" to="." method="_on_BuyArchmageButton_focus_entered"]
+[connection signal="focus_exited" from="Panel/MainScreen/Upgrades/BuyArchmageButton" to="." method="_on_BuyArchmageButton_focus_exited"]
+[connection signal="mouse_entered" from="Panel/MainScreen/Upgrades/BuyArchmageButton" to="." method="_on_BuyArchmageButton_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/MainScreen/Upgrades/BuyArchmageButton" to="." method="_on_BuyArchmageButton_mouse_exited"]
+[connection signal="pressed" from="Panel/MainScreen/Upgrades/BuyArchmageButton" to="." method="_on_BuyArchmageButton_pressed"]
+[connection signal="focus_entered" from="Panel/MainScreen/Upgrades/BuyHerculeanButton" to="." method="_on_BuyHerculeanButton_focus_entered"]
+[connection signal="focus_exited" from="Panel/MainScreen/Upgrades/BuyHerculeanButton" to="." method="_on_BuyHerculeanButton_focus_exited"]
+[connection signal="mouse_entered" from="Panel/MainScreen/Upgrades/BuyHerculeanButton" to="." method="_on_BuyHerculeanButton_mouse_entered"]
+[connection signal="mouse_exited" from="Panel/MainScreen/Upgrades/BuyHerculeanButton" to="." method="_on_BuyHerculeanButton_mouse_exited"]
+[connection signal="pressed" from="Panel/MainScreen/Upgrades/BuyHerculeanButton" to="." method="_on_BuyHerculeanButton_pressed"]

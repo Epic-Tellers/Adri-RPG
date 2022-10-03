@@ -1,12 +1,12 @@
 extends Node2D
 
 const GrassEffect = preload("res://Effects/GrassEffect.tscn")
-signal grass_died(pos)
+#signal grass_died(pos)
 
-func _ready():
-	var world = get_tree().current_scene
-	if self.connect("grass_died",world,"_on_grass_died") != OK:
-		print("Error in Grass trying to connect grass_died signal to _on_grass_died method")
+#func _ready():
+	#var world = get_tree().current_scene
+#	if self.connect("grass_died",world,"_on_grass_died") != OK:
+#		print("Error in Grass trying to connect grass_died signal to _on_grass_died method")
 
 func create_grass_effect():
 	var grassEffect = GrassEffect.instance()
