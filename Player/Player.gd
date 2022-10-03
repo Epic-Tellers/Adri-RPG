@@ -332,17 +332,24 @@ func instance_multiple_fireballs(posSpawn, direction, times):
 		fireball.direction_set(posSpawn + auxDirection)
 		auxDirection = auxDirection.rotated(increment)
 
-func spawn_one_halo():
+func resonant_spawn_halo(pos):
+	var spawns = stats.upgradeArrayStats[6]
+	if spawns > 0:
+		var TW = create_tween().set_loops(spawns)
+		TW.tween_callback(self, "spawn_one_halo",[pos])
+		TW.tween_interval(DELAY_BETWEEN_HALOS)
+		
+func spawn_one_halo(pos):
 	var halo = HaloScene.instance()
 	get_tree().current_scene.add_child(halo)
-	halo.global_position = global_position
+	halo.global_position = pos
 
 func spawn_echo_halo():
 	var spawns = stats.upgradeArrayStats[5] + 1
 	print("got to check for spawns. Spawns: " +String(spawns))
 	if spawns > 0:
 		var TW = create_tween().set_loops(spawns)
-		TW.tween_callback(self, "spawn_one_halo")
+		TW.tween_callback(self, "spawn_one_halo",[global_position])
 		TW.tween_interval(DELAY_BETWEEN_HALOS)
 
 func start_charge_indicator(time):

@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://World/Tree.png" type="Texture" id=1]
 [ext_resource path="res://Shadows/LargeShadow.png" type="Texture" id=2]
 [ext_resource path="res://World/Tree.gd" type="Script" id=3]
+[ext_resource path="res://Music and Sounds/Hit.wav" type="AudioStream" id=4]
 
 [sub_resource type="CapsuleShape2D" id=1]
 height = 8.0
@@ -32,5 +33,9 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitColision"]
 rotation = 1.5708
 shape = SubResource( 2 )
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 4 )
+bus = "SFX"
 
 [connection signal="area_entered" from="HitColision" to="." method="_on_HitColision_area_entered"]

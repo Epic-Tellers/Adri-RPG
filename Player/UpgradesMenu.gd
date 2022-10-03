@@ -4,7 +4,7 @@ signal back_pressed
 onready var batSoulLabel = $Panel/MainScreen/Holder/Icon/Label
 
 #var UPGRADES = ["Resonant", "Archmage", "Herculean"]
-var UPGRADES_DESCRIPTION = ["Enemies dying from an Echo wave spawn an Echo wave.", "Your sorcerer fireball now spawns an AoE on hit.", "Killing an enemy has a 5% to restore health." ]
+var UPGRADES_DESCRIPTION = ["Echo wave kills spawn 1*stack Echo waves.", "Your sorcerer fireball now spawns 1*stack AoE on hit.", "Killing enemies has a 10*stack % to restore 1 health." ]
 onready var upgradeText = $Panel/MainScreen/DescriptionPanel/DescriptionText
 onready var resonantBuyButton = $Panel/MainScreen/Upgrades/BuyResonantButton
 onready var archmageBuyButton = $Panel/MainScreen/Upgrades/BuyArchmageButton

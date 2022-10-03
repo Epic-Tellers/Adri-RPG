@@ -51,6 +51,13 @@ func heal(value):
 	else:
 		self.health = max_health
 
+func herculean_heal():
+	var stacks = upgradeArrayStats[8] 
+	if stacks > 0:
+		var aux = randi() % 100
+		if aux < stacks*10:
+			heal(1)
+
 func _ready():
 	self.health = max_health
 	initialMaxHealth = max_health

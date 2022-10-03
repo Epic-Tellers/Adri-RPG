@@ -179,7 +179,7 @@ margin_left = 6.0
 margin_top = -57.0
 margin_right = 101.0
 margin_bottom = -27.0
-rect_min_size = Vector2( 95, 30 )
+rect_min_size = Vector2( 100, 30 )
 input_pass_on_modal_close_click = false
 custom_styles/panel = ExtResource( 3 )
 
