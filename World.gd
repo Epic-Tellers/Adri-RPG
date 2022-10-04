@@ -8,6 +8,7 @@ const NextLevelCollider = preload("res://NextLevelColider.tscn")
 const HealHeart = preload("res://World/RotatingHeart.tscn")
 const PauseScene = preload("res://PauseMenu.tscn")
 const BossWaveScene = preload("res://UI/BossWaveBanner.tscn")
+const NormalWaveScene = preload("res://UI/RegularWaveBanner.tscn")
 var changeScenesTimer = null
 var enemiesInScene = 0
 var player = null
@@ -23,6 +24,9 @@ func _ready():
 	if CrManager.check_if_boss_floor():
 		var bossBanner = BossWaveScene.instance()
 		$CanvasLayer.add_child(bossBanner)
+	else:
+		var normalBanner = NormalWaveScene.instance()
+		$CanvasLayer.add_child(normalBanner)
 	
 	#spawn thy enemies
 	var spawnPointsArray = spawnPointHolder.get_children()

@@ -11,6 +11,8 @@ onready var text4 = $VBoxContainer/HBoxContainer2/Row2/Upgrade4/RichTextLabel
 onready var text5 = $VBoxContainer/HBoxContainer2/Row2/Upgrade5/RichTextLabel
 onready var text6 = $VBoxContainer/HBoxContainer2/Row2/Upgrade6/RichTextLabel
 
+onready var nextWaveLabel = $NextWavePanel/NextWaveLabel
+
 var upgradeButton1
 var upgradeButton2
 var upgradeButton3
@@ -44,6 +46,7 @@ func _ready():
 	button3.text = UPGRADES[upgradeButton3]
 	updateUpgradeCounter()
 	button1.grab_focus()
+	nextWaveLabel.text = "Current wave: " + str(CrManager.get_wave_number()) +"\n"+ "\nNext boss wave: " + str(CrManager.waves_for_next_boss()) 
 	
 
 func change_scene():
@@ -57,12 +60,12 @@ func change_scene():
 
 func updateUpgradeCounter():
 	# ["Berserker", "Resilient", "Sorcerer", "Dancer", "Babe Ruth", "Echo"]
-	text1.text = "Berserker stacks: " + String(PlayerStats.upgradeArrayStats[0])
-	text2.text  = "Resilient stacks: " + String(PlayerStats.upgradeArrayStats[1])
-	text3.text  = "Sorcerer stacks: " + String(PlayerStats.upgradeArrayStats[2])
-	text4.text  = "Dancer stacks: " + String(PlayerStats.upgradeArrayStats[3])
-	text5.text  = "BabeRuth stacks: " + String(PlayerStats.upgradeArrayStats[4])
-	text6.text  = "Echo stacks: " + String(PlayerStats.upgradeArrayStats[5])
+	text1.text = "Berserker: " + String(PlayerStats.upgradeArrayStats[0])
+	text2.text  = "Resilient: " + String(PlayerStats.upgradeArrayStats[1])
+	text3.text  = "Sorcerer: " + String(PlayerStats.upgradeArrayStats[2])
+	text4.text  = "Dancer: " + String(PlayerStats.upgradeArrayStats[3])
+	text5.text  = "BabeRuth: " + String(PlayerStats.upgradeArrayStats[4])
+	text6.text  = "Echo: " + String(PlayerStats.upgradeArrayStats[5])
 
 func _on_Button1_pressed():
 	emit_signal("picked_upgrade",upgradeButton1)

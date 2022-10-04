@@ -16,7 +16,19 @@ func _ready():
 func IncrementCR():
 	currentCR += CR_INCREMENT
 	update_highest_floor()
-	
+
+func waves_for_next_boss():
+	var nextBossWave = BOSS_FLOORS
+	var currentWave = get_wave_number()
+	while nextBossWave < currentWave:
+		nextBossWave += BOSS_FLOORS
+	return nextBossWave
+
+func get_wave_number():
+	if CR_INCREMENT != 0:
+		return currentCR / CR_INCREMENT
+	else:
+		return 0
 
 func check_if_boss_floor():
 	if currentCR % BOSS_FLOORS == 0:
