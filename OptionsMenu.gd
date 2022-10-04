@@ -8,7 +8,6 @@ onready var musicRangeControl = $Panel/MainScreenOptions/Holder/MusicVolumeConta
 onready var sfxRangeControl = $Panel/MainScreenOptions/Holder/SfxVolumeContainer/RangeControl
 onready var options = $Panel/MainScreenOptions
 
-
 onready var controls = $Panel/ControlsMenu
 onready var controlBackButton = $Panel/ControlsMenu/ControlsBackButton
 

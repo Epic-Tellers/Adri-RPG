@@ -20,17 +20,16 @@ expand = true
 stretch_mode = 2
 
 [node name="VBoxContainer" type="HBoxContainer" parent="."]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -63.0
-margin_top = -27.0
-margin_right = 63.0
-margin_bottom = -13.0
+margin_top = -33.0
+margin_bottom = -19.0
+alignment = 1
 
 [node name="StartButton" type="Button" parent="VBoxContainer"]
-margin_right = 25.0
+margin_left = 35.0
+margin_right = 60.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../QuitButton")
 focus_neighbour_bottom = NodePath("../Upgrades")
@@ -39,8 +38,8 @@ focus_previous = NodePath("../QuitButton")
 text = "Start"
 
 [node name="Upgrades" type="Button" parent="VBoxContainer"]
-margin_left = 29.0
-margin_right = 67.0
+margin_left = 64.0
+margin_right = 102.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../StartButton")
 focus_neighbour_bottom = NodePath("../OptionsButton")
@@ -49,23 +48,34 @@ focus_previous = NodePath("../StartButton")
 text = "Upgrades"
 
 [node name="OptionsButton" type="Button" parent="VBoxContainer"]
-margin_left = 71.0
-margin_right = 102.0
+margin_left = 106.0
+margin_right = 137.0
 margin_bottom = 14.0
 focus_neighbour_top = NodePath("../Upgrades")
-focus_neighbour_bottom = NodePath("../QuitButton")
-focus_next = NodePath("../QuitButton")
+focus_neighbour_bottom = NodePath("../FeatsButton")
+focus_next = NodePath("../FeatsButton")
 focus_previous = NodePath("../Upgrades")
 text = "Options"
 
-[node name="QuitButton" type="Button" parent="VBoxContainer"]
-margin_left = 106.0
-margin_right = 126.0
+[node name="FeatsButton" type="Button" parent="VBoxContainer"]
+margin_left = 141.0
+margin_right = 171.0
 margin_bottom = 14.0
+rect_min_size = Vector2( 30, 0 )
 focus_neighbour_top = NodePath("../OptionsButton")
-focus_neighbour_bottom = NodePath("../StartButton")
-focus_next = NodePath(".")
+focus_neighbour_bottom = NodePath("../QuitButton")
+focus_next = NodePath("../QuitButton")
 focus_previous = NodePath("../OptionsButton")
+text = "Feats"
+
+[node name="QuitButton" type="Button" parent="VBoxContainer"]
+margin_left = 175.0
+margin_right = 195.0
+margin_bottom = 14.0
+focus_neighbour_top = NodePath("../FeatsButton")
+focus_neighbour_bottom = NodePath("../StartButton")
+focus_next = NodePath("../StartButton")
+focus_previous = NodePath("../FeatsButton")
 text = "Quit"
 
 [node name="Control" type="Control" parent="."]
@@ -138,4 +148,5 @@ margin_bottom = 40.0
 [connection signal="pressed" from="VBoxContainer/StartButton" to="." method="_on_StartButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/Upgrades" to="." method="_on_Upgrades_pressed"]
 [connection signal="pressed" from="VBoxContainer/OptionsButton" to="." method="_on_OptionsButton_pressed"]
+[connection signal="pressed" from="VBoxContainer/FeatsButton" to="." method="_on_FeatsButton_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_QuitButton_pressed"]

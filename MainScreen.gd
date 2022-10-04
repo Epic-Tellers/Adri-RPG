@@ -10,6 +10,8 @@ var OptionsMenuScene = preload("res://OptionsMenu.tscn")
 var optionsMenuScene = null
 var UpgradeMenuScene = preload("res://UpgradesMenu.tscn")
 var upgradeMenuScene = null
+var FeatsMenuScene = preload("res://UI/FeatsScene.tscn")
+var featsMenuScene = null
 
 func _ready():
 	randomize()
@@ -54,3 +56,16 @@ func _on_upgrade_back_pressed():
 			upgradeMenuScene.queue_free()
 			toggle_hide()
 			startButton.grab_focus()
+
+func _on_FeatsButton_pressed():
+	featsMenuScene = FeatsMenuScene.instance()
+	add_child(featsMenuScene)
+	featsMenuScene.connect("back_pressed",self,"_on_feats_back_pressed")
+	toggle_hide()
+
+func _on_feats_back_pressed():
+	if featsMenuScene != null:
+			featsMenuScene.queue_free()
+			toggle_hide()
+			startButton.grab_focus()
+	
