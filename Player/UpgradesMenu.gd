@@ -4,7 +4,7 @@ signal back_pressed
 onready var batSoulLabel = $Panel/MainScreen/Holder/Icon/Label
 
 #var UPGRADES = ["Resonant", "Archmage", "Herculean"]
-var UPGRADES_DESCRIPTION = ["Echo wave kills spawn 1*stack Echo waves.", "Your sorcerer fireball now spawns 1*stack AoE on hit.", "Killing enemies has a 10*stack % to restore 1 health." ]
+var UPGRADES_DESCRIPTION = ["Echo wave kills spawn 1*stack Echo waves.", "Enemies dying spawn allied ghosts. Ghost HP = stacks.", "Killing enemies has a 10*stack % to restore 1 health." ]
 onready var upgradeText = $Panel/MainScreen/DescriptionPanel/DescriptionText
 onready var resonantBuyButton = $Panel/MainScreen/Upgrades/BuyResonantButton
 onready var archmageBuyButton = $Panel/MainScreen/Upgrades/BuyArchmageButton
@@ -32,7 +32,7 @@ func updateBuyLabels():
 	archmageBuyButton.text = "Cost: " + str(archmageCost)
 	herculeanBuyButton.text = "Cost: " + str(herculeanCost)
 	resonantLabel.text = "Resonant. Stacks: "+ str(PlayerStats.upgradeArrayStats[6])
-	archmageLabel.text = "Archmage. Stacks: "+ str(PlayerStats.upgradeArrayStats[7])
+	archmageLabel.text = "Necromancer. Stacks: "+ str(PlayerStats.upgradeArrayStats[7])
 	herculeanLabel.text = "Herculean. Stacks: "+ str(PlayerStats.upgradeArrayStats[8])
 	
 func _on_BackButton_pressed():

@@ -41,6 +41,7 @@ const PlayerHurtSound = preload("res://Player/PlayerHurtSound.tscn")
 const PlayerGhost = preload("res://Player/Ghost.tscn")
 const FireballScene = preload("res://Player/PlayerFireball.tscn")
 const HaloScene = preload("res://Player/HaloEffect.tscn")
+const AllyGhostBatScene = preload("res://Player/PlayerGhostBat.tscn")
 
 onready var animationPlayer = $AnimationPlayer #this is called to play animations
 onready var blinkAnimationPlayer = $BlinkAnimationPlayer
@@ -331,6 +332,15 @@ func instance_multiple_fireballs(posSpawn, direction, times):
 		fireball.set_origin_position(posSpawn)
 		fireball.direction_set(posSpawn + auxDirection)
 		auxDirection = auxDirection.rotated(increment)
+
+func spawnAllyBat(pos): #from the necromancer / archmage upgrade
+	#AllyGhostBatScene
+	var spawns = stats.upgradeArrayStats[7]
+	for times in spawns:
+		var ally = AllyGhostBatScene.instance()
+		get_tree().current_scene.call_deferred("add_child", ally)
+		var auxVec = Vector2(randi()%20 - 10, randi()%20 -10)
+		ally.global_position = pos + auxVec
 
 func resonant_spawn_halo(pos):
 	var spawns = stats.upgradeArrayStats[6]

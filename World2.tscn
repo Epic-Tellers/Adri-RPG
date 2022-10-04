@@ -532,7 +532,7 @@ position = Vector2( 528, 152 )
 position = Vector2( 576, 468 )
 
 [node name="SpawnPoint3" type="Position2D" parent="YSort/SpawnPoints"]
-position = Vector2( 72, 514 )
+position = Vector2( 32, 376 )
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
