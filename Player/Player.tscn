@@ -1,4 +1,4 @@
-[gd_scene load_steps=109 format=2]
+[gd_scene load_steps=111 format=2]
 
 [ext_resource path="res://Player/Player.gd" type="Script" id=1]
 [ext_resource path="res://Player/Player.png" type="Texture" id=2]
@@ -14,6 +14,7 @@
 [ext_resource path="res://Music and Sounds/SoundCharge.wav" type="AudioStream" id=12]
 [ext_resource path="res://Player/ChargeIndicator.tscn" type="PackedScene" id=13]
 [ext_resource path="res://Music and Sounds/grasstep1.wav" type="AudioStream" id=14]
+[ext_resource path="res://Effects/AuraEffect.tscn" type="PackedScene" id=15]
 
 [sub_resource type="ShaderMaterial" id=49]
 shader = ExtResource( 9 )
@@ -1556,7 +1557,23 @@ tracks/0/keys = {
 "values": [ false ]
 }
 
-[node name="Player" type="KinematicBody2D"]
+[sub_resource type="Animation" id=133]
+resource_name = "TurnWhite"
+length = 0.5
+tracks/0/type = "value"
+tracks/0/path = NodePath("Sprite:material:shader_param/active")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 1,
+"values": [ true ]
+}
+
+[node name="Player" type="KinematicBody2D" groups=["Player"]]
 collision_layer = 2
 script = ExtResource( 1 )
 ACCELERATION_ORIGINAL = 1000
@@ -1566,6 +1583,12 @@ HITSTOP_DURATION = 1.0
 ROLL_INVINCIBILITY = 0.4
 SPIN_SPEED_MODIFIER = 0.8
 BABE_RUTH_AUGMENT = 12
+
+[node name="DancerAura" parent="." instance=ExtResource( 15 )]
+scale = Vector2( 0.2, 0.25 )
+
+[node name="circle_fade" parent="DancerAura" index="0"]
+self_modulate = Color( 0.956863, 0.247059, 0.054902, 1 )
 
 [node name="Shadow" type="Sprite" parent="."]
 position = Vector2( 0, 10 )
@@ -1634,6 +1657,7 @@ __meta__ = {
 
 [node name="SwordHitbox" parent="HitboxPivot" instance=ExtResource( 3 )]
 position = Vector2( 15, 0 )
+collision_layer = 64
 collision_mask = 8
 script = ExtResource( 4 )
 KNOCKBACK_FORCE = 100
@@ -1657,6 +1681,7 @@ bus = "SFX"
 anims/RESET = SubResource( 52 )
 anims/Start = SubResource( 50 )
 anims/Stop = SubResource( 51 )
+anims/TurnWhite = SubResource( 133 )
 
 [node name="ChargeTimer" type="Timer" parent="."]
 
@@ -1673,7 +1698,7 @@ value = 0.0
 visible = false
 position = Vector2( 0, -25 )
 scale = Vector2( 0.5, 0.5 )
-frame = 10
+frame = 33
 
 [node name="ChargeCompleted" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 11 )
@@ -1695,5 +1720,6 @@ bus = "SFX"
 [connection signal="invincibility_started" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_started"]
 [connection signal="timeout" from="ChargeTimer" to="." method="_on_ChargeTimer_timeout"]
 
+[editable path="DancerAura"]
 [editable path="HitboxPivot/SwordHitbox"]
 [editable path="Hurtbox"]

@@ -8,3 +8,6 @@ func _ready():
 	TW.tween_property(self,"scale",Vector2(SCALE_TO_EXPAND,SCALE_TO_EXPAND),TIME_TO_EXPAND)
 	yield(TW,"finished")
 	queue_free()
+
+func set_damage(value):
+	self.damage = value

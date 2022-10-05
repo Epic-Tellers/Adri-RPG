@@ -45,3 +45,12 @@ func _on_WorldArea_body_entered(_body):
 	fireGone.rotate(-PI/2)
 	get_tree().current_scene.add_child(fireGone)
 	queue_free()
+
+
+func _on_WorldArea_area_entered(_area):
+	var fireGone = FireGone.instance()
+	fireGone.global_position = global_position
+	fireGone.rotation = rotation
+	fireGone.rotate(-PI/2)
+	get_tree().current_scene.add_child(fireGone)
+	queue_free()

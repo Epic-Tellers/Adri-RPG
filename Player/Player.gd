@@ -6,7 +6,8 @@ enum {
 	ATTACK,
 	SPIN_CHARGE,
 	SPIN_HOLD,
-	SPIN_RELEASE #spin = charged attack
+	SPIN_RELEASE, #spin = charged attack
+	NONE
 }
 
 signal playerSpawned
@@ -52,6 +53,7 @@ onready var chargeTimer = $ChargeTimer
 onready var chargeEffect = $ChargeEffect
 onready var chargeIndicator = $ChargeIndicator
 onready var chargeOngoingSound = $ChargeAttack
+onready var dancerAura = $DancerAura/circle_fade
 onready var chargeCompletedSound = $ChargeCompleted
 onready var ChargeTW
 onready var animationState = animationTree.get("parameters/playback") #this is used to travel() between nodes of the animation tree
@@ -63,6 +65,7 @@ func _ready():
 		print("Error in player trying to connect playerstats's no_health signal to player's player_death method")
 	stats.connect("upgrades_change",self,"set_upgrades")
 	animationTree.active = true
+	dancerAura.visible = false
 	swordHitbox.knockback_vector = roll_vector
 	set_upgrades(stats.upgradeArrayStats)
 	var world = get_tree().current_scene
@@ -70,9 +73,10 @@ func _ready():
 		print("Error in World trying to connect to player")
 	else:
 		emit_signal("playerSpawned",self)
-
 # _process = update. Happens each frase AS FAST AS POSSIBLE -> delta is not constant
 # _physics_process. Framerate is sinked to the physics. It waits until phys have already been processed. "stable" delta.
+
+
 
 func _process(delta):
 	# state machine incoming
@@ -89,6 +93,8 @@ func _process(delta):
 			spin_hold_state(delta)
 		SPIN_RELEASE:
 			spin_release_state(delta)
+		NONE:
+			pass
 	
 func move_state(delta):
 	var input_vector = get_input_vector()
@@ -298,10 +304,13 @@ func update_roll_speed():
 	ROLL_SPEED = MAX_SPEED * ROLL_SPEED_MODIFIER 
 
 func buff_dancer():
-	dancerBuffed = true
+	if stats.upgradeArrayStats[3] > 0:
+		dancerAura.visible = true
+		dancerBuffed = true
 
 func spend_buff_dancer():
 	dancerBuffed = false
+	dancerAura.visible = false
 
 func on_fireball_check():
 	var aux = stats.upgradeArrayStats[2]
@@ -338,6 +347,7 @@ func spawnAllyBat(pos): #from the necromancer / archmage upgrade
 	var spawns = stats.upgradeArrayStats[7]
 	for times in spawns:
 		var ally = AllyGhostBatScene.instance()
+		ally.set_damage(stats.berserkerModifier +1)
 		get_tree().current_scene.call_deferred("add_child", ally)
 		var auxVec = Vector2(randi()%20 - 10, randi()%20 -10)
 		ally.global_position = pos + auxVec
@@ -351,6 +361,7 @@ func resonant_spawn_halo(pos):
 		
 func spawn_one_halo(pos):
 	var halo = HaloScene.instance()
+	halo.set_damage(stats.berserkerModifier +1)
 	get_tree().current_scene.add_child(halo)
 	halo.global_position = pos
 
@@ -373,4 +384,10 @@ func stop_charge_indicator():
 		ChargeTW.stop()
 	chargeIndicator.visible = false
 	chargeIndicator.value = 0
-	
+
+func turn_white(): #called by next level collider on colision
+	blinkAnimationPlayer.play("TurnWhite")
+
+func set_state_none():
+	state = NONE
+	animationState.travel("Idle")

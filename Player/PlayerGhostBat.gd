@@ -41,3 +41,6 @@ func accelerate_towards_point(position, delta):
 	var direction = global_position.direction_to(position)
 	velocity = velocity.move_toward(direction * SPEED, 250 * delta)
 	sprite.flip_h = velocity.x < 0
+
+func set_damage(value):
+	$Hitbox.damage = value

@@ -73,7 +73,7 @@ func upgrades_changed(newArray):
 
 func reset_upgrades():
 	#upgradeArrayStats = [0,0,0,0,0,0]
-	for item in 5: #we only want to reset the in-run upgrades
+	for item in 6: #we only want to reset the in-run upgrades
 		upgradeArrayStats[item] = 0
 	
 	self.upgradeArrayStats = upgradeArrayStats

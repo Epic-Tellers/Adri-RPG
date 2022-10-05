@@ -27,8 +27,8 @@ noise = SubResource( 3 )
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = SubResource( 1 )
-shader_param/intensity = 1.7
-shader_param/speed = 1.5
+shader_param/intensity = 1.5
+shader_param/speed = 0.5
 shader_param/n = SubResource( 4 )
 
 [node name="Node2D" type="Node2D"]
