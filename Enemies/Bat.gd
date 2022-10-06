@@ -4,6 +4,7 @@ const EnemyDeathEffect = preload("res://Effects/EnemyDeathEffect.tscn")
 const Soul = preload("res://Enemies/BatSoul.tscn")
 
 signal died(position)
+signal requestTeleport(position)
 
 enum {
 	IDLE,
@@ -29,13 +30,17 @@ onready var hurtbox = $Hurtbox
 onready var softCollision = $SoftCollision
 onready var wanderController = $WanderController
 onready var animationPlayer = $AnimationPlayer
+onready var stuckChecker = $StuckChecker
 
 func _ready():
 	state = pick_random_new_state([IDLE, WANDER])
 	sprite.frame = rand_range(0, 4)
+	
 	if PlayerStats.connect("no_health",self,"set_player_null") != OK:
 		print("Error in a bat trying to connect player's no_health signal to bat's set_player_null method")
 	
+	if stuckChecker.connect("stucked",self,"_on_stucked") != OK:
+		print("Error in bat.gd trying to connect StuckChecker's stuck signal to self _on_stucked method")
 	
 	
 func _physics_process(delta):
@@ -117,6 +122,9 @@ func asign_player(body):
 func set_player_null():
 	playerDetectionZone.player = null
 	state = WANDER
+
+func _on_stucked():
+	emit_signal("requestTeleport", self.global_position)
 
 func drop_souls():
 	for i in CR_VALUE * 2:

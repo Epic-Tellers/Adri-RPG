@@ -3,6 +3,7 @@ extends Node2D
 export var CHANGE_SCENES_DELAY = 2
 onready var spawnPointHolder = $YSort/SpawnPoints
 onready var camera = $Camera2D
+onready var enemyTeleporter = $EnemyTeleporter
 onready var deathScene = "res://DeathScene.tscn"
 const NextLevelCollider = preload("res://NextLevelColider.tscn")
 const HealHeart = preload("res://World/RotatingHeart.tscn")
@@ -39,6 +40,7 @@ func _ready():
 		targetPoint.add_child(item)
 		item.position += Vector2(randi() % 40 - 20, randi() % 40 - 20)
 		item.connect("died",self,"_on_enemy_death")
+		item.connect("requestTeleport",self,"_on_enemy_requested_teleport")
 		item.asign_player(player)
 	
 	#and save progress!
@@ -103,4 +105,7 @@ func last_enemy_death(pos):
 func _on_player_spawn(spawnedPlayer):
 	player = spawnedPlayer
 	print("I got a player: "+str(player))
+
+func _on_enemy_requested_teleport(pos):
+	enemyTeleporter.activate(pos)
 	

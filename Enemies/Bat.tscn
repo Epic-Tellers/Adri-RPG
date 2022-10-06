@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=29 format=2]
 
 [ext_resource path="res://Enemies/Bat.png" type="Texture" id=1]
 [ext_resource path="res://Shadows/SmallShadow.png" type="Texture" id=2]
@@ -11,6 +11,7 @@
 [ext_resource path="res://Enemies/WanderController.tscn" type="PackedScene" id=9]
 [ext_resource path="res://WhiteColorShader.tres" type="Shader" id=10]
 [ext_resource path="res://Enemies/EnemyGroupZone.tscn" type="PackedScene" id=11]
+[ext_resource path="res://Enemies/StuckChecker.tscn" type="PackedScene" id=12]
 
 [sub_resource type="ShaderMaterial" id=12]
 resource_local_to_scene = true
@@ -122,7 +123,7 @@ material = SubResource( 12 )
 position = Vector2( 0, 3 )
 frames = SubResource( 6 )
 animation = "AnimationFly"
-frame = 3
+frame = 4
 playing = true
 offset = Vector2( 0, -11 )
 
@@ -175,6 +176,8 @@ anims/Stop = SubResource( 15 )
 [node name="CollisionShape2D" parent="EnemyGroupZone" index="0"]
 modulate = Color( 0.564706, 0.145098, 0.682353, 1 )
 shape = SubResource( 16 )
+
+[node name="StuckChecker" parent="." instance=ExtResource( 12 )]
 
 [connection signal="area_entered" from="Hurtbox" to="." method="_on_Hurtbox_area_entered"]
 [connection signal="invincibility_ended" from="Hurtbox" to="." method="_on_Hurtbox_invincibility_ended"]

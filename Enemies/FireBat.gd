@@ -20,6 +20,7 @@ var canAttack = true
 var fireballRounds = 0
 
 signal died(position)
+signal requestTeleport(position)
 
 export var EXPLODE_ON_DEATH = true
 export var KNOCKBACK_FORCE = 30 #how hard is pushed back upon getting hit
@@ -51,12 +52,17 @@ onready var attackCD = $AttackCD
 onready var fireballSpawnPoint = $FireballSpawnPoint
 onready var deathDealy = $DeathDealy
 onready var audioStreamPlayer = $AudioStreamPlayer
+onready var stuckChecker = $StuckChecker
 
 func _ready():
 	state = pick_random_new_state([IDLE, WANDER])
 	sprite.frame = rand_range(0, 4)
 	if PlayerStats.connect("no_health",self,"set_player_null") != OK:
 		print("Error in a bat trying to connect player's no_health signal to bat's set_player_null method")
+	
+	if stuckChecker.connect("stucked",self,"_on_stucked") != OK:
+		print("Error in bat.gd trying to connect StuckChecker's stuck signal to self _on_stucked method")
+	
 	
 func _physics_process(delta):
 	knockback = knockback.move_toward(Vector2.ZERO, FLY_DRAG * delta)
@@ -260,3 +266,6 @@ func asign_player(body):
 func set_player_null():
 	playerDetectionZone.player = null
 	state = WANDER
+
+func _on_stucked():
+	emit_signal("requestTeleport", self.global_position)
