@@ -10,6 +10,7 @@ const HealHeart = preload("res://World/RotatingHeart.tscn")
 const PauseScene = preload("res://PauseMenu.tscn")
 const BossWaveScene = preload("res://UI/BossWaveBanner.tscn")
 const NormalWaveScene = preload("res://UI/RegularWaveBanner.tscn")
+const TeleportParticles = preload("res://Enemies/EnemyTeleport.tscn")
 var changeScenesTimer = null
 var enemiesInScene = 0
 var player = null
@@ -108,4 +109,7 @@ func _on_player_spawn(spawnedPlayer):
 
 func _on_enemy_requested_teleport(pos):
 	enemyTeleporter.activate(pos)
-	
+	var particles = TeleportParticles.instance()
+	#get_tree().current_scene.call_deferred("add_child", soulDrop)
+	get_tree().current_scene.add_child(particles)
+	particles.global_position = pos
