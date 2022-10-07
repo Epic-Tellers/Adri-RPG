@@ -46,7 +46,7 @@ func _ready():
 	
 	#and save progress!
 	PlayerSaveInfo._save_game()
-
+	enemyTeleporter.player = player
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("pause")):

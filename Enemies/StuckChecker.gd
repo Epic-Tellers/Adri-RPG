@@ -4,7 +4,7 @@ signal stucked
 var lastSavedPosition = Vector2.ZERO
 onready var timer = $StuckCheckerTimer
 
-export var TIME = 4.0
+export var TIME = 8.0
 export var DISTANCE = 50.0
 
 func _ready():

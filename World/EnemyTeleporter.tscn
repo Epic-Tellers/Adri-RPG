@@ -15,10 +15,6 @@ shape = SubResource( 53 )
 
 [node name="Pos1" type="Position2D" parent="."]
 
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Pos1"]
-
 [node name="Pos2" type="Position2D" parent="."]
-
-[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="Pos2"]
 
 [connection signal="body_entered" from="." to="." method="_on_EnemyTeleporter_body_entered"]

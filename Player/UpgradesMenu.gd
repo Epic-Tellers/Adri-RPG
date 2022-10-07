@@ -4,7 +4,7 @@ signal back_pressed
 onready var batSoulLabel = $Panel/MainScreen/Holder/Icon/Label
 
 #var UPGRADES = ["Resonant", "Archmage", "Herculean"]
-var UPGRADES_DESCRIPTION = ["Echo wave kills spawn 1*stack Echo waves.", "Enemies dying spawn allied ghosts. Ghost HP = stacks.", "Killing enemies has a 10*stack % to restore 1 health." ]
+var UPGRADES_DESCRIPTION = ["Echo wave kills spawn Echo waves.", "Enemies dying spawn allied ghosts.", "Killing enemies has a % to restore 1 health." ]
 onready var upgradeText = $Panel/MainScreen/DescriptionPanel/DescriptionText
 onready var resonantBuyButton = $Panel/MainScreen/Upgrades/BuyResonantButton
 onready var archmageBuyButton = $Panel/MainScreen/Upgrades/BuyArchmageButton
@@ -21,7 +21,7 @@ var herculeanCost = 0
 
 func _ready():
 	update_batsoul_label()
-	$Panel/BackButton.grab_focus()
+	$Panel/MainScreen/BackButton.grab_focus()
 	updateBuyLabels()
 
 func updateBuyLabels():

@@ -1,6 +1,7 @@
 extends Area2D
 
 onready var restPosition = global_position
+var player
 
 func activate(pos):
 	self.global_position = pos
@@ -16,7 +17,7 @@ func reset():
 	self.global_position = restPosition
 
 func pickDestination():
-	if $Pos1/VisibilityNotifier2D.is_on_screen():
-		return $Pos2.position
-	else:
+	if $Pos1.position.distance_to(player) > $Pos2.position.distance_to(player):
 		return $Pos1.position
+	else:
+		return $Pos2.position
