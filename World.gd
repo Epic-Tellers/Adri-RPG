@@ -46,7 +46,9 @@ func _ready():
 	
 	#and save progress!
 	PlayerSaveInfo._save_game()
-	enemyTeleporter.player = player
+	
+	#player sharing
+	enemyTeleporter.assign_player(player)
 
 func _unhandled_input(event):
 	if (event.is_action_pressed("pause")):
@@ -105,7 +107,6 @@ func last_enemy_death(pos):
 
 func _on_player_spawn(spawnedPlayer):
 	player = spawnedPlayer
-	print("I got a player: "+str(player))
 
 func _on_enemy_requested_teleport(pos):
 	enemyTeleporter.activate(pos)

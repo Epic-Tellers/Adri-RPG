@@ -95,7 +95,7 @@ func _physics_process(delta):
 				state = WANDER
 		
 		FLEE:
-			if canAttack:
+			if canAttack and check_safety():
 				state = CHASE
 			else:
 				if playerDetectionZone.player != null:
@@ -124,10 +124,17 @@ func _on_charge_completed():
 		fireball_attack(player.global_position, ATTACK_INSTANCES) #vector looking up from the bat's mouth to the player
 
 func try_to_avoid(position):
-	if global_position.distance_to(position) <= FLEE_RANGE:
-		state = FLEE
+	if playerDetectionZone.player != null:
+		if global_position.distance_to(position) <= FLEE_RANGE:
+			state = FLEE
+		else:
+			state = WANDER
+
+func check_safety():
+	if global_position.distance_to(playerDetectionZone.player.global_position) <= FLEE_RANGE:
+		return false
 	else:
-		state = WANDER
+		return true
 	
 func update_wander():
 	state = pick_random_new_state([IDLE, WANDER])

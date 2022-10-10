@@ -681,7 +681,7 @@ bus = "Music"
 [node name="EnemyTeleporter" parent="." instance=ExtResource( 15 )]
 
 [node name="Pos1" parent="EnemyTeleporter" index="1"]
-position = Vector2( 128, 120 )
+position = Vector2( 488, 140 )
 
 [node name="Pos2" parent="EnemyTeleporter" index="2"]
 position = Vector2( 138, 496 )

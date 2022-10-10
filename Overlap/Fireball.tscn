@@ -7,8 +7,9 @@
 radius = 5.99999
 height = 8.00003
 
-[sub_resource type="CircleShape2D" id=2]
-radius = 7.14286
+[sub_resource type="CapsuleShape2D" id=2]
+radius = 2.85714
+height = 5.71429
 
 [node name="Hitbox" type="Area2D"]
 scale = Vector2( 0.7, 0.7 )
@@ -36,7 +37,8 @@ collision_mask = 65
 monitoring = false
 
 [node name="WorldCollider" type="CollisionShape2D" parent="WorldArea"]
-position = Vector2( 4.76837e-07, 0 )
+position = Vector2( 1.42858, 0 )
+rotation = -1.5708
 shape = SubResource( 2 )
 
 [connection signal="area_entered" from="." to="." method="_on_Hitbox_area_entered"]

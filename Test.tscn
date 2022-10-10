@@ -1,33 +1,17 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Enemies/Bat.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Player/Player.tscn" type="PackedScene" id=2]
-[ext_resource path="res://World/Bush.tscn" type="PackedScene" id=3]
+[ext_resource path="res://World/GrassBackground.png" type="Texture" id=1]
+[ext_resource path="res://Player/PlayerFireball.tscn" type="PackedScene" id=2]
 
 [node name="Test" type="Node2D"]
 
-[node name="Player" parent="." instance=ExtResource( 2 )]
-position = Vector2( 40, 72 )
+[node name="BG" type="TextureRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 232.0
+margin_bottom = 184.0
+texture = ExtResource( 1 )
+stretch_mode = 2
 
-[node name="Bat" parent="." instance=ExtResource( 1 )]
-position = Vector2( 144, 136 )
-
-[node name="Bush_holder" type="Node2D" parent="."]
-
-[node name="Bush" parent="Bush_holder" instance=ExtResource( 3 )]
-position = Vector2( 104, 128 )
-
-[node name="Bush2" parent="Bush_holder" instance=ExtResource( 3 )]
-position = Vector2( 112, 112 )
-
-[node name="Bush3" parent="Bush_holder" instance=ExtResource( 3 )]
-position = Vector2( 128, 96 )
-
-[node name="Bush4" parent="Bush_holder" instance=ExtResource( 3 )]
-position = Vector2( 104, 144 )
-
-[node name="Bush" parent="Bush_holder/Bush4" instance=ExtResource( 3 )]
-position = Vector2( 8, 16 )
-
-[node name="Bush2" parent="Bush_holder/Bush4" instance=ExtResource( 3 )]
-position = Vector2( 48, -48 )
+[node name="Hitbox" parent="." instance=ExtResource( 2 )]
+position = Vector2( 40, 96 )

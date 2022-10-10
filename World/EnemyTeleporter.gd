@@ -10,14 +10,20 @@ func activate(pos):
 	TW.tween_callback(self, "reset")
 
 func _on_EnemyTeleporter_body_entered(body):
-	body.set_global_position(pickDestination() + Vector2(randi() % 10 - 5, randi() % 10 - 5))
+	body.set_global_position(pickDestination() + Vector2(randi() % 14 - 7, randi() % 14 - 7))
 	print("Teleported something to: "+str(body.global_position))
 
 func reset():
 	self.global_position = restPosition
 
 func pickDestination():
-	if $Pos1.position.distance_to(player) > $Pos2.position.distance_to(player):
-		return $Pos1.position
-	else:
+	var dist1 = $Pos1.position.distance_to(player.position)
+	var dist2 = $Pos2.position.distance_to(player.position)
+	
+	if dist2 > dist1:
 		return $Pos2.position
+	else:
+		return $Pos1.position
+
+func assign_player(body):
+	self.player = body

@@ -550,10 +550,10 @@ bus = "Music"
 [node name="EnemyTeleporter" parent="." instance=ExtResource( 15 )]
 
 [node name="Pos1" parent="EnemyTeleporter" index="1"]
-position = Vector2( 552, 144 )
+position = Vector2( 136, 152 )
 
 [node name="Pos2" parent="EnemyTeleporter" index="2"]
-position = Vector2( 464, 458 )
+position = Vector2( 520, 440 )
 
 [editable path="Camera2D"]
 [editable path="YSort/PortalHolder/Portals2"]

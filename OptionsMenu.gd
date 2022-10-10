@@ -11,7 +11,7 @@ onready var options = $Panel/MainScreenOptions
 onready var controls = $Panel/ControlsMenu
 onready var controlBackButton = $Panel/ControlsMenu/ControlsBackButton
 
-var fullscreen = false
+var fullscreen = true
 
 func _ready():
 	update_display()
@@ -42,12 +42,13 @@ func update_bus_volume(busName, volumePercent):
 	AudioServer.set_bus_volume_db(busIdx, linear2db(volumePercent))
 
 func update_display():
-	windowModeButton.text = "WINDOWED" if !fullscreen else "FULLSCREEN"
+	windowModeButton.text = "FULLSCREEN" if fullscreen else "WINDOWED"
 
 
 func _on_ButtonWindowMode_pressed():
-	fullscreen = !fullscreen
+	fullscreen = false if fullscreen else true
 	OS.window_fullscreen = fullscreen
+	print("got to change mode to: "+str(fullscreen))
 	update_display()
 
 func _on_BackButton_pressed():
